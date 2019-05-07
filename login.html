@@ -13,18 +13,26 @@
 
     <body>
         <div>
-            <h1 class="titulo">Sistema Biblioteca</h1>
+            <h1 class="titulo"><a href="index.html" alt="Pagina Principal">Sistema Biblioteca</a></h1>
         </div>
+
+        <nav id="barra-menu">
+                <ul>
+                    <li><a href="index.html" alt="Pagina Inicial">Inicio</a></li>
+                    <li><a href="" alt="Sobre">Sobre</a></li>
+                </ul>
+            </nav>
+
         <div class="corpo-form">
             <h2>Iniciar Sessão</h2>
-            <form name="login_form" method="GET" action="">
-                <label for="entrar">Login:</label>
-                <input type="text" placeholder="Login" name="txtLogin" id="entrar">
+            <form name="login_form" method="GET" action="dados.php">
+                <label for="txtLogin">Login:</label>
+                <input type="text" id="txtLogin" name="txtLogin" placeholder="Login" >
 
-                <label for="senha">Senha:</label>
-                <input type="password" placeholder="Senha" name="txtSenha" id="senha">
+                <label for="txtSenha">Senha:</label>
+                <input type="password" id="txtSenha" name="txtSenha" placeholder="Senha" >
 
-                <input type="button" name="btnEntrar" value="Entrar">
+                <input type="submit" id="btnEntrar" name="btnEntrar" value="Entrar">
                 <a href="cadastro.html" alt="Cadastro">Ainda não é cadastrado?<strong>Cadastre-se!</strong></a></li>
             </form>
         </div>

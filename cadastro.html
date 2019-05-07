@@ -13,23 +13,30 @@
 
     <body>
         <div>
-            <h1 class="titulo">Sistema Biblioteca</h1>
+            <h1 class="titulo"><a href="index.html" alt="Pagina Principal">Sistema Biblioteca</a></h1>
         </div>
         
+        <nav id="barra-menu">
+                <ul>
+                    <li><a href="index.html" alt="Pagina Inicial">Inicio</a></li>
+                    <li><a href="" alt="Sobre">Sobre</a></li>
+                </ul>
+            </nav>
+
         <div class="corpo-form">
             <h2>Preencha todos os dados!</h2>
-            <form name="" method="POST" action="">
+            <form name="cadastro_form" method="POST" action="">
                 <label for="txtLogin">Login</label>
                 <input type="text" placeholder="Login" name="txtLogin" id="txtLogin">
 
                 <label for="txtEmail">Email</label>
-                <input type="text" placeholder="Email" name="txtEmail" id="txtEmail">
+                <input type="text" name="txtEmail" id="txtEmail" placeholder="Email" >
 
                 <label for="txtSenha">Senha</label>
-                <input type="password" placeholder="Senha" name="txtSenha" id="txtSenha">
+                <input type="password" name="txtSenha" id="txtSenha" placeholder="Senha" >
 
                 <label for="txtConfirmaSenha">Confirmar Senha</label>
-                <input type="password" placeholder="Confirmar Senha" name="txtConfirmaSenha" id="txtConfirmaSenha">
+                <input type="password" name="txtConfirmaSenha" id="txtConfirmaSenha" placeholder="Confirmar Senha">
 
                 <input type="button" id="btnCadastrar" name="btnCadastrar" value="Cadastrar">
             </form>

@@ -19,7 +19,18 @@ h1.titulo{
     font-size: 36px;
 }
 
-nav {
+h1.titulo a{
+    font-family: 'Righteous', cursive; /*Fonte Titulo*/
+    text-align: center;
+    font-size: 36px;
+}
+
+h1.titulo a:hover{
+    background: #6AA69B;
+    color: white;
+}
+
+nav{
     position: absolute;
     top: 64px;
     right: 0;
@@ -56,16 +67,21 @@ input{
     border: 1px solid black;
     font-size: 16pt;
     padding: 10px 20px;
+    /*background-color: rgba(255, 255, 255, 0.01);
+    color: white;*/
+    outline: none;
 }
 
-input.button{
+input[type=submit]{
     background: #8C3555;
+    border: none;
+    cursor: pointer;
 }
 
 div.corpo-form{
     text-align: center;
     width: 420px;
-    margin: 50px auto 10px auto;
+    margin: 100px auto 10px auto;
 }
 
 nav#barra-menu{
@@ -83,4 +99,16 @@ nav#barra-menu ul{
 nav#barra-menu li{
     display: block;
     float: left;
+}
+
+nav#barra-acesso{
+    text-align: center;
+    
+    border-top: 1px dashed black;
+    border-bottom: 1px dashed black;
+}
+
+nav#barra-acesso li{
+    display: block;
+    float: right;
 }

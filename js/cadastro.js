@@ -1,25 +1,38 @@
-let btnCadastrar = document.querySelector('btnCadastrar')
+
+let btnCadastrar = document.querySelector('#btnCadastrar')
 
 function validar(){
 
-    let txtLogin = document.querySelector('txtLogin')
-    let txtEmail = document.querySelector('txtEmail')
-    let txtSenha = document.querySelector('txtSenha')
-    let txtConfirmaSenha = document.querySelector('txtConfirmaSenha')
+    let txtLogin = document.querySelector('#txtLogin')
+    let txtEmail = document.querySelector('#txtEmail')
+    let txtSenha = document.querySelector('#txtSenha')
+    let txtConfirmaSenha = document.querySelector('#txtConfirmaSenha')
 
-    if(txtLogin.textContent == "" || txtLogin.textContent.length < 3)
+    if(txtLogin.value.trim() == '' || txtLogin.value.trim().length < 3)
         return false;
-    else if(txtEmail.textContent == "" || txtEmail.textContent.length < 3)
+    else if(txtEmail.value.trim() == '' || txtEmail.value.trim().length < 3)
         return false;
-    else if(txtSenha.textContent == "" || txtSenha.textContent.length < 3)
+    else if(txtSenha.value.trim() == '' || txtSenha.value.trim().length < 3)
         return false;
-    else if(txtConfirmaSenha.textContent == "" || txtConfirmaSenha.textContent.length < 3)
+    else if(txtConfirmaSenha.value.trim() == '' || txtConfirmaSenha.value.trim().length < 3)
         return false;
-    else if(txtSenha.textContent != txtConfirmaSenha.textContent)
+    else if(txtSenha.value.trim() != txtConfirmaSenha.value.trim())
         return false;
+    
+        return true;
 
 }
 
-btnCadastrar.addEventListener('click', function(){
-    console.log(validar());
+btnCadastrar.addEventListener('click', function() {
+
+    if(validar())
+    {
+        let txtLogin = document.querySelector('#txtLogin').value.trim();
+        let txtEmail = document.querySelector('#txtEmail').value.trim();
+        let txtSenha = document.querySelector('#txtSenha').value.trim();
+        
+        xhr.open("POST", "http://localhost/Sistema-Biblioteca/php/salvar.php?login="+txtLogin+"&email="+txtEmail+"&senha="+txtSenha);
+        xhr.send();
+    }
+
 })
