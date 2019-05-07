@@ -1,13 +1,17 @@
 <?php
 
-namespace php\conection;
-
 try {
-
+    $nome = "Biblioteca";
+    $host = "localhost";
+    $usuario = "root";
+    $senha = "";
     $pdo = new PDO("mysql:dbname=".$nome.";host=".$host, $usuario, $senha);
     
+    echo "Conectado com sucesso";
+
 } catch (PDOException $e) {
     $erro = $e->getMessagem();
+    echo "Eror ao Conectar".$erro;
 }
 
 class Conexao
