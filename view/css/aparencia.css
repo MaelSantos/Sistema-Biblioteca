@@ -8,7 +8,7 @@
 
 body{
     background-color: #6AA69B; /*Cor de fundo*/
-    background-image: url("../res/fundo.png"); /*Imagem de fundo*/
+    background-image: url("../fundo.png"); /*Imagem de fundo*/
     background-position: 10% 10%;
     margin: 10px 10px;
 }
@@ -72,7 +72,7 @@ input{
     outline: none;
 }
 
-input[type=submit]{
+input[type=button]{
     background: #8C3555;
     border: none;
     cursor: pointer;

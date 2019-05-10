@@ -1,34 +1,31 @@
 <?php
 
-try {
-    $nome = "Biblioteca";
-    $host = "localhost";
-    $usuario = "root";
-    $senha = "";
-    $pdo = new PDO("mysql:dbname=".$nome.";host=".$host, $usuario, $senha);
-    
-    echo "Conectado com sucesso";
-
-} catch (PDOException $e) {
-    $erro = $e->getMessagem();
-    echo "Eror ao Conectar".$erro;
-}
-
 class Conexao
 {
     private $pdo;
     private $erro;
 
-    function conectar($nome, $host, $usuario, $senha)
+    // private $nome = "Biblioteca";
+    // private $host = "localhost";
+    // private $usuario = "root";
+    // private $senha = "";
+
+    // function __construct()
+    // {
+    //     conectar($nome, $host, $usuario, $senha);
+    // }
+
+    public function conectar($nome, $host, $usuario, $senha)
     {
         try {
             global $pdo;
 
             $pdo = new PDO("mysql:dbname=".$nome.";host=".$host, $usuario, $senha);
-            
+            return true;
         } catch (PDOException $e) {
             global $erro;
             $erro = $e->getMessagem();
+            return false;
         }
     }
 
