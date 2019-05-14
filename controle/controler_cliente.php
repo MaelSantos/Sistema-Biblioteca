@@ -1,16 +1,37 @@
 <?php
-   require '../dao/dao_cliente.php';
-   require '../model/cliente.php';
-   
-   $objetoCliente = new Cliente();
-   $objetoCliente->setNome($_REQUEST['nome']);
-   $objetoCliente->setCpf($_REQUEST['cpf']);
-   $objetoCliente->setEmail($_REQUEST['email']);
-   $objetoCliente->setEndereco($_REQUEST['endereco']);
-   
-   $dao = new DaoCliente();
-   $dao->cadastrarCliente($objetoCliente); 
- 	
-	header('Location: ../view/view_cliente.php');
-	exit;
-?>
+   require_once '../dao/dao_cliente.php';
+   require_once '../model/cliente.php';
+
+   $op = $_GET["op"];
+
+   $cliente = new Cliente();
+   $cliente->setNome($_GET["nome"]);
+   $cliente->setCpf( $_GET["cpf"]);
+   $cliente->setEmail($_GET["email"]);
+   $cliente->setTelefone($_GET["telefone"]);
+   $cliente->setLogin($_GET["login"]);
+   $cliente->setSenha($_GET["senha"]);
+
+   $daoCliente = new DaoCliente();
+
+   if($op == "salvar")
+   {
+      $daoCliente->salvar($cliente);
+      echo "Sucesso";
+   }
+   if($op == "editar")
+   {
+      $daoCliente->editar($cliente);
+      echo "Sucesso";
+   }
+   if($op == "buscar")
+   {
+      $daoCliente->buscar($cliente);
+      echo "Sucesso";
+   }
+   if($op == "remover")
+   {
+      $daoCliente->remover($cliente); 
+      echo "Sucesso";
+   }
+

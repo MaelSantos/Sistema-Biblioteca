@@ -45,7 +45,7 @@ btnCadastrar.addEventListener('click', function() {
         
         var xhr = new XMLHttpRequest();
         xhr.addEventListener("load", function() {
-            if (this.responseText.trim() == 'sucesso') {
+            if (this.responseText.trim() == 'Sucesso') {
                 window.alert('Cliente Cadastrado');
                 
                 // limpando o formulário
@@ -61,7 +61,7 @@ btnCadastrar.addEventListener('click', function() {
             }
         });
 
-        xhr.open('GET', 'http://localhost/SistemaBiblioteca/Cliente/salvar.php?nome='+txtNome+'&cpf='+txtCpf+'&email='+txtEmail+'&telefone='+txtTelefone+'&login='+txtLogin+'&senha='+txtSenha);
+        xhr.open('GET', 'http://localhost/SistemaBiblioteca/Cliente/controle_cliente.php?op=salvar&nome='+txtNome+'&cpf='+txtCpf+'&email='+txtEmail+'&telefone='+txtTelefone+'&login='+txtLogin+'&senha='+txtSenha);
         xhr.send();
 
     }
