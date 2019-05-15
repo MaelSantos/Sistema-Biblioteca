@@ -45,6 +45,7 @@ btnCadastrar.addEventListener('click', function() {
         
         var xhr = new XMLHttpRequest();
         xhr.addEventListener("load", function() {
+            console.log(this.responseText.trim());
             if (this.responseText.trim() == 'Sucesso') {
                 window.alert('Cliente Cadastrado');
                 
@@ -55,13 +56,14 @@ btnCadastrar.addEventListener('click', function() {
                 document.querySelector('#txtTelefome').value = "";
                 document.querySelector('#txtLogin').value = "";
                 document.querySelector('#txtSenha').value = "";
+                document.querySelector('#txtConfirmaSenha').value = "";
 
             } else {
                 window.alert('Erro ao Cadastrar');
             }
         });
 
-        xhr.open('GET', 'http://localhost/SistemaBiblioteca/Cliente/controle_cliente.php?op=salvar&nome='+txtNome+'&cpf='+txtCpf+'&email='+txtEmail+'&telefone='+txtTelefone+'&login='+txtLogin+'&senha='+txtSenha);
+        xhr.open('GET', 'http://localhost/Sistema-Biblioteca/controle/controle_cliente.php?op=salvar&nome='+txtNome+'&cpf='+txtCpf+'&email='+txtEmail+'&telefone='+txtTelefone+'&login='+txtLogin+'&senha='+txtSenha);
         xhr.send();
 
     }

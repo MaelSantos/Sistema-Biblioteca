@@ -5,33 +5,27 @@ class Conexao
     private $pdo;
     private $erro;
 
-    // private $nome = "Biblioteca";
-    // private $host = "localhost";
-    // private $usuario = "root";
-    // private $senha = "";
+    public function __construct()
+    {
+        $this->conectar("Biblioteca", "localhost", "root", "");
+    }
 
-    // function __construct()
-    // {
-    //     conectar($nome, $host, $usuario, $senha);
-    // }
-
-    public function conectar($nome, $host, $usuario, $senha)
+    public function conectar($banco, $host, $usuario, $senha)
     {
         try {
-            global $pdo;
-
-            $pdo = new PDO("mysql:dbname=".$nome.";host=".$host, $usuario, $senha);
+            // $pdo = new PDO("mysql:host=localhost;dbname=Biblioteca", "root", "");
+            $this->pdo = new PDO("mysql:host=" . $host . ";dbname=" . $banco, $usuario, $senha);
             return true;
         } catch (PDOException $e) {
             global $erro;
-            $erro = $e->getMessagem();
+            $erro = $e->getMessage();
             return false;
         }
     }
 
     /**
      * Get the value of pdo
-     */ 
+     */
     public function getPdo()
     {
         return $this->pdo;
@@ -39,9 +33,10 @@ class Conexao
 
     /**
      * Get the value of erro
-     */ 
+     */
     public function getErro()
     {
         return $this->erro;
     }
+
 }

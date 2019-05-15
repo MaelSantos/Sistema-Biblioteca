@@ -2,22 +2,13 @@
 
 class Conta
 {
+    private $id;
     private $data_efetuada;
     private $data_pagamento;
     private $data_paga;
     private $multa;
     private $valor_total;
     private $id_aluga;
-
-    public function __construct($data_efetuada, $data_pagamento, $data_paga, $multa, $valor_total, $id_aluga)
-    {
-        $this->$data_efetuada  = $data_efetuada;
-        $this->$data_pagamento = $data_pagamento;
-        $this->$data_paga      = $data_paga;
-        $this->$multa          = $multa;
-        $this->$valor_total    = $valor_total;
-        $this->$id_aluga       = $id_aluga;
-    }
 
     /**
      * Get the value of data_efetuada
@@ -135,6 +126,26 @@ class Conta
     public function setId_aluga($id_aluga)
     {
         $this->id_aluga = $id_aluga;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
 
         return $this;
     }

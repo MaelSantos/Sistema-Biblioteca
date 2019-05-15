@@ -8,13 +8,6 @@ class Cliente extends Usuario
     private $cpf;
     private $telefone;
 
-    public function __construct($id, $nome, $login, $senha, $email, $cpf, $telefone)
-    {
-        parent::__construct($id, $nome, $login, $senha, $email);
-        $this->cpf      = $cpf;
-        $this->telefone = $telefone;
-    }
-
     /**
      * Get the value of cpf
      */

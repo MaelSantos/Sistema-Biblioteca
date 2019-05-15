@@ -12,17 +12,6 @@ class Livro
     private $quantidade;
     private $disponivel;
 
-    public function __construct($titulo, $autor, $ano, $editora, $codigo, $quantidade, $disponivel)
-    {
-        $this->$autor      = $autor;
-        $this->$titulo     = $titulo;
-        $this->$ano        = $ano;
-        $this->$editora    = $editora;
-        $this->$codigo     = $codigo;
-        $this->$quantidade = $quantidade;
-        $this->$disponivel = $disponivel;
-    }
-
     /**
      * Get the value of id
      */

@@ -13,19 +13,6 @@ class Aluga
     private $id_cliente;
     private $id_livro;
 
-    public function __construct($id, $data_locacao, $data_devolucao, $data_devolvido, $diaria, $ativo, $id_funcionario, $id_cliente, $id_livro)
-    {
-        $this->id              = $id;
-        $this->$data_locacao   = $data_locacao;
-        $this->$data_devolucao = $data_devolucao;
-        $this->$data_devolvido = $data_devolvido;
-        $this->$diaria         = $diaria;
-        $this->$ativo          = $ativo;
-        $this->$id_funcionario = $id_funcionario;
-        $this->$id_cliente     = $id_cliente;
-        $this->$id_livro       = $id_livro;
-    }
-
     /**
      * Get the value of id
      */

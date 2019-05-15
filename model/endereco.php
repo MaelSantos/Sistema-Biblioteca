@@ -13,18 +13,6 @@ class Endereco
     private $complemento;
     private $id_cliente;
 
-    public function __construct($rua, $numero, $bairro, $cep, $cidade, $estado, $complemento, $id_cliente)
-    {
-        $this->$rua         = $rua;
-        $this->$numero      = $numero;
-        $this->$bairro      = $bairro;
-        $this->$cep         = $cep;
-        $this->$cidade      = $cidade;
-        $this->$estado      = $estado;
-        $this->$complemento = $complemento;
-        $this->$id_cliente  = $id_cliente;
-    }
-
     /**
      * Get the value of id
      */

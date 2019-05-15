@@ -9,15 +9,6 @@ class Usuario
     private $senha;
     private $email;
 
-    public function __construct($id, $nome, $login, $senha, $email)
-    {
-        $this->id    = $id;
-        $this->nome  = $nome;
-        $this->login = $login;
-        $this->senha = $senha;
-        $this->email = $email;
-    }
-
     /**
      * Get the value of id
      */

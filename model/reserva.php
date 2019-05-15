@@ -10,15 +10,6 @@ class Reserva
     private $id_cliente;
     private $id_livro;
 
-    public function __construct($data_reserva, $data_retirada, $ativo, $id_cliente, $id_livro)
-    {
-        $this->$data_reserva  = $data_reserva;
-        $this->$data_retirada = $data_retirada;
-        $this->$ativo         = $ativo;
-        $this->$id_cliente    = $id_cliente;
-        $this->$id_livro      = $id_livro;
-    }
-
     /**
      * Get the value of id
      */
