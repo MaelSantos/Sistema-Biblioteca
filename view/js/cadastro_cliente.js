@@ -6,7 +6,7 @@ function validar(){
     let txtNome = document.querySelector('#txtNome').value.trim();
     let txtCpf = document.querySelector('#txtCPF').value.trim();
     let txtEmail = document.querySelector('#txtEmail').value.trim();
-    let txtTelefone = document.querySelector('#txtTelefome').value.trim();
+    let txtTelefone = document.querySelector('#txtTelefone').value.trim();
     let txtLogin = document.querySelector('#txtLogin').value.trim();
     let txtSenha = document.querySelector('#txtSenha').value.trim();
     let txtConfirmaSenha = document.querySelector('#txtConfirmaSenha').value.trim();
@@ -39,7 +39,7 @@ btnCadastrar.addEventListener('click', function() {
         let txtNome = document.querySelector('#txtNome').value.trim();
         let txtCpf = document.querySelector('#txtCPF').value.trim();
         let txtEmail = document.querySelector('#txtEmail').value.trim();
-        let txtTelefone = document.querySelector('#txtTelefome').value.trim();
+        let txtTelefone = document.querySelector('#txtTelefone').value.trim();
         let txtLogin = document.querySelector('#txtLogin').value.trim();
         let txtSenha = document.querySelector('#txtSenha').value.trim();
         
@@ -53,7 +53,7 @@ btnCadastrar.addEventListener('click', function() {
                 document.querySelector('#txtNome').value = "";
                 document.querySelector('#txtCPF').value = "";
                 document.querySelector('#txtEmail').value = "";
-                document.querySelector('#txtTelefome').value = "";
+                document.querySelector('#txtTelefone').value = "";
                 document.querySelector('#txtLogin').value = "";
                 document.querySelector('#txtSenha').value = "";
                 document.querySelector('#txtConfirmaSenha').value = "";
