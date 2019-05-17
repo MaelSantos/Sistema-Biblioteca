@@ -37,7 +37,7 @@ nav{
     padding: 20px;
 }
 
-p, label, h2{
+p, label, h2, tr{
     font-family: 'Lusitana', serif;
     font-size: 25px;
 }
@@ -111,4 +111,13 @@ nav#barra-acesso{
 nav#barra-acesso li{
     display: block;
     float: right;
+}
+
+table{
+    float: right;
+    margin: 150px 100px;
+}
+td{
+    text-align: center;
+    padding: 10px 10px;
 }

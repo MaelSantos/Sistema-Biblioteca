@@ -16,20 +16,20 @@ $daoCliente = new DaoCliente();
 
 try {
     if ($op == "salvar") {
-        $daoCliente->salvar($cliente);
-        echo "Sucesso";
+        $r = $daoCliente->salvar($cliente);
+        if($r == true)
+            echo "Sucesso";
     }
     if ($op == "editar") {
         $daoCliente->editar($cliente);
-        echo "Sucesso";
     }
     if ($op == "buscar") {
-        $daoCliente->buscar($cliente);
-        echo "Sucesso";
+        $r = $daoCliente->buscar($cliente);
+        if($r == true)
+            echo "Sucesso";
     }
     if ($op == "remover") {
         $daoCliente->remover($cliente);
-        echo "Sucesso";
     }
 } catch (Throwable $th) {
     echo "Falha" . $th;

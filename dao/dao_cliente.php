@@ -26,7 +26,6 @@ class DaoCliente
         $sql->execute();
 
         if ($sql->rowCount() > 0) {
-            echo "Erro ao Salvar";
             return false;
         } else {
             $sql = $conexao->getPdo()->prepare("INSERT INTO Cliente(nome, cpf, telefone, email, login, senha)
@@ -59,8 +58,26 @@ class DaoCliente
     }
     public function buscar(Cliente $cliente)
     {
-
-        global $conexao;
+        try {
+            global $conexao;
+    
+            $sql = $conexao->getPdo()->prepare("SELECT id FROM Cliente WHERE login = :l AND senha = :s");
+            $sql->bindValue(":l", $cliente->getLogin());
+            $sql->bindValue(":s", md5($cliente->getSenha()));
+            $sql->execute();
+    
+            // $c = $sql->fetch();
+    
+            if ($sql->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+            
+        } catch (\Throwable $e) {
+            echo $e->getMessage();
+            return false;
+        }
     }
     public function remover(Cliente $cliente)
     {
