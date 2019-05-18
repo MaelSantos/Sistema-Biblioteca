@@ -29,6 +29,9 @@ function validar(){
 
 btnCadastrar.addEventListener('click', function() {
 
+    let erro = document.querySelector("#form-erro");
+    let sucesso = document.querySelector("#form-sucesso");
+
     if(validar())
     {
         let txtTitulo = document.querySelector('#txtTitulo').value.trim();
@@ -38,28 +41,40 @@ btnCadastrar.addEventListener('click', function() {
         let txtCodigo = document.querySelector('#txtCodigo').value.trim();
         let txtQuantidade = document.querySelector('#txtQuantidade').value.trim();
         
+        sucesso.style = 'display: none';
+
         var xhr = new XMLHttpRequest();
         xhr.addEventListener("load", function() {
             console.log(this.responseText.trim());
             if (this.responseText.trim() == 'Sucesso') {
-                window.alert('Cliente Cadastrado');
+                window.alert('Livro Cadastrado');
                 
                 // limpando o formulário
-                let txtTitulo = document.querySelector('#txtTitulo').value = '';
-                let txtAutor = document.querySelector('#txtAutor').value = '';
-                let txtAno = document.querySelector('#txtAno').value = '';
-                let txtEditora = document.querySelector('#txtEditora').value = '';
-                let txtCodigo = document.querySelector('#txtCodigo').value = '';
-                let txtQuantidade = document.querySelector('#txtQuantidade') = '';
+                document.querySelector('#txtTitulo').value = '';
+                document.querySelector('#txtAutor').value = '';
+                document.querySelector('#txtAno').value = '';
+                document.querySelector('#txtEditora').value = '';
+                document.querySelector('#txtCodigo').value = '';
+                document.querySelector('#txtQuantidade') = '';
+
+                erro.style = 'display: none';
+                sucesso.style = 'display: initial';
 
             } else {
-                window.alert('Erro ao Cadastrar');
+                erro.textContent = 'Erro ao Cadastrar';
+                erro.style = 'display: initial';
             }
         });
 
-        xhr.open('GET', 'http://localhost/Sistema-Biblioteca/controle/controle_livro.php?op=salvar&autor='+txtAutor+'&titulo='
-        +txtTitulo+'&ano='+txtAno+'&editora='+txtEditora+'&codigo='+txtCodigo+'&quantidade='+txtQuantidade+'&disponivel='+txtQuantidade);
-        xhr.send();
-
+        let url = '../controle/controle_livro.php';
+        let params = 'op=salvar&autor='+txtAutor+'&titulo='
+        +txtTitulo+'&ano='+txtAno+'&editora='+txtEditora+'&codigo='+txtCodigo+'&quantidade='+txtQuantidade+'&disponivel='+txtQuantidade;
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send(params);
+        
+    }else {
+        erro.textContent = 'Dados invalidos, repetidos ou faltando';
+        erro.style = 'display: initial';
     }
 })

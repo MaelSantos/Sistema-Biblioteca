@@ -31,7 +31,10 @@ function validar(){
 
 btnCadastrar.addEventListener('click', function() {
 
-    if(validar())
+    let erro = document.querySelector("#form-erro");
+    let sucesso = document.querySelector("#form-sucesso");
+
+    if(validar()) //valida se todos os campos estão preenchidos
     {
         let txtNome = document.querySelector('#txtNome').value.trim();
         let txtCargo = document.querySelector('#txtCargo').value.trim();
@@ -39,11 +42,12 @@ btnCadastrar.addEventListener('click', function() {
         let txtLogin = document.querySelector('#txtLogin').value.trim();
         let txtSenha = document.querySelector('#txtSenha').value.trim();
         
+        sucesso.style = 'display: none';
+
         var xhr = new XMLHttpRequest();
         xhr.addEventListener("load", function() {
             console.log(this.responseText.trim());
             if (this.responseText.trim() == 'Sucesso') {
-                window.alert('Cliente Cadastrado');
                 
                 // limpando o formulário
                 document.querySelector('#txtNome').value = "";
@@ -53,13 +57,23 @@ btnCadastrar.addEventListener('click', function() {
                 document.querySelector('#txtSenha').value = "";
                 document.querySelector('#txtConfirmaSenha').value = "";
 
+                erro.style = 'display: none';
+                sucesso.style = 'display: initial';
+
             } else {
-                window.alert('Erro ao Cadastrar');
+                erro.textContent = 'Erro ao Cadastrar';
+                erro.style = 'display: initial';
             }
         });
 
-        xhr.open('GET', 'http://localhost/Sistema-Biblioteca/controle/controle_funcionario.php?op=salvar&nome='+txtNome+'&cargo='+txtCargo+'&email='+txtEmail+'&login='+txtLogin+'&senha='+txtSenha);
-        xhr.send();
-
+        let url = '../controle/controle_funcionario.php';
+        let params = 'op=salvar&nome='+txtNome+'&cargo='+txtCargo+'&email='+txtEmail+'&login='+txtLogin+'&senha='+txtSenha;
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send(params);
+        
+    }else {
+        erro.textContent = 'Dados invalidos, repetidos ou faltando';
+        erro.style = 'display: initial';
     }
 })

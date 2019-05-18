@@ -1,5 +1,6 @@
 
-let btnCadastrar = document.querySelector('#btnCadastrar')
+let btnCadastrar = document.querySelector('#btnCadastrar');
+
 
 function validar(){
 
@@ -34,7 +35,10 @@ function validar(){
 
 btnCadastrar.addEventListener('click', function() {
 
-    if(validar())
+    let erro = document.querySelector("#form-erro");
+    let sucesso = document.querySelector("#form-sucesso");
+    
+    if(validar()) //valida se todos os campos estão preenchidos
     {
         let txtNome = document.querySelector('#txtNome').value.trim();
         let txtCpf = document.querySelector('#txtCPF').value.trim();
@@ -42,6 +46,8 @@ btnCadastrar.addEventListener('click', function() {
         let txtTelefone = document.querySelector('#txtTelefone').value.trim();
         let txtLogin = document.querySelector('#txtLogin').value.trim();
         let txtSenha = document.querySelector('#txtSenha').value.trim();
+
+        sucesso.style = 'display: none';
         
         var xhr = new XMLHttpRequest();
         xhr.addEventListener("load", function() {
@@ -58,13 +64,23 @@ btnCadastrar.addEventListener('click', function() {
                 document.querySelector('#txtSenha').value = "";
                 document.querySelector('#txtConfirmaSenha').value = "";
 
+                erro.style = 'display: none';
+                sucesso.style = 'display: initial';
+
             } else {
-                window.alert('Erro ao Cadastrar');
+                erro.textContent = 'Erro ao Cadastrar';
+                erro.style = 'display: initial';
             }
         });
+            
+        let url = '../controle/controle_cliente.php';
+        let params = 'op=salvar&nome='+txtNome+'&cpf='+txtCpf+'&email='+txtEmail+'&telefone='+txtTelefone+'&login='+txtLogin+'&senha='+txtSenha;
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send(params);
 
-        xhr.open('GET', 'http://localhost/Sistema-Biblioteca/controle/controle_cliente.php?op=salvar&nome='+txtNome+'&cpf='+txtCpf+'&email='+txtEmail+'&telefone='+txtTelefone+'&login='+txtLogin+'&senha='+txtSenha);
-        xhr.send();
-
+    }else {
+        erro.textContent = 'Dados invalidos, repetidos ou faltando';
+        erro.style = 'display: initial';
     }
 })

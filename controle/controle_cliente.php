@@ -2,15 +2,15 @@
 require_once '../dao/dao_cliente.php';
 require_once '../model/cliente.php';
 
-$op = $_GET["op"];
+$op = $_POST["op"];
 
 $cliente = new Cliente();
-$cliente->setNome($_GET["nome"]);
-$cliente->setCpf($_GET["cpf"]);
-$cliente->setEmail($_GET["email"]);
-$cliente->setTelefone($_GET["telefone"]);
-$cliente->setLogin($_GET["login"]);
-$cliente->setSenha($_GET["senha"]);
+$cliente->setNome($_POST["nome"]);
+$cliente->setCpf($_POST["cpf"]);
+$cliente->setEmail($_POST["email"]);
+$cliente->setTelefone($_POST["telefone"]);
+$cliente->setLogin($_POST["login"]);
+$cliente->setSenha($_POST["senha"]);
 
 $daoCliente = new DaoCliente();
 
@@ -23,10 +23,15 @@ try {
     if ($op == "editar") {
         $daoCliente->editar($cliente);
     }
-    if ($op == "buscar") {
+    if ($op == "login") {
         $r = $daoCliente->buscar($cliente);
         if($r == true)
+        {
+            session_start(); 
+            $_SESSION["logado"] = $cliente->getCpf();//Define que existe um usuário logado
             echo "Sucesso";
+            // header("Location: ../view/inicio.html");
+        }
     }
     if ($op == "remover") {
         $daoCliente->remover($cliente);

@@ -7,6 +7,7 @@
         <title>Sistema Biblioteca</title>
         <link href="css/reset.css" rel="stylesheet">
         <link href="css/aparencia.css" rel="stylesheet">
+        <link href="css/componentes.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Lusitana" rel="stylesheet">
     </head>
@@ -27,7 +28,9 @@
         </header>
 
         <div class="corpo-form">
-            <h2>Preencha todos os dados!</h2>
+            <!--Mensagens de notificação-->
+            <div id="form-erro"></div>
+            <div id="form-sucesso">Preencha todos os dados!</div>
             <form name="cadastro_form" method="POST" action=""> <!--formulario-->
                 
                 <label for="txtTitulo">Titulo</label>

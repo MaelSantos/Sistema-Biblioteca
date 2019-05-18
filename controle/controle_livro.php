@@ -2,16 +2,16 @@
 require_once '../dao/dao_livro.php';
 require_once '../model/livro.php';
 
-$op = $_GET["op"];
+$op = $_POST["op"];
 
 $livro = new Livro();
-$livro->setAutor($_GET["autor"]);
-$livro->setTitulo($_GET["titulo"]);
-$livro->setAno($_GET["ano"]);
-$livro->setEditora($_GET["editora"]);
-$livro->setCodigo($_GET["codigo"]);
-$livro->setQuantidade($_GET["quantidade"]);
-$livro->setDisponivel($_GET["disponivel"]);
+$livro->setAutor($_POST["autor"]);
+$livro->setTitulo($_POST["titulo"]);
+$livro->setAno($_POST["ano"]);
+$livro->setEditora($_POST["editora"]);
+$livro->setCodigo($_POST["codigo"]);
+$livro->setQuantidade($_POST["quantidade"]);
+$livro->setDisponivel($_POST["disponivel"]);
 
 $daoLivro = new DaoLivro();
 

@@ -7,6 +7,7 @@
         <title>Sistema Biblioteca</title>
         <link href="css/reset.css" rel="stylesheet">
         <link href="css/aparencia.css" rel="stylesheet">
+        <link href="css/componentes.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Lusitana" rel="stylesheet">
     </head>
@@ -27,7 +28,7 @@
         </header>
 
         <div class="corpo-form">
-            <h2>Iniciar Sessão</h2>
+            <div id="form-erro"></div> <!--Mensagem de erro-->
             <form name="login_form" method="GET" action=""> <!--formulario-->
                 <label for="txtLogin">Login:</label>
                 <input type="text" id="txtLogin" name="txtLogin" placeholder="Login" >
@@ -40,5 +41,5 @@
             </form>
         </div>
     </body>
-
+    <script src="js/login_cliente.js"></script>
 </html>

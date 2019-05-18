@@ -1,15 +1,12 @@
-::-webkit-input-placeholder {
-    color: #fff;
- }
- 
- :-moz-placeholder { /* Firefox 18- */
-    color: #fff;  
- }
- 
- ::-moz-placeholder {  /* Firefox 19+ */
-    color: #fff;  
- }
- 
- :-ms-input-placeholder {  
-    color: #fff;  
- }
+#form-erro {
+   font-family: 'Lusitana', serif;
+   font-size: 25px;
+   color: red;
+   display: none;
+}
+#form-sucesso {
+   font-family: 'Lusitana', serif;
+   font-size: 25px;
+   color: green;
+   display: none;
+}

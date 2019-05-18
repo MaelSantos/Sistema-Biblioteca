@@ -2,14 +2,14 @@
 require_once '../dao/dao_funcionario.php';
 require_once '../model/funcionario.php';
 
-$op = $_GET["op"];
+$op = $_POST["op"];
 
 $funcionario = new Funcionario();
-$funcionario->setNome($_GET["nome"]);
-$funcionario->setCargo($_GET["cargo"]);
-$funcionario->setEmail($_GET["email"]);
-$funcionario->setLogin($_GET["login"]);
-$funcionario->setSenha($_GET["senha"]);
+$funcionario->setNome($_POST["nome"]);
+$funcionario->setCargo($_POST["cargo"]);
+$funcionario->setEmail($_POST["email"]);
+$funcionario->setLogin($_POST["login"]);
+$funcionario->setSenha($_POST["senha"]);
 
 $daoFuncionario = new DaoFuncionario();
 
