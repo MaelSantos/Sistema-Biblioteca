@@ -67,7 +67,10 @@ if(isset($_SESSION['logado'])) {
             <tbody>
             </tbody>
         </table>
+        <footer>  <!--rodapé-->
+            <p>&copy; Todos os direitos são reservados.</p>
+        </footer>
+        <script src="js/acervo.js"></script>
+        <script src="js/logout.js"></script>
     </body>
-    <script src="js/acervo.js"></script>
-    <script src="js/logout.js"></script>
 </html>

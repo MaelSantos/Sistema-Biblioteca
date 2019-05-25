@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-if(isset($_SESSION['logado'])) {
+if(isset($_SESSION['admin'])) {
 } else {
     $_SESSION['falhou'] = 'sim';
     header("Location: ../index.php");
@@ -25,14 +25,14 @@ if(isset($_SESSION['logado'])) {
     <body>
         <header> <!--cabeçalho-->
             <div>
-                <h1 class="titulo"><a href="../index.html" alt="Pagina Principal">Sistema Biblioteca</a></h1>
+                <h1 class="titulo"><a href="admin.php" alt="Pagina Principal">Sistema Biblioteca</a></h1>
             </div>
             
             <nav id="barra-menu"> <!--junção de links-->
                 <ul>
-                    <li><a href="../index.html" alt="Pagina Inicial">Inicio</a></li>
+                    <li><a href="admin.php" alt="Pagina Inicial">Inicio</a></li>
                     <li><a href="" alt="Sobre">Sobre</a></li>
-                    <li><a href="contatos.html" alt="Contatos">Contatos</a></li>
+                    <li><a href="contatos.php" alt="Contatos">Contatos</a></li>
                 </ul>
             </nav>
             <nav id="barra-acesso"> <!--junção de links-->
@@ -42,30 +42,34 @@ if(isset($_SESSION['logado'])) {
                 </ul>
             </nav>
         </header>
-
         <div class="corpo-form">
             <!--Mensagens de notificação-->
             <div id="form-erro"></div>
-            <div id="form-sucesso">Preencha todos os dados!</div>
-            <form name="cadastro_form" method="POST" action=""> <!--formulario-->
-                
-                <label id="lblRetirada">Data de retirada</label>
-
-                <label id="lblReserva">Data de Reserva</label>
-
-                <label id="lblCliente">Cliente:</label>
-
-                <label id="lblLivro">Livro:</label>
-
-                <input type="button" id="btnConfirmar" name="btnConfimar" value="Confirmar">
-
+            <form class="busca"> <!--Formulario de busca-->
+                <input type="text" id="txtBuscar" name="txtBuscar" placeholder="Buscar">
+                <input type="button" id="btnBuscar" name="Buscar" value="Buscar">
+                <label for="cbxTipo">Tipo de Busca</label>
+                <select name="cbxTipo" id="cbxTipo">
+                    <option value="cliente">Cliente</option>
+                    <option value="funcionario">Funcionario</option>
+                    <option value="alugado">Alugado</option>
+                </select>
+                <input type="button" id="btnCadastrarFuncionario" name="btnCadastrarFuncionario" value="Cadastrar Funcionario">
+                <input type="button" id="btnCadastrarLivro" name="btnCadastrarLivro" value="Cadastrar Livro">
+                <input type="button" id="btnAlugar" name="btnAlugar" value="Alugar Livro">
             </form>
         </div>
+
+        <table class="tabela" border="1px" cellpadding="5px" cellspacing="0"> <!--Tabela de livros-->
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
         <footer>  <!--rodapé-->
             <p>&copy; Todos os direitos são reservados.</p>
         </footer>
-        <script src="js/reserva.js"></script>
+        <script src="js/admin.js"></script>
         <script src="js/logout.js"></script>
     </body>
-
 </html>

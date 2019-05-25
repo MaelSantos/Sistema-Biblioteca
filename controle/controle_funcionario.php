@@ -22,9 +22,19 @@ try {
         $daoFuncionario->editar($funcionario);
         echo "Sucesso";
     }
-    if ($op == "buscar") {
-        $daoFuncionario->buscar($funcionario);
-        echo "Sucesso";
+    if ($op == "login") {
+        $id = $daoFuncionario->buscar($funcionario);
+        if($id != null)
+        {
+            session_start(); 
+            $_SESSION["admin"] = $funcionario->getLogin();//Define que existe um usuário logado
+            $_SESSION["id"] = $id; //Define que existe um usuário logado
+            echo "Sucesso";
+        }
+    }
+    if ($op == "buscabusca") {
+        $funcionarios = $daoFuncionario->busca_por_busca($funcionario);
+        echo json_encode($funcionarios);
     }
     if ($op == "remover") {
         $daoFuncionario->remover($funcionario);

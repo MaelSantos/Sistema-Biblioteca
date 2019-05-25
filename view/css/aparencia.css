@@ -58,7 +58,7 @@ a:hover{
     color: white;
 }
 
-input{
+input, select{
     display: block;
     font-family: 'Lusitana', serif;
     width: 350px;
@@ -99,7 +99,7 @@ nav#barra-menu ul{
 
 nav#barra-menu li{
     display: block;
-    float: left;
+    /* float: left; */
 }
 
 nav#barra-acesso{
@@ -117,4 +117,14 @@ nav#barra-acesso li{
 td, th{
     text-align: center;
     padding: 10px 10px;
+}
+
+footer {
+    position:absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #8C3555;
+    /* display: inline-flex; */
 }

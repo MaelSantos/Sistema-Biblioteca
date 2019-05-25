@@ -71,6 +71,9 @@ if(isset($_SESSION['logado'])) {
                 </tbody>
             </table>
         </div>
+        <footer>  <!--rodapé-->
+            <p>&copy; Todos os direitos são reservados.</p>
+        </footer>
     </body>
     <script src="js/inicio.js"></script>
     <script src="js/logout.js"></script>

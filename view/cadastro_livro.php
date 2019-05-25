@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+if(isset($_SESSION['admin'])) {
+} else {
+    $_SESSION['falhou'] = 'sim';
+    header("Location: ../index.php");
+}
+?>
+
 <!DOCTYPE html>
 
 <html lang="pt-br">
@@ -54,8 +64,9 @@
                 <input type="button" id="btnCadastrar" name="btnCadastrar" value="Cadastrar">
             </form>
         </div>
-
+        <footer>  <!--rodapé-->
+            <p>&copy; Todos os direitos são reservados.</p>
+        </footer>
         <script src="js/cadastro_livro.js"></script>
     </body>
-
 </html>

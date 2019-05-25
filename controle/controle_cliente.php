@@ -33,6 +33,10 @@ try {
             echo "Sucesso";
         }
     }
+    if ($op == "buscabusca") {
+        $clientes = $daoCliente->busca_por_busca($cliente);
+        echo json_encode($clientes);
+    }
     if ($op == "remover") {
         $daoCliente->remover($cliente);
     }

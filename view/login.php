@@ -40,6 +40,9 @@
                 <a href="cadastro_cliente.php" alt="Cadastro">Ainda não é cadastrado?<strong>Cadastre-se!</strong></a></li>
             </form>
         </div>
+        <footer>  <!--rodapé-->
+            <p>&copy; Todos os direitos são reservados.</p>
+        </footer>
     </body>
     <script src="js/login_cliente.js"></script>
 </html>

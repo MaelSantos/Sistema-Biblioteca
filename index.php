@@ -33,6 +33,10 @@
             </nav>
         </header>
 
+        <footer>  <!--rodapé-->
+            <p>&copy; Todos os direitos são reservados.</p>
+            <a href="view/login_funcionario.php" alt="Funcionario">Funcionario</a>
+        </footer>
     </body>
     
 </html>

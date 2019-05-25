@@ -57,7 +57,9 @@
                 <input type="button" id="btnCadastrar" name="btnCadastrar" value="Cadastrar">
             </form>
         </div>
-
+        <footer>  <!--rodapé-->
+            <p>&copy; Todos os direitos são reservados.</p>
+        </footer>
         <script src="js/cadastro_cliente.js"></script>
     </body>
 
