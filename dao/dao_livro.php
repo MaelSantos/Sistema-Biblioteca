@@ -3,6 +3,19 @@
 include_once 'conection.php';
 include_once '../model/livro.php';
 
+// $livro = new Livro();
+// $livro->setAutor("N");
+// $livro->setTitulo("N");
+// $livro->setAno("N");
+// $livro->setEditora("N");
+// $livro->setCodigo("N");
+// $livro->setQuantidade("N");
+// $livro->setDisponivel("N");
+
+// $daoLivro = new DaoLivro();
+
+// $daoLivro->busca_por_busca($livro);
+
 class DaoLivro
 {
 
@@ -59,11 +72,36 @@ class DaoLivro
         $sql->bindValue(":d", $livro->getDisponivel());
         $sql->execute();
     }
-    public function buscar(Livro $livro)
+    public function buscar_por_locacao(Livro $livro)
     {
 
         global $conexao;
     }
+    public function busca_por_busca(Livro $livro)
+    {
+        global $conexao;
+
+        $sql = $conexao->getPdo()->prepare("SELECT * FROM Livro WHERE autor LIKE :a OR titulo LIKE :t OR ano LIKE :an OR editora LIKE :e OR codigo LIKE :c OR quantidade LIKE :q OR disponivel LIKE :d");
+        $sql->bindValue(":a", "%".$livro->getAutor()."%");
+        $sql->bindValue(":t", "%".$livro->getTitulo()."%");
+        $sql->bindValue(":an", "%".$livro->getAno()."%");
+        $sql->bindValue(":e", "%".$livro->getEditora()."%");
+        $sql->bindValue(":c", "%".$livro->getCodigo()."%");
+        $sql->bindValue(":q", "%".$livro->getQuantidade()."%");
+        $sql->bindValue(":d", "%".$livro->getDisponivel()."%");
+        $sql->execute();
+
+        $livros = array();
+        $i = 0;
+        while($row = $sql->fetch()) {
+            $livros[$i]= $row;
+            $i++;
+        }
+
+        // echo json_encode($livros);
+        return $livros;
+    }
+
     public function remover(Livro $livro)
     {
 

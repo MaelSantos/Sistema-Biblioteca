@@ -6,6 +6,7 @@
         <meta charset="utf-8">
         <title>Sistema Biblioteca</title>
         <link href="view/css/reset.css" rel="stylesheet">
+        <link href="view/css/componentes.css" rel="stylesheet">
         <link href="view/css/aparencia.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Lusitana" rel="stylesheet">
@@ -14,20 +15,20 @@
     <body>
         <header> <!--cabeçalho-->
             <div>
-                <h1 class="titulo"><a href="index.html" alt="Pagina Inicial">Sistema Biblioteca</a></h1>
+                <h1 class="titulo"><a href="index.php" alt="Pagina Inicial">Sistema Biblioteca</a></h1>
             </div>
             <nav id="barra-menu"> <!--junção de links-->
                 <ul>
-                    <li><a href="index.html" alt="Pagina Inicial">Inicio</a></li>
+                    <li><a href="index.php" alt="Pagina Inicial">Inicio</a></li>
                     <li><a href="" alt="Sobre">Sobre</a></li>
-                    <li><a href="view/contatos.html" alt="Contatos">Contatos</a></li>
+                    <li><a href="view/contatos.php" alt="Contatos">Contatos</a></li>
                 </ul>
             </nav>
 
             <nav id="barra-acesso"> <!--junção de links-->
                 <ul>
-                    <li><a href="view/cadastro_cliente.html" alt="Cadastro">Cadastro</a></li>
-                    <li><a href="view/login.html" alt="Login">Login</a></li>
+                    <li><a href="view/cadastro_cliente.php" alt="Cadastro">Cadastro</a></li>
+                    <li><a href="view/login.php" alt="Login">Login</a></li>
                 </ul>
             </nav>
         </header>

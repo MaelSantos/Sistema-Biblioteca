@@ -15,14 +15,14 @@
     <body>
         <header> <!--cabeçalho-->
             <div>
-                <h1 class="titulo"><a href="../index.html" alt="Pagina Principal">Sistema Biblioteca</a></h1>
+                <h1 class="titulo"><a href="../index.php" alt="Pagina Principal">Sistema Biblioteca</a></h1>
             </div>
     
             <nav id="barra-menu"> <!--junção de links-->
                 <ul>
-                    <li><a href="../index.html" alt="Pagina Inicial">Inicio</a></li>
+                    <li><a href="../index.php" alt="Pagina Inicial">Inicio</a></li>
                     <li><a href="" alt="Sobre">Sobre</a></li>
-                    <li><a href="contatos.html" alt="Contatos">Contatos</a></li>
+                    <li><a href="contatos.php" alt="Contatos">Contatos</a></li>
                 </ul>
             </nav>
         </header>
@@ -37,7 +37,7 @@
                 <input type="password" id="txtSenha" name="txtSenha" placeholder="Senha" >
 
                 <input type="button" id="btnEntrar" name="btnEntrar" value="Entrar">
-                <a href="cadastro_cliente.html" alt="Cadastro">Ainda não é cadastrado?<strong>Cadastre-se!</strong></a></li>
+                <a href="cadastro_cliente.php" alt="Cadastro">Ainda não é cadastrado?<strong>Cadastre-se!</strong></a></li>
             </form>
         </div>
     </body>

@@ -10,6 +10,11 @@ class Reserva
     private $id_cliente;
     private $id_livro;
 
+    public function __toString()
+    {
+        return $this->data_reserva." ".$this->data_retirada." ".$this->ativo." ".$this->id_cliente." ".$this->id_livro;
+    }
+
     /**
      * Get the value of id
      */

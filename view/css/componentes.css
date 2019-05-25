@@ -10,3 +10,27 @@
    color: green;
    display: none;
 }
+
+table.tabela{ /* localização da tabela */
+   margin: 70px auto auto auto;
+   table-layout: fixed;
+   width: 100%;
+}
+
+table.tabela thead tr th {
+   background: #0D0D0D; /* Linha de cabeçalho com fundo preto */
+   color: white;
+   overflow: auto;
+}
+table.tabela tr td{ /* Toda a tabela com fundo azul */
+   background: #6BBFA7;
+   overflow: auto;
+} 
+table.tabela tr.dif td {
+   background: #D96A6A; /* Linhas com fundo rosa */
+   overflow: auto;
+}
+
+form.busca {
+   display: flex;
+}

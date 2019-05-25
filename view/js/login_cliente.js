@@ -24,11 +24,10 @@ btnEntrar.addEventListener('click', function() {
         let txtLogin = document.querySelector('#txtLogin').value.trim();
         let txtSenha = document.querySelector('#txtSenha').value.trim();
 
-        var xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
         xhr.addEventListener("load", function() {
-            console.log(this.responseText.trim());
             if (this.responseText.trim() == 'Sucesso') {
-                window.location.replace('inicio.html');
+                window.location.replace('inicio.php');
 
             } else {
                 erro.textContent = 'Erro ao Realizar Login';

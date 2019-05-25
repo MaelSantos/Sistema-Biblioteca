@@ -24,13 +24,13 @@ try {
         $daoCliente->editar($cliente);
     }
     if ($op == "login") {
-        $r = $daoCliente->buscar($cliente);
-        if($r == true)
+        $id = $daoCliente->buscar($cliente);
+        if($id != null)
         {
             session_start(); 
-            $_SESSION["logado"] = $cliente->getCpf();//Define que existe um usuário logado
+            $_SESSION["logado"] = $cliente->getLogin();//Define que existe um usuário logado
+            $_SESSION["id"] = $id; //Define que existe um usuário logado
             echo "Sucesso";
-            // header("Location: ../view/inicio.html");
         }
     }
     if ($op == "remover") {

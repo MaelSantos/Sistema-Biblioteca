@@ -66,13 +66,13 @@ class DaoCliente
             $sql->bindValue(":s", md5($cliente->getSenha()));
             $sql->execute();
     
-            // $c = $sql->fetch();
-    
-            if ($sql->rowCount() > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            // if ($sql->rowCount() > 0) {
+            //     return true;
+            // } else {
+            //     return false;
+            // }
+
+            return $sql->fetch()["id"];
             
         } catch (\Throwable $e) {
             echo $e->getMessage();

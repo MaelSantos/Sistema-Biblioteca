@@ -24,9 +24,9 @@ try {
         $daoLivro->editar($livro);
         echo "Sucesso";
     }
-    if ($op == "buscar") {
-        $daoLivro->buscar($livro);
-        echo "Sucesso";
+    if ($op == "buscabusca") {
+        $livros = $daoLivro->busca_por_busca($livro);
+        echo json_encode($livros);
     }
     if ($op == "remover") {
         $daoLivro->remover($livro);

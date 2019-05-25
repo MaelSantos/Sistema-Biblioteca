@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+if(isset($_SESSION['logado'])) {
+} else {
+    $_SESSION['falhou'] = 'sim';
+    header("Location: ../index.php");
+}
+?>
+
 <!DOCTYPE html>
 
 <html lang="pt-br">
@@ -25,6 +35,12 @@
                     <li><a href="contatos.html" alt="Contatos">Contatos</a></li>
                 </ul>
             </nav>
+            <nav id="barra-acesso"> <!--junção de links-->
+                <ul>
+                    <li><a id="link-sair" href="javascript:void(0)" alt="Sair">Sair</a></li>
+                    <li><a id="link-perfil" href="javascript:void(0)" alt="Perfil">Perfil</a></li>
+                </ul>
+            </nav>
         </header>
 
         <div class="corpo-form">
@@ -33,29 +49,21 @@
             <div id="form-sucesso">Preencha todos os dados!</div>
             <form name="cadastro_form" method="POST" action=""> <!--formulario-->
                 
-                <label for="txtTitulo">Titulo</label>
-                <input type="text" placeholder="Titulo" name="txtTitulo" id="txtTitulo">
+                <label id="lblRetirada">Data de retirada</label>
 
-                <label for="txtAutor">Autor</label>
-                <input type="text" placeholder="Autor" name="txtAutor" id="txtAutor">
-                
-                <label for="txtAno">Ano</label>
-                <input type="text" name="txtAno" id="txtAno" placeholder="Ano" >
+                <label id="lblReserva">Data de Reserva</label>
 
-                <label for="txtEditora">Editora</label>
-                <input type="text" name="txtEditora" id="txtEditora" placeholder="Editora" >
-                
-                <label for="txtCodigo">Codigo</label>
-                <input type="text" name="txtCodigo" id="txtCodigo" placeholder="Codigo">
+                <label id="lblCliente">Cliente:</label>
 
-                <label for="txtQuantidade">Quantidade</label>
-                <input type="text" name="txtQuantidade" id="txtQuantidade" placeholder="Quantidade" >
+                <label id="lblLivro">Livro:</label>
 
-                <input type="button" id="btnCadastrar" name="btnCadastrar" value="Cadastrar">
+                <input type="button" id="btnConfirmar" name="btnConfimar" value="Confirmar">
+
             </form>
         </div>
 
-        <script src="js/cadastro_livro.js"></script>
+        <script src="js/reserva.js"></script>
+        <script src="js/logout.js"></script>
     </body>
 
 </html>

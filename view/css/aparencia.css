@@ -37,7 +37,7 @@ nav{
     padding: 20px;
 }
 
-p, label, h2, tr{
+p, label, h1, h2, tr{
     font-family: 'Lusitana', serif;
     font-size: 25px;
 }
@@ -76,6 +76,7 @@ input[type=button]{
     background: #8C3555;
     border: none;
     cursor: pointer;
+    color: white;
 }
 
 div.corpo-form{
@@ -113,11 +114,7 @@ nav#barra-acesso li{
     float: right;
 }
 
-table{
-    float: right;
-    margin: 150px 100px;
-}
-td{
+td, th{
     text-align: center;
     padding: 10px 10px;
 }
