@@ -41,10 +41,16 @@ class DaoAluga
                 $sql->bindValue(":c", $aluga->getId_cliente());
                 $sql->bindValue(":o", $aluga->getId_livro());
                 $sql->execute();
-                return true;
+
+                $sql = $conexao->getPdo()->prepare("SELECT id FROM Aluga ORDER BY id DESC LIMIT 1");
+                $sql->execute();
+
+                return $sql->fetch()["id"];
+
             }
         } catch (\Throwable $th) {
             echo $e->getMessage();
+            return null;
         }
 
     }
@@ -83,6 +89,30 @@ class DaoAluga
         } catch (\Throwable $e) {
             echo $e->getMessage();
             return false;
+        }
+    }
+
+    public function buscar_por_id($id)
+    {
+        try {
+            global $conexao;
+    
+            $sql = $conexao->getPdo()->prepare("SELECT a.*, c.nome, f.nome, l.titulo FROM Aluga a, Cliente c, Funcionario f, Livro l WHERE a.id_cliente = c.id AND a.id_funcionario = f.id AND a.id_livro = l.id AND c.id = :i");
+            $sql->bindValue(":i", $id);
+            $sql->execute();
+
+            $alugados = array();
+            $i = 0;
+            while($row = $sql->fetch()) {
+                $alugados[$i]= $row;
+                $i++;
+            }
+    
+            return $alugados;
+            
+        } catch (\Throwable $e) {
+            echo $e->getMessage();
+            return null;
         }
     }
 

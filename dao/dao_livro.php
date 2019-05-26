@@ -70,6 +70,24 @@ class DaoLivro
 
         global $conexao;
     }
+    public function busca_por_codigo($codigo)
+    {
+        try {
+            global $conexao;
+    
+            $sql = $conexao->getPdo()->prepare("SELECT id FROM Livro WHERE codigo = :c");
+            $sql->bindValue(":c", $codigo);
+            $sql->execute();
+
+            return $sql->fetch()["id"];
+            
+        } catch (\Throwable $th) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+
+
     public function busca_por_busca(Livro $livro)
     {
         try {

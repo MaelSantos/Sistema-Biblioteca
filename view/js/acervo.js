@@ -31,9 +31,7 @@ xhr.addEventListener('load', function() {//retornar os resultados da busca para 
         let reservar = ultimaLinha.querySelector('.reservar');
 
         reservar.addEventListener('click', function reservar(){
-            let cookie = ultimaLinha.querySelector('.col_codigo').textContent;
-            document.cookie = 'Codigo='+livros[i]["id"];
-            window.location.replace('reserva.php');
+            window.location.replace('reserva.php?&livro='+livros[i]["codigo"]);
         });
     }
     
@@ -67,4 +65,30 @@ function setCookie(name, value, duration) {
     ((duration) ? "; duration=" + duration.toGMTString() : "");
 
     document.cookie = cookie;
+}
+
+function getCookie(name) {
+    var cookies = document.cookie;
+    var prefix = name + "=";
+    var begin = cookies.indexOf("; " + prefix);
+
+    if (begin == -1) {
+
+        begin = cookies.indexOf(prefix);
+        
+        if (begin != 0) {
+            return null;
+        }
+
+    } else {
+        begin += 2;
+    }
+
+    var end = cookies.indexOf(";", begin);
+    
+    if (end == -1) {
+        end = cookies.length;                        
+    }
+
+    return unescape(cookies.substring(begin + prefix.length, end));
 }

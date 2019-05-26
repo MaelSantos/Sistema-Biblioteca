@@ -25,7 +25,7 @@ if(isset($_SESSION['logado'])) {
     <body>
         <header> <!--cabeçalho-->
             <div>
-                <h1 class="titulo"><a href="../index.php" alt="Pagina Principal">Sistema Biblioteca</a></h1>
+                <h1 class="titulo"><a href="inicio.php" alt="Pagina Principal">Sistema Biblioteca</a></h1>
             </div>
             
             <nav id="barra-menu"> <!--junção de links-->

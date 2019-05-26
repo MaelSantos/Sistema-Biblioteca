@@ -29,9 +29,13 @@ try {
         {
             session_start(); 
             $_SESSION["logado"] = $cliente->getLogin();//Define que existe um usuário logado
+            // $_SESSION["logado"] = $cliente->getCpf();//Define que existe um usuário logado
             $_SESSION["id"] = $id; //Define que existe um usuário logado
             echo "Sucesso";
         }
+        else
+            echo "Falha";
+
     }
     if ($op == "buscabusca") {
         $clientes = $daoCliente->busca_por_busca($cliente);

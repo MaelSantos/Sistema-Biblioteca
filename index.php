@@ -1,3 +1,14 @@
+<?php
+
+session_start();
+if(isset($_SESSION['logado'])) {
+    header("Location: view/inicio.php");
+} 
+else if(isset($_SESSION['admin'])) {
+    header("Location: view/admin.php");
+}
+?>
+
 <!DOCTYPE html>
 
 <html lang="pt-br">

@@ -22,7 +22,7 @@ class DaoConta
             global $conexao;
             
             $sql = $conexao->getPdo()->prepare("INSERT INTO Conta(data_efetuada, data_pagamento, data_paga, multa, valor_total, id_aluga)
-            VALUES (:e :p, :a, :m, :v, :l)");
+            VALUES (:e, :p, :a, :m, :v, :l)");
             $sql->bindValue(":e", $conta->getData_efetuada());
             $sql->bindValue(":p", $conta->getData_pagamento());
             $sql->bindValue(":a", $conta->getData_paga());
@@ -34,6 +34,7 @@ class DaoConta
 
         } catch (\Throwable $th) {
             echo $e->getMessage();
+            return false;
         }
 
     }

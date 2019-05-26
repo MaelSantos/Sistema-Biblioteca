@@ -1,6 +1,11 @@
 
 let btnCadastrar = document.querySelector('#btnCadastrar')
 
+var erro = document.querySelector("#form-erro");
+var sucesso = document.querySelector("#form-sucesso");
+
+var xhr = new XMLHttpRequest();
+
 function validar(){
 
     let txtTitulo = document.querySelector('#txtTitulo').value.trim();
@@ -29,9 +34,6 @@ function validar(){
 
 btnCadastrar.addEventListener('click', function() {
 
-    let erro = document.querySelector("#form-erro");
-    let sucesso = document.querySelector("#form-sucesso");
-
     if(validar())
     {
         let txtTitulo = document.querySelector('#txtTitulo').value.trim();
@@ -42,29 +44,6 @@ btnCadastrar.addEventListener('click', function() {
         let txtQuantidade = document.querySelector('#txtQuantidade').value.trim();
         
         sucesso.style = 'display: none';
-
-        var xhr = new XMLHttpRequest();
-        xhr.addEventListener("load", function() {
-            console.log(this.responseText.trim());
-            if (this.responseText.trim() == 'Sucesso') {
-                window.alert('Livro Cadastrado');
-                
-                // limpando o formulário
-                document.querySelector('#txtTitulo').value = '';
-                document.querySelector('#txtAutor').value = '';
-                document.querySelector('#txtAno').value = '';
-                document.querySelector('#txtEditora').value = '';
-                document.querySelector('#txtCodigo').value = '';
-                document.querySelector('#txtQuantidade') = '';
-
-                erro.style = 'display: none';
-                sucesso.style = 'display: initial';
-
-            } else {
-                erro.textContent = 'Erro ao Cadastrar';
-                erro.style = 'display: initial';
-            }
-        });
 
         let url = '../controle/controle_livro.php';
         let params = 'op=salvar&autor='+txtAutor+'&titulo='
@@ -77,4 +56,25 @@ btnCadastrar.addEventListener('click', function() {
         erro.textContent = 'Dados invalidos, repetidos ou faltando';
         erro.style = 'display: initial';
     }
-})
+});
+
+xhr.addEventListener("load", function() {
+    console.log(this.responseText.trim());
+    if (this.responseText.trim() == 'Sucesso') {
+        
+        // limpando o formulário
+        document.querySelector('#txtTitulo').value = '';
+        document.querySelector('#txtAutor').value = '';
+        document.querySelector('#txtAno').value = '';
+        document.querySelector('#txtEditora').value = '';
+        document.querySelector('#txtCodigo').value = '';
+        document.querySelector('#txtQuantidade') = '';
+
+        erro.style = 'display: none';
+        sucesso.style = 'display: initial';
+
+    } else {
+        erro.textContent = 'Erro ao Cadastrar';
+        erro.style = 'display: initial';
+    }
+});

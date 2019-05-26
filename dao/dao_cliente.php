@@ -82,6 +82,40 @@ class DaoCliente
         }
     }
 
+    public function buscar_por_cpf($cpf)
+    {
+        try {
+            global $conexao;
+    
+            $sql = $conexao->getPdo()->prepare("SELECT id FROM Cliente WHERE cpf = :c");
+            $sql->bindValue(":c", $cpf);
+            $sql->execute();
+
+            return $sql->fetch()["id"];
+            
+        } catch (\Throwable $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
+    public function buscar_por_login($login)
+    {
+        try {
+            global $conexao;
+    
+            $sql = $conexao->getPdo()->prepare("SELECT id FROM Cliente WHERE login = :l");
+            $sql->bindValue(":l", $login);
+            $sql->execute();
+
+            return $sql->fetch()["id"];
+            
+        } catch (\Throwable $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
     public function busca_por_busca(Cliente $cliente)
     {
         try {

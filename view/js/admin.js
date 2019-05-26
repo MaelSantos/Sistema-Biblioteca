@@ -9,8 +9,9 @@ var xhr = new XMLHttpRequest();
 var cbxTipo = document.querySelector('#cbxTipo');
 
 xhr.addEventListener('load', function() {//retornar os resultados da busca para a tela
-    let resultado = JSON.parse(this.responseText.trim());//passa para uma lista os arquivos do JSON
 
+    let resultado = JSON.parse(this.responseText.trim());//passa para uma lista os arquivos do JSON
+    console.log(resultado);
     let tr = document.querySelectorAll('.tabela > tbody > tr');
     for(let i = 0; i < tr.length; i++)
         tr[i].remove() //remove elementos existentes na tabela
@@ -102,7 +103,53 @@ xhr.addEventListener('load', function() {//retornar os resultados da busca para 
         }
     }
     else if(cbxTipo.options[cbxTipo.selectedIndex].value == 'alugado'){
-        
+        let cabecalho = '<tr>';
+        cabecalho += '<th>Locação</th>';
+        cabecalho += '<th>Devolução</th>';
+        cabecalho += '<th>Data Devolvido</th>';
+        cabecalho += '<th>Diaria</th>';
+        cabecalho += '<th>Ativo</th>';
+        cabecalho += '<th>Funcionario</th>';
+        cabecalho += '<th>Cliente</th>';
+        cabecalho += '<th>Livro</th>';
+        cabecalho += '<th>Opções</th>';
+        cabecalho += '</tr>';
+
+        document.querySelector('.tabela > thead').insertAdjacentHTML('beforeend', cabecalho);//adiciona o cabeçalho
+
+        for(let i = 0; i < resultado.length; i++)
+        {
+            //prepara os dados a serem adicionados
+            let txtHtml;
+            if(i % 2 == 0)
+                txtHtml = "<tr class='dif'>";
+            else
+                txtHtml = "<tr>";
+            txtHtml += "<td class='col_locacao'>"+resultado[i]["data_locacao"]+"</td>";
+            txtHtml += "<td class='col_devolucao'>"+resultado[i]["data_devolucao"]+"</td>";
+            txtHtml += "<td class='col_devolvido'>"+resultado[i]["data_devolvido"]+"</td>";
+            txtHtml += "<td class='col_diaria'>"+resultado[i]["diaria"]+"</td>";
+            if(resultado[i]["ativo"] == 1)
+                txtHtml += "<td class='col_ativo'>Sim</td>";
+            else
+                txtHtml += "<td class='col_ativo'>Não</td>";
+            txtHtml += "<td class='col_funcionario'>"+resultado[i][10]+"</td>";
+            txtHtml += "<td class='col_cliente'>"+resultado[i][9]+"</td>";
+            txtHtml += "<td class='col_livro'>"+resultado[i]["titulo"]+"</td>";
+            txtHtml += "<td><a class='detalhes' href='javascript:void(0)'>Detalhes</a></td>";
+            txtHtml += "</tr>";
+
+            let tbody = document.querySelector('.tabela > tbody');
+            tbody.insertAdjacentHTML('beforeend', txtHtml);//adiciona os novos elementos
+            let ultimaLinha = tbody.querySelector('tr:last-child');
+            let detalhes = ultimaLinha.querySelector('.detalhes');
+
+            detalhes.addEventListener('click', function detalhes(){
+                // let cookie = ultimaLinha.querySelector('.col_codigo').textContent;
+                // document.cookie = 'Codigo='+resultado[i]["id"];
+                // window.location.replace('reserva.php');
+            });
+        }
     }
 
 });
@@ -130,6 +177,14 @@ btnBuscar.addEventListener('click', function() { //busca resultado
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhr.send(params);
         }
+        else if(cbxTipo.options[cbxTipo.selectedIndex].value == 'alugado'){
+            //envia a requisição
+            let url = '../controle/controle_aluga.php';
+            let params = 'op=buscaid&data_locacao='+txtBuscar+'&data_devolucao='+txtBuscar+'&diaria='+txtBuscar+'&id_funcionario='+txtBuscar+'&id_cliente='+txtBuscar+'&id_livro='+txtBuscar;
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send(params);
+        }
         
         erro.style = 'display: none';
     }else{
@@ -148,7 +203,7 @@ btnCadastrarLivro.addEventListener('click', function() {
 });
 
 btnAlugar.addEventListener('click', function() {
-    window.location.replace('alugar.php');
+    window.location.replace('aluga.php');
 });
 
 function setCookie(name, value, duration) {

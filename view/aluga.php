@@ -1,13 +1,3 @@
-<?php
-
-session_start();
-if(isset($_SESSION['admin'])) {
-} else {
-    $_SESSION['falhou'] = 'sim';
-    header("Location: ../index.php");
-}
-?>
-
 <!DOCTYPE html>
 
 <html lang="pt-br">
@@ -25,7 +15,7 @@ if(isset($_SESSION['admin'])) {
     <body>
         <header> <!--cabeçalho-->
             <div>
-                <h1 class="titulo"><a href="../index.html" alt="Pagina Principal">Sistema Biblioteca</a></h1>
+                <h1 class="titulo"><a href="../index.php" alt="Pagina Principal">Sistema Biblioteca</a></h1>
             </div>
             
             <nav id="barra-menu"> <!--junção de links-->
@@ -47,26 +37,26 @@ if(isset($_SESSION['admin'])) {
         <div class="corpo-form">
             <!--Mensagens de notificação-->
             <div id="form-erro"></div>
-            <div id="form-sucesso">Cadastrado com sucesso!</div>
+            <div id="form-sucesso">Cadastrado com Sucesso!</div>
             <form name="cadastro_form" method="POST" action=""> <!--formulario-->
                 
-                <label for="txtNome">Nome</label>
-                <input type="text" placeholder="Nome" name="txtNome" id="txtNome">
+                <label for="datLocacao">Data de locação</label>
+                <input type="date" placeholder="Data de locação" name="datLocacao" id="datLocacao">
 
-                <label for="txtEmail">Email</label>
-                <input type="text" name="txtEmail" id="txtEmail" placeholder="Email" >
-
-                <label for="txtCargo">Cargo</label>
-                <input type="text" name="txtCargo" id="txtCargo" placeholder="Cargo" >
+                <label for="datDevolucao">Data de Devolução</label>
+                <input type="date" placeholder="Data de Devolução" name="datDevolucao" id="datDevolucao">
                 
-                <label for="txtLogin">Login</label>
-                <input type="text" placeholder="Login" name="txtLogin" id="txtLogin">
+                <label for="txtDiaria">Diaria</label>
+                <input type="text" name="txtDiaria" id="txtDiaria" placeholder="Diaria" >
 
-                <label for="txtSenha">Senha</label>
-                <input type="password" name="txtSenha" id="txtSenha" placeholder="Senha" >
+                <label for="txtLivro">Livro</label>
+                <input type="text" name="txtLivro" id="txtLivro" placeholder="Livro" >
+                
+                <label for="txtCliente">Cliente</label>
+                <input type="text" name="txtCliente" id="txtCliente" placeholder="Cliente">
 
-                <label for="txtConfirmaSenha">Confirmar Senha</label>
-                <input type="password" name="txtConfirmaSenha" id="txtConfirmaSenha" placeholder="Confirmar Senha">
+                <label for="txtFuncionario">Funcionario</label>
+                <input type="text" name="txtFuncionario" id="txtFuncionario" placeholder="Funcionario" >
 
                 <input type="button" id="btnCadastrar" name="btnCadastrar" value="Cadastrar">
             </form>
@@ -74,7 +64,7 @@ if(isset($_SESSION['admin'])) {
         <footer>  <!--rodapé-->
             <p>&copy; Todos os direitos são reservados.</p>
         </footer>
-        <script src="js/cadastro_funcionario.js"></script>
+        <script src="js/aluga.js"></script>
     </body>
 
 </html>

@@ -1,36 +1,88 @@
 <?php
 require_once '../dao/dao_aluga.php';
+require_once '../dao/dao_funcionario.php';
+require_once '../dao/dao_livro.php';
+require_once '../dao/dao_cliente.php';
+require_once '../dao/dao_conta.php';
 require_once '../model/aluga.php';
+require_once '../model/conta.php';
 
 $op = $_POST["op"];
 
 $aluga = new Aluga();
 $aluga->setData_locacao($_POST["data_locacao"]);
 $aluga->setData_devolucao($_POST["data_devolucao"]);
-$aluga->setData_devolvido($_POST["data_devolvido"]);
+$aluga->setData_devolvido(null);
 $aluga->setDiaria($_POST["diaria"]);
-$aluga->setAtivo($_POST["ativo"]);
-$aluga->setId_funcionario($_POST["id_funcionario"]);
-$aluga->setId_cliente($_POST["id_cliente"]);
-$aluga->setId_livro($_POST["id_livro"]);
+$aluga->setAtivo(true);
 
+$daoFuncionario = new DaoFuncionario();
+$daoCliente     = new DaoCliente();
+$daoLivro       = new DaoLivro();
+$daoAluga       = new DaoAluga();
 
-$daoAluga = new DaoAluga();
+$cliente = $daoCliente->buscar_por_cpf($_POST["id_cliente"]);
+
+if ($cliente != null) {
+    $aluga->setId_cliente($cliente);
+} else {
+    echo "Cliente Invalido";
+}
 
 try {
     if ($op == "salvar") {
-        $daoAluga->salvar($aluga);
-        echo "Sucesso";
-    }
-    if ($op == "editar") {
+
+        $funcionario = $daoFuncionario->buscar_por_login($_POST["id_funcionario"]);
+        if ($funcionario != null) {
+            $aluga->setId_funcionario($funcionario);
+        } else {
+            echo "Funcionario Invalido";
+            $op = "falha";
+        }
+
+        $livro = $daoLivro->busca_por_codigo($_POST["id_livro"]);
+        if ($livro != null) {
+            $aluga->setId_livro($livro);
+        } else {
+            echo "Codigo Errado!!!";
+            $op = "falha";
+        }
+
+        if ($op != "falha") {
+            $id = $daoAluga->salvar($aluga);
+            
+            $conta = new Conta();
+            $conta->setData_efetuada($aluga->getData_locacao());
+            $conta->setId_aluga($id);
+            $conta->setValor_total($aluga->getDiaria() * 7);
+            $conta->setData_paga(null);
+            $conta->setData_pagamento(null);
+            $conta->setMulta(0);
+    
+            $daoConta = new DaoConta();
+            $r        = $daoConta->salvar($conta);
+            if ($r == true) {
+                echo "Sucesso";
+            } else {
+                echo "Falha ao Gerar Conta";
+            }
+        }
+
+
+    } else if ($op == "editar") {
+
         $daoAluga->editar($aluga);
         echo "Sucesso";
-    }
-    if ($op == "buscabusca") {
+
+    } else if ($op == "buscabusca") {
         $alugados = $daoAluga->busca_por_busca($aluga);
         echo json_encode($alugados);
-    }
-    if ($op == "remover") {
+    } else if ($op == "buscaid") {
+
+        $alugados = $daoAluga->buscar_por_id($cliente);
+        echo json_encode($alugados);
+
+    } else if ($op == "remover") {
         $daoAluga->remover($aluga);
         echo "Sucesso";
     }

@@ -80,6 +80,23 @@ class DaoFuncionario
         }
     }
 
+    public function buscar_por_login($login)
+    {
+        try {
+            global $conexao;
+    
+            $sql = $conexao->getPdo()->prepare("SELECT id FROM Funcionario WHERE login = :l");
+            $sql->bindValue(":l", $login);
+            $sql->execute();
+
+            return $sql->fetch()["id"];
+            
+        } catch (\Throwable $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
     public function busca_por_busca(Funcionario $funcionario)
     {
         try {

@@ -6,6 +6,17 @@ if(isset($_SESSION['logado'])) {
     $_SESSION['falhou'] = 'sim';
     header("Location: ../index.php");
 }
+
+try { //força a entrada somente se informar os dados do cliente e do livro
+    $livro = $_GET['livro'];
+
+    if($livro == null)
+        header("Location: acervo.php");
+
+} catch (\Throwable $th) {
+    header("Location: acervo.php");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -25,14 +36,14 @@ if(isset($_SESSION['logado'])) {
     <body>
         <header> <!--cabeçalho-->
             <div>
-                <h1 class="titulo"><a href="../index.html" alt="Pagina Principal">Sistema Biblioteca</a></h1>
+                <h1 class="titulo"><a href="inicio.php" alt="Pagina Principal">Sistema Biblioteca</a></h1>
             </div>
             
             <nav id="barra-menu"> <!--junção de links-->
                 <ul>
-                    <li><a href="../index.html" alt="Pagina Inicial">Inicio</a></li>
+                    <li><a href="inicio.php" alt="Pagina Inicial">Inicio</a></li>
                     <li><a href="" alt="Sobre">Sobre</a></li>
-                    <li><a href="contatos.html" alt="Contatos">Contatos</a></li>
+                    <li><a href="contatos.php" alt="Contatos">Contatos</a></li>
                 </ul>
             </nav>
             <nav id="barra-acesso"> <!--junção de links-->
@@ -46,18 +57,22 @@ if(isset($_SESSION['logado'])) {
         <div class="corpo-form">
             <!--Mensagens de notificação-->
             <div id="form-erro"></div>
-            <div id="form-sucesso">Preencha todos os dados!</div>
+            <div id="form-sucesso">Reservado com sucesso!</div>
             <form name="cadastro_form" method="POST" action=""> <!--formulario-->
-                
-                <label id="lblRetirada">Data de retirada</label>
+            
+            <label for="txtReserva">Data de Reserva</label>
+            <input type="date" id="txtReserva" name="txtReserva" placeholder="Data de Reserva">
+            
+            <label>Data de Retirada</label>
+            <input type="date" id="txtRetirada" name="txtRetirada" placeholder="Data de Retirada">
 
-                <label id="lblReserva">Data de Reserva</label>
-
-                <label id="lblCliente">Cliente:</label>
-
-                <label id="lblLivro">Livro:</label>
-
-                <input type="button" id="btnConfirmar" name="btnConfimar" value="Confirmar">
+            <label for="txtCliente">Cliente:</label>
+            <input type="text" id="txtCliente" name="txtCliente" placeholder="Cliente" value=<?php echo $_SESSION['logado']?>>
+            
+            <label for="txtLivro">Livro:</label>
+            <input type="text" id="txtLivro" name="txtLivro" placeholder="Livro" value=<?php echo $livro?> >
+            
+            <input type="button" id="btnConfirmar" name="btnConfimar" value="Confirmar">
 
             </form>
         </div>

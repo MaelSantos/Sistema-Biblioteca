@@ -53,7 +53,6 @@ btnCadastrar.addEventListener('click', function() {
         xhr.addEventListener("load", function() {
             console.log(this.responseText.trim());
             if (this.responseText.trim() == 'Sucesso') {
-                window.alert('Cliente Cadastrado');
                 
                 // limpando o formulário
                 document.querySelector('#txtNome').value = "";

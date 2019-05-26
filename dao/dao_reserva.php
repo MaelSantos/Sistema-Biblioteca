@@ -21,9 +21,10 @@ class DaoReserva
         try {
             global $conexao;
     
-            $sql = $conexao->getPdo()->prepare("SELECT r.id FROM Reserva r, Cliente c WHERE r.id_cliente = c.id");
+            $sql = $conexao->getPdo()->prepare("SELECT r.id FROM Reserva r WHERE r.id_cliente = :i");
+            $sql->bindValue(":i", $reserva->getId_cliente());
             $sql->execute();
-    
+
             if ($sql->rowCount() > 5) {
                 echo "Cliente Já Excedeu Suas Reservas";
                 return false;
@@ -37,8 +38,6 @@ class DaoReserva
                 $sql->bindValue(":c", $reserva->getId_cliente());
                 $sql->bindValue(":l", $reserva->getId_livro());
                 $sql->execute();
-                echo "Salvo";
-                echo "Retorno: ".$sql->fetch();
                 return true;
             }
             
