@@ -11,6 +11,7 @@ $cliente->setEmail($_POST["email"]);
 $cliente->setTelefone($_POST["telefone"]);
 $cliente->setLogin($_POST["login"]);
 $cliente->setSenha($_POST["senha"]);
+$cliente->setAtivo(true);
 
 $daoCliente = new DaoCliente();
 
@@ -42,7 +43,8 @@ try {
         echo json_encode($clientes);
     }
     if ($op == "remover") {
-        $daoCliente->remover($cliente);
+        $cli = $daoCliente->buscar_por_cpf($_POST["cpf"]);
+        $daoCliente->remover($cli);
     }
 } catch (Throwable $th) {
     echo "Falha" . $th;

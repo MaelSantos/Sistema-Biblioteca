@@ -10,6 +10,7 @@ $funcionario->setCargo($_POST["cargo"]);
 $funcionario->setEmail($_POST["email"]);
 $funcionario->setLogin($_POST["login"]);
 $funcionario->setSenha($_POST["senha"]);
+$funcionario->setAtivo(true);
 
 $daoFuncionario = new DaoFuncionario();
 
@@ -18,11 +19,11 @@ try {
         $daoFuncionario->salvar($funcionario);
         echo "Sucesso";
     }
-    if ($op == "editar") {
+    else if ($op == "editar") {
         $daoFuncionario->editar($funcionario);
         echo "Sucesso";
     }
-    if ($op == "login") {
+    else if ($op == "login") {
         $id = $daoFuncionario->buscar($funcionario);
         if($id != null)
         {
@@ -32,11 +33,11 @@ try {
             echo "Sucesso";
         }
     }
-    if ($op == "buscabusca") {
+    else if ($op == "buscabusca") {
         $funcionarios = $daoFuncionario->busca_por_busca($funcionario);
         echo json_encode($funcionarios);
     }
-    if ($op == "remover") {
+    else if ($op == "remover") {
         $daoFuncionario->remover($funcionario);
         echo "Sucesso";
     }

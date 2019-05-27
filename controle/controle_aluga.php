@@ -21,16 +21,16 @@ $daoCliente     = new DaoCliente();
 $daoLivro       = new DaoLivro();
 $daoAluga       = new DaoAluga();
 
-$cliente = $daoCliente->buscar_por_cpf($_POST["id_cliente"]);
-
-if ($cliente != null) {
-    $aluga->setId_cliente($cliente);
-} else {
-    echo "Cliente Invalido";
-}
 
 try {
     if ($op == "salvar") {
+
+        $cliente = $daoCliente->buscar_por_cpf($_POST["id_cliente"]);
+        if ($cliente != null) {
+            $aluga->setId_cliente($cliente);
+        } else {
+            echo "Cliente Invalido";
+        }
 
         $funcionario = $daoFuncionario->buscar_por_login($_POST["id_funcionario"]);
         if ($funcionario != null) {
@@ -78,11 +78,13 @@ try {
         $alugados = $daoAluga->busca_por_busca($aluga);
         echo json_encode($alugados);
     } else if ($op == "buscaid") {
-
+        $cliente = $daoCliente->buscar_por_cpf($_POST["id_cliente"]);
         $alugados = $daoAluga->buscar_por_id($cliente);
         echo json_encode($alugados);
 
     } else if ($op == "remover") {
+        $aluga->setId_cliente($_POST["id_cliente"]);
+        $aluga->setId_livro($_POST["id_livro"]);
         $daoAluga->remover($aluga);
         echo "Sucesso";
     }

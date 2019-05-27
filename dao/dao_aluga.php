@@ -97,7 +97,7 @@ class DaoAluga
         try {
             global $conexao;
     
-            $sql = $conexao->getPdo()->prepare("SELECT a.*, c.nome, f.nome, l.titulo FROM Aluga a, Cliente c, Funcionario f, Livro l WHERE a.id_cliente = c.id AND a.id_funcionario = f.id AND a.id_livro = l.id AND c.id = :i");
+            $sql = $conexao->getPdo()->prepare("SELECT a.*, c.nome, f.nome, l.titulo FROM Aluga a, Cliente c, Funcionario f, Livro l WHERE a.id_cliente = c.id AND a.id_funcionario = f.id AND a.id_livro = l.id AND c.id = :i AND a.ativo = true");
             $sql->bindValue(":i", $id);
             $sql->execute();
 
@@ -151,8 +151,9 @@ class DaoAluga
         try {
             global $conexao;
     
-            $sql = $conexao->getPdo()->prepare("DELETE FROM Aluga WHERE id = :i");
-            $sql->bindValue(":i", $aluga->getId());
+            $sql = $conexao->getPdo()->prepare("UPDATE Aluga a INNER JOIN Cliente c ON (c.id = a.id_cliente AND c.nome = :i) INNER JOIN Livro l ON (l.id = a.id_livro AND l.titulo = :d) SET a.ativo = false");
+            $sql->bindValue(":i", $aluga->getId_cliente());
+            $sql->bindValue(":d", $aluga->getId_livro());
             $sql->execute();
         } catch (\Throwable $th) {
             echo $e->getMessage();

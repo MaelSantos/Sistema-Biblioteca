@@ -102,7 +102,7 @@ class DaoFuncionario
         try {
             global $conexao;
     
-            $sql = $conexao->getPdo()->prepare("SELECT * FROM Funcionario WHERE nome LIKE :n OR cargo LIKE :c OR email LIKE :e OR login LIKE :l");
+            $sql = $conexao->getPdo()->prepare("SELECT * FROM Funcionario WHERE (nome LIKE :n OR cargo LIKE :c OR email LIKE :e OR login LIKE :l) AND ativo = true");
             $sql->bindValue(":n", "%".$funcionario->getNome()."%");
             $sql->bindValue(":c", "%".$funcionario->getCargo()."%");
             $sql->bindValue(":e", "%".$funcionario->getEmail()."%");
@@ -128,9 +128,11 @@ class DaoFuncionario
         try {
             global $conexao;
 
-            $sql = $conexao->getPdo()->prepare("DELETE FROM Funcionario WHERE id = :i");
-            $sql->bindValue(":i", $funcionario->getId());
+            $sql = $conexao->getPdo()->prepare("UPDATE Funcionario SET ativo = false WHERE login = :l");
+            $sql->bindValue(":l", $funcionario->getLogin());
             $sql->execute();
+
+            echo $sql->rowCount();
         } catch (\Throwable $th) {
             echo $e->getMessage();
         }

@@ -121,7 +121,7 @@ class DaoCliente
         try {
             global $conexao;
     
-            $sql = $conexao->getPdo()->prepare("SELECT * FROM Cliente WHERE nome LIKE :n OR cpf LIKE :c OR telefone LIKE :t OR email LIKE :e OR login LIKE :l");
+            $sql = $conexao->getPdo()->prepare("SELECT * FROM Cliente WHERE (nome LIKE :n OR cpf LIKE :c OR telefone LIKE :t OR email LIKE :e OR login LIKE :l) AND ativo = true");
             $sql->bindValue(":n", "%".$cliente->getNome()."%");
             $sql->bindValue(":c", "%".$cliente->getCpf()."%");
             $sql->bindValue(":t", "%".$cliente->getTelefone()."%");
@@ -143,13 +143,13 @@ class DaoCliente
         }
     }
 
-    public function remover(Cliente $cliente)
+    public function remover($id)
     {
         try {
             global $conexao;
     
-            $sql = $conexao->getPdo()->prepare("DELETE FROM Cliente WHERE id = :i");
-            $sql->bindValue(":i", $cliente->getId());
+            $sql = $conexao->getPdo()->prepare("UPDATE Cliente SET ativo = false WHERE id = :i");
+            $sql->bindValue(":i", $id);
             $sql->execute();
         } catch (\Throwable $th) {
             echo $e->getMessage();

@@ -8,6 +8,7 @@ class Usuario
     private $login;
     private $senha;
     private $email;
+    private $ativo;
 
     /**
      * Get the value of id
@@ -105,6 +106,26 @@ class Usuario
     public function setEmail($email)
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of ativo
+     */ 
+    public function getAtivo()
+    {
+        return $this->ativo;
+    }
+
+    /**
+     * Set the value of ativo
+     *
+     * @return  self
+     */ 
+    public function setAtivo($ativo)
+    {
+        $this->ativo = $ativo;
 
         return $this;
     }
