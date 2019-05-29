@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-if(isset($_SESSION['logado'])) {
+if(isset($_SESSION['logado']) || isset($_SESSION['admin'])) {
 } else {
     $_SESSION['falhou'] = 'sim';
     header("Location: ../index.php");
@@ -25,7 +25,7 @@ if(isset($_SESSION['logado'])) {
     <body>
         <header> <!--cabeçalho-->
             <div>
-                <h1 class="titulo"><a href="../index.html" alt="Pagina Principal">Sistema Biblioteca</a></h1>
+                <h1 class="titulo"><a href="../index.php" alt="Pagina Principal">Sistema Biblioteca</a></h1>
             </div>
             
             <nav id="barra-menu"> <!--junção de links-->

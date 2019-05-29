@@ -20,18 +20,11 @@
             
             <nav id="barra-menu"> <!--junção de links-->
                 <ul>
-                    <li><a href="admin.php" alt="Pagina Inicial">Inicio</a></li>
+                    <li><a href="../index.php" alt="Pagina Inicial">Inicio</a></li>
                     <li><a href="" alt="Sobre">Sobre</a></li>
                     <li><a href="contatos.php" alt="Contatos">Contatos</a></li>
                 </ul>
             </nav>
-            <nav id="barra-acesso"> <!--junção de links-->
-                <ul>
-                    <li><a id="link-sair" href="javascript:void(0)" alt="Sair">Sair</a></li>
-                    <li><a id="link-perfil" href="javascript:void(0)" alt="Perfil">Perfil</a></li>
-                </ul>
-            </nav>
-
         </header>
 
         <div class="corpo-form">
@@ -68,6 +61,7 @@
             <p>&copy; Todos os direitos são reservados.</p>
         </footer>
         <script src="js/cadastro_cliente.js"></script>
+        <script src="js/logout.js"></script>
     </body>
 
 </html>

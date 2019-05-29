@@ -37,17 +37,13 @@ xhr.addEventListener('load', function () {//retornar os resultados da busca para
         for (let i = 0; i < resultado.length; i++) {
 
             //prepara os dados a serem adicionados
-            let txtHtml;
-            if (i % 2 == 0)
-                txtHtml = "<tr class='dif'>";
-            else
-                txtHtml = "<tr>";
+            let txtHtml = "<tr>";
             txtHtml += "<td class='col_nome'>" + resultado[i]["nome"] + "</td>";
             txtHtml += "<td class='col_login'>" + resultado[i]["login"] + "</td>";
             txtHtml += "<td class='col_email'>" + resultado[i]["email"] + "</td>";
             txtHtml += "<td class='col_cpf'>" + resultado[i]["cpf"] + "</td>";
             txtHtml += "<td class='col_telefone'>" + resultado[i]["telefone"] + "</td>";
-            txtHtml += "<td><a class='editar' href='javascript:void(0)'>Detalhes</a> <a class='deletar' href='javascript:void(0)'>Deletar</a></td>";
+            txtHtml += "<td><a class='editar' href='javascript:void(0)'>Editar</a> <a class='deletar' href='javascript:void(0)'>Deletar</a></td>";
             txtHtml += "</tr>";
 
             let tbody = document.querySelector('.tabela > tbody');
@@ -92,11 +88,7 @@ xhr.addEventListener('load', function () {//retornar os resultados da busca para
 
         for (let i = 0; i < resultado.length; i++) {
             //prepara os dados a serem adicionados
-            let txtHtml;
-            if (i % 2 == 0)
-                txtHtml = "<tr class='dif'>";
-            else
-                txtHtml = "<tr>";
+            let txtHtml = "<tr>";
             txtHtml += "<td class='col_nome'>" + resultado[i]["nome"] + "</td>";
             txtHtml += "<td class='col_login'>" + resultado[i]["login"] + "</td>";
             txtHtml += "<td class='col_email'>" + resultado[i]["email"] + "</td>";
@@ -149,11 +141,7 @@ xhr.addEventListener('load', function () {//retornar os resultados da busca para
 
         for (let i = 0; i < resultado.length; i++) {
             //prepara os dados a serem adicionados
-            let txtHtml;
-            if (i % 2 == 0)
-                txtHtml = "<tr class='dif'>";
-            else
-                txtHtml = "<tr>";
+            let txtHtml = "<tr>";
             txtHtml += "<td class='col_locacao'>" + resultado[i]["data_locacao"] + "</td>";
             txtHtml += "<td class='col_devolucao'>" + resultado[i]["data_devolucao"] + "</td>";
             txtHtml += "<td class='col_devolvido'>" + resultado[i]["data_devolvido"] + "</td>";

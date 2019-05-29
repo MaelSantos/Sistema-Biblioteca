@@ -7,10 +7,12 @@
 */
 
 body{
-    background-color: #6AA69B; /*Cor de fundo*/
+    background-color: #6AA69B; /* Cor de fundo */
     background-image: url("../fundo.png"); /*Imagem de fundo*/
-    background-position: 10% 10%;
-    margin: 10px 10px;
+    background-repeat: no-repeat;
+    background-position: 40% 20%;
+    margin: 1% 1%;
+    margin-bottom: 100px;
 }
 
 h1.titulo{
@@ -30,13 +32,6 @@ h1.titulo a:hover{
     color: white;
 }
 
-nav{
-    position: absolute;
-    top: 64px;
-    right: 0;
-    padding: 20px;
-}
-
 p, label, h1, h2, tr{
     font-family: 'Lusitana', serif;
     font-size: 25px;
@@ -45,7 +40,7 @@ p, label, h1, h2, tr{
 a{
     font-family: 'Lusitana', serif;
     font-size: 25px;
-    border-radius: 15px;    
+    border-radius: 15px;
     text-align: center;
     text-decoration: none;
     color: black;
@@ -67,8 +62,6 @@ input, select{
     border: 1px solid black;
     font-size: 16pt;
     padding: 10px 20px;
-    /*background-color: rgba(255, 255, 255, 0.01);
-    color: white;*/
     outline: none;
 }
 
@@ -77,12 +70,31 @@ input[type=button]{
     border: none;
     cursor: pointer;
     color: white;
+    width: 390px;
 }
 
 div.corpo-form{
     text-align: center;
-    width: 420px;
-    margin: 100px auto 10px auto;
+    width: 33%;
+    margin: 9% auto 1% auto;
+    min-height:100%;
+    position: relative;
+}
+
+div.form-opcoes{
+    text-align: center;
+    width: 100%;
+    margin: 8% auto 1% auto;
+    min-height:100%;
+    position: relative;
+}
+
+nav{
+    position: absolute;
+    top: 9%;
+    right: 0;
+    padding: 1%; /* 20px; */
+
 }
 
 nav#barra-menu{
@@ -91,6 +103,9 @@ nav#barra-menu{
     overflow: hidden;
     border-top: 1px dashed black;
     border-bottom: 1px dashed black;
+    position: absolute;
+    margin-top: 1%;
+    top: 8%;
 }
 
 nav#barra-menu ul{
@@ -104,9 +119,8 @@ nav#barra-menu li{
 
 nav#barra-acesso{
     text-align: center;
-    
-    border-top: 1px dashed black;
-    border-bottom: 1px dashed black;
+    margin-top: 1%;
+    top: 8%;
 }
 
 nav#barra-acesso li{
@@ -119,12 +133,24 @@ td, th{
     padding: 10px 10px;
 }
 
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+div{
+    position: relative;
+}
+
 footer {
-    position:absolute;
-    left: 0;
+    position: absolute;
     bottom: 0;
     width: 100%;
+    height: 7%;
+    left: 0;
     text-align: center;
     background-color: #8C3555;
-    /* display: inline-flex; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

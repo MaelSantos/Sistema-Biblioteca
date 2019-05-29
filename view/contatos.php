@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <title>Sistema Biblioteca</title>
         <link href="css/reset.css" rel="stylesheet">
-        <link href="view/css/componentes.css" rel="stylesheet">
+        <link href="css/componentes.css" rel="stylesheet">
         <link href="css/aparencia.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Lusitana" rel="stylesheet">
@@ -26,17 +26,15 @@
             </nav>
         </header>
 
-        <div>
+        <main id="contatos">
             <p>ABIMAEL JONAS FURTUOSO DOS SANTOS<p>
             <p>DISCENTE NO CURSO BACHARELADO EM SITEMAS DE INFORMAÇÃO</p>
             <p>UNIDADE ACADÊMICA DE SERRA TALHADA / UNIVERSIDADE FEDERAL RURAL DE PERNANBUCO</p>
-        </div>
-        <div>
-            <p>CONTATOS<p>
-            <p>Tel : (88)9 8116-9372</p>
-            <p>email : maelsantos777@gmail.com</p>
+            <p>CONTATOS:<p>
+            <p>Telefone: (88)9 8116-9372</p>
+            <p>Email: maelsantos777@gmail.com</p>
             <a href="https://www.facebook.com/profile.php?id=100014350898752" alt="CafePraza" target="_blank">Ir para Facebook</a>
-        </div>
+        </main>
         <footer>  <!--rodapé-->
             <p>&copy; Todos os direitos são reservados.</p>
         </footer>

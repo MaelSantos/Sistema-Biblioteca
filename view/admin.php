@@ -42,21 +42,21 @@ if(isset($_SESSION['admin'])) {
                 </ul>
             </nav>
         </header>
-        <div class="corpo-form">
+        <div class="form-opcoes">
             <!--Mensagens de notificação-->
             <div id="form-erro"></div>
             <form class="busca"> <!--Formulario de busca-->
                 <input type="text" id="txtBuscar" name="txtBuscar" placeholder="Buscar">
                 <input type="button" id="btnBuscar" name="Buscar" value="Buscar">
-                <label for="cbxTipo">Tipo de Busca</label>
+                <!-- <label for="cbxTipo">Tipo:</label> -->
                 <select name="cbxTipo" id="cbxTipo">
                     <option value="cliente">Cliente</option>
                     <option value="funcionario">Funcionario</option>
                     <option value="alugado">Alugado</option>
                 </select>
-                <input type="button" id="btnCadastrarFuncionario" name="btnCadastrarFuncionario" value="Cadastrar Funcionario">
-                <input type="button" id="btnCadastrarLivro" name="btnCadastrarLivro" value="Cadastrar Livro">
                 <input type="button" id="btnAlugar" name="btnAlugar" value="Alugar Livro">
+                <input type="button" id="btnCadastrarLivro" name="btnCadastrarLivro" value="Cadastrar Livro">
+                <input type="button" id="btnCadastrarFuncionario" name="btnCadastrarFuncionario" value="Cadastrar Funcionario">
             </form>
         </div>
 
@@ -66,10 +66,10 @@ if(isset($_SESSION['admin'])) {
             <tbody>
             </tbody>
         </table>
+        <script src="js/admin.js"></script>
+        <script src="js/logout.js"></script>
         <footer>  <!--rodapé-->
             <p>&copy; Todos os direitos são reservados.</p>
         </footer>
-        <script src="js/admin.js"></script>
-        <script src="js/logout.js"></script>
     </body>
 </html>

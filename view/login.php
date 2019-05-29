@@ -37,7 +37,7 @@
                 <input type="password" id="txtSenha" name="txtSenha" placeholder="Senha" >
 
                 <input type="button" id="btnEntrar" name="btnEntrar" value="Entrar">
-                <a href="cadastro_cliente.php" alt="Cadastro">Ainda não é cadastrado?<strong>Cadastre-se!</strong></a></li>
+                <a href="cadastro_cliente.php" alt="Cadastro">Ainda não é cadastrado? <strong>Cadastre-se!</strong></a></li>
             </form>
         </div>
         <footer>  <!--rodapé-->

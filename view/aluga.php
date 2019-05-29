@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+if(isset($_SESSION['admin'])) {
+} else {
+    $_SESSION['falhou'] = 'sim';
+    header("Location: ../index.php");
+}
+?>
+
 <!DOCTYPE html>
 
 <html lang="pt-br">

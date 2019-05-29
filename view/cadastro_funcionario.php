@@ -75,6 +75,7 @@ if(isset($_SESSION['admin'])) {
             <p>&copy; Todos os direitos são reservados.</p>
         </footer>
         <script src="js/cadastro_funcionario.js"></script>
+        <script src="js/logout.js"></script>
     </body>
 
 </html>

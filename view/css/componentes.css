@@ -12,7 +12,7 @@
 }
 
 table.tabela{ /* localização da tabela */
-   margin: 70px auto auto auto;
+   margin: 2% auto auto auto;
    table-layout: fixed;
    width: 100%;
 }
@@ -20,17 +20,21 @@ table.tabela{ /* localização da tabela */
 table.tabela thead tr th {
    background: #0D0D0D; /* Linha de cabeçalho com fundo preto */
    color: white;
-   overflow: auto;
+   overflow: visible;
 }
 table.tabela tr td{ /* Toda a tabela com fundo azul */
    background: #6BBFA7;
-   overflow: auto;
-} 
-table.tabela tr.dif td {
-   background: #D96A6A; /* Linhas com fundo rosa */
-   overflow: auto;
+   overflow: visible;
+   border-bottom: 1px solid black; /*Divisão entre as linhas*/
 }
 
 form.busca {
    display: flex;
+}
+
+main#contatos{
+   position: relative;
+   text-align: center;
+   margin-top: 13%;
+   background: #6AA69B; /*Mesma cor de fundo*/
 }
