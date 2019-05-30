@@ -97,7 +97,31 @@ class DaoAluga
         try {
             global $conexao;
     
-            $sql = $conexao->getPdo()->prepare("SELECT a.*, c.nome, f.nome, l.titulo FROM Aluga a, Cliente c, Funcionario f, Livro l WHERE a.id_cliente = c.id AND a.id_funcionario = f.id AND a.id_livro = l.id AND c.id = :i AND a.ativo = true");
+            $sql = $conexao->getPdo()->prepare("SELECT a.*, c.nome, f.nome, l.titulo FROM Aluga a, Cliente c, Funcionario f, Livro l WHERE a.id_cliente = c.id AND a.id_funcionario = f.id AND a.id_livro = l.id AND c.id = :i AND a.data_devolucao > CURRENT_DATE AND a.ativo = true");
+            $sql->bindValue(":i", $id);
+            $sql->execute();
+
+            $alugados = array();
+            $i = 0;
+            while($row = $sql->fetch()) {
+                $alugados[$i]= $row;
+                $i++;
+            }
+    
+            return $alugados;
+            
+        } catch (\Throwable $e) {
+            echo $e->getMessage();
+            return null;
+        }
+    }
+
+    public function buscar_por_atrazados($id)
+    {
+        try {
+            global $conexao;
+    
+            $sql = $conexao->getPdo()->prepare("SELECT a.*, c.nome, f.nome, l.titulo FROM Aluga a, Cliente c, Funcionario f, Livro l WHERE a.id_cliente = c.id AND a.id_funcionario = f.id AND a.id_livro = l.id AND c.id = :i AND a.data_devolucao < CURRENT_DATE AND a.ativo = true");
             $sql->bindValue(":i", $id);
             $sql->execute();
 

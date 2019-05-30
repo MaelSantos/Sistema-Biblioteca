@@ -14,7 +14,7 @@ class Conexao
     {
         try {
             // $pdo = new PDO("mysql:host=localhost;dbname=Biblioteca", "root", "");
-            $this->pdo = new PDO("mysql:host=" . $host . ";dbname=" . $banco, $usuario, $senha);
+            $this->pdo = new PDO("mysql:host=" . $host . ";dbname=" . $banco, $usuario, $senha, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''));
             return true;
         } catch (PDOException $e) {
             global $erro;

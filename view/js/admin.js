@@ -219,7 +219,7 @@ btnBuscar.addEventListener('click', function () { //busca resultado
         else if (cbxTipo.options[cbxTipo.selectedIndex].value == 'alugado') {
             //envia a requisição
             let url = '../controle/controle_aluga.php';
-            let params = 'op=buscaid&data_locacao=' + txtBuscar + '&data_devolucao=' + txtBuscar + '&diaria=' + txtBuscar + '&id_funcionario=' + txtBuscar + '&id_cliente=' + txtBuscar + '&id_livro=' + txtBuscar;
+            let params = 'op=buscacpf&data_locacao=' + txtBuscar + '&data_devolucao=' + txtBuscar + '&diaria=' + txtBuscar + '&id_funcionario=' + txtBuscar + '&id_cliente=' + txtBuscar + '&id_livro=' + txtBuscar;
             xhr.open("POST", url, true);
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhr.send(params);

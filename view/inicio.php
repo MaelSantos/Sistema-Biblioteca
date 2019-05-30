@@ -46,78 +46,47 @@ if(isset($_SESSION['logado'])) {
 
         <div class="form-opcoes">
             <h1><strong>Livros alugados</strong></h1>
-            <table class="tabela" border="1px" cellpadding="5px" cellspacing="0"> <!--Tabela de livros-->
+            <table id="alugados" class="tabela" border="1px" cellpadding="5px" cellspacing="0"> <!--Tabela de livros-->
                 <thead>
-                    <tr>
-                        <th>Codigo</th>
-                        <th>Titulo</th>
-                        <th>Autor</th>
-                        <th>Ano</th>
-                        <th>Editora</th>
-                        <th>Disponiveis</th>
-                        <th>Opções</th>
-                    </tr>
+                <tr>
+                    <th>Livro</th>
+                    <th>Locação</th>
+                    <th>Devolução</th>
+                    <th>Diaria</th>
+                    <th>Cliente</th>
+                    <th>Funcionario</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class='col_codigo'>0001-A</td>
-                        <td class='col_titulo'>Os que não foram</td>
-                        <td class='col_autor'>Ninguem Importante</td>
-                        <td class='col_ano'>2019</td>
-                        <td class='col_editora'>Sei la bixo</td>
-                        <td class='col_disponivel'>100</td>
-                        <td><a class='editar' href='javascript:void(0)'>Editar</a> / <a class='excluir' href='javascript:void(0)'>Excluir</a></td>
-                    </tr>
                 </tbody>
             </table>
             <h1><strong>Livros reservados</strong></h1>
-            <table class="tabela" border="1px" cellpadding="5px" cellspacing="0"> <!--Tabela de livros-->
+            <table id="reservados" class="tabela" border="1px" cellpadding="5px" cellspacing="0"> <!--Tabela de livros-->
                 <thead>
                     <tr>
-                        <th>Codigo</th>
                         <th>Titulo</th>
-                        <th>Autor</th>
-                        <th>Ano</th>
-                        <th>Editora</th>
-                        <th>Disponiveis</th>
+                        <th>Reserva</th>
+                        <th>Retirada</th>
+                        <th>Cliente</th>
                         <th>Opções</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class='col_codigo'>0001-A</td>
-                        <td class='col_titulo'>Os que não foram</td>
-                        <td class='col_autor'>Ninguem Importante</td>
-                        <td class='col_ano'>2019</td>
-                        <td class='col_editora'>Sei la bixo</td>
-                        <td class='col_disponivel'>100</td>
-                        <td><a class='editar' href='javascript:void(0)'>Editar</a> / <a class='excluir' href='javascript:void(0)'>Excluir</a></td>
-                    </tr>
                 </tbody>
             </table>
             <h1><strong>Locações atrazadas<strong></h1>
-            <table class="tabela" border="1px" cellpadding="5px" cellspacing="0"> <!--Tabela de livros-->
+            <table id="atrasados" class="tabela" border="1px" cellpadding="5px" cellspacing="0"> <!--Tabela de livros-->
                 <thead>
                     <tr>
-                        <th>Codigo</th>
-                        <th>Titulo</th>
-                        <th>Autor</th>
-                        <th>Ano</th>
-                        <th>Editora</th>
-                        <th>Disponiveis</th>
-                        <th>Opções</th>
+                        <th>Livro</th>
+                        <th>Locação</th>
+                        <th>Devolução</th>
+                        <th>Diaria</th>
+                        <th>Cliente</th>
+                        <th>Funcionario</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class='col_codigo'>0001-A</td>
-                        <td class='col_titulo'>Os que não foram</td>
-                        <td class='col_autor'>Ninguem Importante</td>
-                        <td class='col_ano'>2019</td>
-                        <td class='col_editora'>Sei la bixo</td>
-                        <td class='col_disponivel'>100</td>
-                        <td><a class='editar' href='javascript:void(0)'>Editar</a> / <a class='excluir' href='javascript:void(0)'>Excluir</a></td>
-                    </tr>
                 </tbody>
             </table>
         </div>

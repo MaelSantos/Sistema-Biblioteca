@@ -14,6 +14,8 @@ $reserva = new Reserva();
 $reserva->setAtivo(true);
 $reserva->setData_reserva($_POST["data_reserva"]);
 $reserva->setData_retirada($_POST["data_retirada"]);
+// $reserva->setId_cliente($_POST["id_cliente"]);
+// $reserva->setId_livro($_POST["id_livro"]);
 
 echo $reserva;
 
@@ -51,17 +53,23 @@ try {
             }
         }
 
-    }
-    else if ($op == "editar") {
+    } else if ($op == "editar") {
         $daoReserva->editar($reserva);
         echo "Sucesso";
-    }
-    else if ($op == "buscabusca") {
+
+    } else if ($op == "buscabusca") {
         $reservas = $daoReserva->busca_por_busca($reserva);
         echo json_encode($reservas);
-        echo "Sucesso";
-    }
-    else if ($op == "remover") {
+
+    } else if ($op == "buscaid") {
+        $reservas = $daoReserva->buscar_por_id($_SESSION["id"]);
+        ob_end_clean(); //limpo conteudo anterior (apago buffer)
+        ob_start(); //inicializo novamente o buffer
+        echo json_encode($reservas);
+
+    } else if ($op == "remover") {
+        $reserva->setId_cliente($_POST["id_cliente"]);
+        $reserva->setId_livro($_POST["id_livro"]);
         $daoReserva->remover($reserva);
         echo "Sucesso";
     }

@@ -21,7 +21,6 @@ $daoCliente     = new DaoCliente();
 $daoLivro       = new DaoLivro();
 $daoAluga       = new DaoAluga();
 
-
 try {
     if ($op == "salvar") {
 
@@ -50,7 +49,7 @@ try {
 
         if ($op != "falha") {
             $id = $daoAluga->salvar($aluga);
-            
+
             $conta = new Conta();
             $conta->setData_efetuada($aluga->getData_locacao());
             $conta->setId_aluga($id);
@@ -58,7 +57,7 @@ try {
             $conta->setData_paga(null);
             $conta->setData_pagamento(null);
             $conta->setMulta(0);
-    
+
             $daoConta = new DaoConta();
             $r        = $daoConta->salvar($conta);
             if ($r == true) {
@@ -68,7 +67,6 @@ try {
             }
         }
 
-
     } else if ($op == "editar") {
 
         $daoAluga->editar($aluga);
@@ -77,12 +75,23 @@ try {
     } else if ($op == "buscabusca") {
         $alugados = $daoAluga->busca_por_busca($aluga);
         echo json_encode($alugados);
-    } else if ($op == "buscaid") {
-        $cliente = $daoCliente->buscar_por_cpf($_POST["id_cliente"]);
+
+    } else if ($op == "buscacpf") {
+        $cliente  = $daoCliente->buscar_por_cpf($_POST["id_cliente"]);
         $alugados = $daoAluga->buscar_por_id($cliente);
         echo json_encode($alugados);
 
-    } else if ($op == "remover") {
+    } else if ($op == "buscaid") {
+        session_start();
+        $alugados = $daoAluga->buscar_por_id($_SESSION["id"]);
+        echo json_encode($alugados);
+    }
+    else if ($op == "buscaAtrazados") {
+        session_start();
+        $alugados = $daoAluga->buscar_por_atrazados($_SESSION["id"]);
+        echo json_encode($alugados);
+    }
+    else if ($op == "remover") {
         $aluga->setId_cliente($_POST["id_cliente"]);
         $aluga->setId_livro($_POST["id_livro"]);
         $daoAluga->remover($aluga);

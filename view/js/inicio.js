@@ -1,70 +1,125 @@
-let btnBuscar = document.querySelector('#btnBuscar');
-var xhr = new XMLHttpRequest();
+var xhrAlugados = new XMLHttpRequest();
+var xhrReservados = new XMLHttpRequest();
+var xhrAtrazados = new XMLHttpRequest();
 
-xhr.addEventListener('load', function() {//retornar os resultados da busca para a tela
-    let livros = JSON.parse(this.responseText.trim());//passa para uma lista os arquivos do JSON
+xhrAlugados.addEventListener('load', function() {//retornar os resultados da busca para a tela
+    let resultado = JSON.parse(this.responseText.trim());//passa para uma lista os arquivos do JSON
 
-    let tr = document.querySelectorAll('.tabela > tbody > tr');
+    let tr = document.querySelectorAll('#alugados > tbody > tr');
     for(let i = 0; i < tr.length; i++)
         tr[i].remove() //remove elementos existentes na tabela
     
-    for(let i = 0; i < livros.length; i++)
+    for(let i = 0; i < resultado.length; i++)
     {
         //prepara os dados a serem adicionados
-        let txtHtml;
-        if(i % 2 == 0)
-            txtHtml = "<tr class='dif'>";
-        else
-            txtHtml = "<tr>";
-        txtHtml += "<td class='col_codigo'>"+livros[i]["codigo"]+"</td>";
-        txtHtml += "<td class='col_titulo'>"+livros[i]["titulo"]+"</td>";
-        txtHtml += "<td class='col_autor'>"+livros[i]["autor"]+"</td>";
-        txtHtml += "<td class='col_ano'>"+livros[i]["ano"]+"</td>";
-        txtHtml += "<td class='col_editora'>"+livros[i]["editora"]+"</td>";
-        txtHtml += "<td class='col_disponivel'>"+livros[i]["disponivel"]+"</td>";
-        txtHtml += "<td><a class='reservar' href='javascript:void(0)'>Reservar</a></td>";
+        let txtHtml = "<tr>";
+        txtHtml += "<td class='col_livro'>" + resultado[i]["titulo"] + "</td>";
+        txtHtml += "<td class='col_locacao'>" + resultado[i]["data_locacao"] + "</td>";
+        txtHtml += "<td class='col_devolucao'>" + resultado[i]["data_devolucao"] + "</td>";
+        txtHtml += "<td class='col_diaria'>" + resultado[i]["diaria"] + "</td>";
+        txtHtml += "<td class='col_cliente'>" + resultado[i][9] + "</td>";
+        txtHtml += "<td class='col_funcionario'>" + resultado[i][10] + "</td>";
         txtHtml += "</tr>";
+        
+        let tbody = document.querySelector('#alugados > tbody');
+        tbody.insertAdjacentHTML('beforeend', txtHtml);//adiciona os novos elementos
+    }
+    
+});
 
-        let tbody = document.querySelector('.tabela > tbody');
+xhrReservados.addEventListener('load', function() {//retornar os resultados da busca para a tela
+    console.log(this.responseText.trim());
+    let resultado = JSON.parse(this.responseText.trim());//passa para uma lista os arquivos do JSON
+
+    let tr = document.querySelectorAll('#reservados > tbody > tr');
+    for(let i = 0; i < tr.length; i++)
+        tr[i].remove() //remove elementos existentes na tabela
+    
+    for(let i = 0; i < resultado.length; i++)
+    {
+        //prepara os dados a serem adicionados
+        let txtHtml = "<tr>";
+        txtHtml += "<td class='col_livro'>" + resultado[i]["titulo"] + "</td>";
+        txtHtml += "<td class='col_locacao'>" + resultado[i]["data_reserva"] + "</td>";
+        txtHtml += "<td class='col_devolucao'>" + resultado[i]["data_retirada"] + "</td>";
+        txtHtml += "<td class='col_cliente'>" + resultado[i]["nome"] + "</td>";
+        txtHtml += "<td><a class='cancelar' href='javascript:void(0)'>Cancelar</a></td>";
+        txtHtml += "</tr>";
+        
+        let tbody = document.querySelector('#reservados > tbody');
         tbody.insertAdjacentHTML('beforeend', txtHtml);//adiciona os novos elementos
         let ultimaLinha = tbody.querySelector('tr:last-child');
-        let reservar = ultimaLinha.querySelector('.reservar');
+        let apagar = ultimaLinha.querySelector('.cancelar');
 
-        reservar.addEventListener('click', function reservar(){
-            let cookie = ultimaLinha.querySelector('.col_codigo').textContent;
-            document.cookie = 'Codigo='+livros[i]["id"];
-            window.location.replace('reserva.php');
+        apagar.addEventListener('click', function () {
+            let linha = this.parentNode.parentNode;
+
+            let cliente = linha.querySelector(".col_cliente").textContent.trim();
+            let livro = linha.querySelector(".col_livro").textContent.trim();
+
+            let x = new XMLHttpRequest();
+            let url = '../controle/controle_reserva.php';
+            let params = 'op=remover&id_livro='+livro+'&id_cliente'+cliente+'0&data_reserva=0&data_retirada=0';
+            x.open("POST", url, true);
+            x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            x.send(params);
+
+            linha.remove();
         });
     }
     
 });
 
-btnBuscar.addEventListener('click', function() { //busca livros 
+xhrAtrazados.addEventListener('load', function() {//retornar os resultados da busca para a tela
+    let resultado = JSON.parse(this.responseText.trim());//passa para uma lista os arquivos do JSON
 
-    let erro = document.querySelector("#form-erro");
-    let txtBuscar = document.querySelector('#txtBuscar').value;
-
-    if(txtBuscar.trim().length > 0)
+    let tr = document.querySelectorAll('#atrazados > tbody > tr');
+    for(let i = 0; i < tr.length; i++)
+        tr[i].remove() //remove elementos existentes na tabela
+    
+    for(let i = 0; i < resultado.length; i++)
     {
-        //envia a requisição
-        let url = '../controle/controle_livro.php';
-        let params = 'op=buscabusca&autor='+txtBuscar+'&titulo='
-        +txtBuscar+'&ano='+txtBuscar+'&editora='+txtBuscar+'&codigo='+txtBuscar+'&quantidade='+txtBuscar+'&disponivel='+txtBuscar;
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.send(params);
+        //prepara os dados a serem adicionados
+        let txtHtml = "<tr>";
+        txtHtml += "<td class='col_livro'>" + resultado[i]["titulo"] + "</td>";
+        txtHtml += "<td class='col_locacao'>" + resultado[i]["data_locacao"] + "</td>";
+        txtHtml += "<td class='col_devolucao'>" + resultado[i]["data_devolucao"] + "</td>";
+        txtHtml += "<td class='col_diaria'>" + resultado[i]["diaria"] + "</td>";
+        txtHtml += "<td class='col_cliente'>" + resultado[i][9] + "</td>";
+        txtHtml += "<td class='col_funcionario'>" + resultado[i][10] + "</td>";
+        txtHtml += "</tr>";
         
-        erro.style = 'display: none';
-    }else{
-        erro.textContent = 'Insira alguma informação';
-        erro.style = 'display: initial';
+        let tbody = document.querySelector('#atrazados > tbody');
+        tbody.insertAdjacentHTML('beforeend', txtHtml);//adiciona os novos elementos
     }
     
-})
+});
 
-function setCookie(name, value, duration) {
-    var cookie = name + "=" + escape(value) +
-    ((duration) ? "; duration=" + duration.toGMTString() : "");
 
-    document.cookie = cookie;
+//Alugados
+let urlAl = '../controle/controle_aluga.php';
+let paramsAl = 'op=buscaid&data_locacao=0&data_devolucao=0&diaria=0&id_funcionario=0&id_cliente=0&id_livro=0';
+xhrAlugados.open("POST", urlAl, true);
+xhrAlugados.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xhrAlugados.send(paramsAl);
+
+//Reservados
+let urlRe = '../controle/controle_reserva.php';
+let paramsRe = 'op=buscaid&id_livro=0&id_cliente=0&data_reserva=0&data_retirada=0';
+xhrReservados.open("POST", urlRe, true);
+xhrReservados.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xhrReservados.send(paramsRe);
+
+//Atrasados
+let urlAt = '../controle/controle_aluga.php';
+let paramsAt = 'op=buscaAtrazados&data_locacao=0&data_devolucao=0&diaria=0&id_funcionario=0&id_cliente=0&id_livro=0';
+xhrAtrazados.open("POST", urlAt, true);
+xhrAtrazados.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xhrAtrazados.send(paramsAt);
+
+
+xhrReservados.onreadystatechange = function() {//Call a function when the state changes.
+    if(xhrReservados.readyState == 4 && xhrReservados.status == 200) {
+        alert(xhrReservados.responseText);
+    }
 }
