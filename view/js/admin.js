@@ -43,25 +43,18 @@ xhr.addEventListener('load', function () {//retornar os resultados da busca para
             txtHtml += "<td class='col_email'>" + resultado[i]["email"] + "</td>";
             txtHtml += "<td class='col_cpf'>" + resultado[i]["cpf"] + "</td>";
             txtHtml += "<td class='col_telefone'>" + resultado[i]["telefone"] + "</td>";
-            txtHtml += "<td><a class='editar' href='javascript:void(0)'>Editar</a> <a class='deletar' href='javascript:void(0)'>Deletar</a></td>";
+            txtHtml += "<td><a class='deletar' href='javascript:void(0)'>Deletar</a></td>";
             txtHtml += "</tr>";
 
             let tbody = document.querySelector('.tabela > tbody');
             tbody.insertAdjacentHTML('beforeend', txtHtml);//adiciona os novos elementos
             let ultimaLinha = tbody.querySelector('tr:last-child');
-            let editar = ultimaLinha.querySelector('.editar');
             let apagar = ultimaLinha.querySelector('.deletar');
 
-            editar.addEventListener('click', function () {
-                // let cookie = ultimaLinha.querySelector('.col_codigo').textContent;
-                // document.cookie = 'Codigo='+resultado[i]["id"];
-                // window.location.replace('reserva.php');
-            });
             apagar.addEventListener('click', function () {
                 let linha = this.parentNode.parentNode;
 
                 let cpf = linha.querySelector(".col_cpf").textContent.trim();
-                console.log(cpf);
 
                 let x = new XMLHttpRequest();
                 let url = '../controle/controle_cliente.php';
@@ -93,20 +86,13 @@ xhr.addEventListener('load', function () {//retornar os resultados da busca para
             txtHtml += "<td class='col_login'>" + resultado[i]["login"] + "</td>";
             txtHtml += "<td class='col_email'>" + resultado[i]["email"] + "</td>";
             txtHtml += "<td class='col_cargo'>" + resultado[i]["cargo"] + "</td>";
-            txtHtml += "<td><a class='editar' href='javascript:void(0)'>Editar</a> <a class='deletar' href='javascript:void(0)'>Deletar</a></td>";
+            txtHtml += "<td><a class='deletar' href='javascript:void(0)'>Deletar</a></td>";
             txtHtml += "</tr>";
 
             let tbody = document.querySelector('.tabela > tbody');
             tbody.insertAdjacentHTML('beforeend', txtHtml);//adiciona os novos elementos
             let ultimaLinha = tbody.querySelector('tr:last-child');
-            let editar = ultimaLinha.querySelector('.editar');
             let apagar = ultimaLinha.querySelector('.deletar');
-
-            editar.addEventListener('click', function () {
-                // let cookie = ultimaLinha.querySelector('.col_codigo').textContent;
-                // document.cookie = 'Codigo='+resultado[i]["id"];
-                // window.location.replace('reserva.php');
-            });
 
             apagar.addEventListener('click', function () {
                 let linha = this.parentNode.parentNode;
@@ -119,7 +105,7 @@ xhr.addEventListener('load', function () {//retornar os resultados da busca para
                 x.open("POST", url, true);
                 x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 x.send(params);
-                
+
                 linha.remove();
             });
         }
@@ -130,10 +116,10 @@ xhr.addEventListener('load', function () {//retornar os resultados da busca para
         cabecalho += '<th>Devolução</th>';
         cabecalho += '<th>Data Devolvido</th>';
         cabecalho += '<th>Diaria</th>';
-        cabecalho += '<th>Ativo</th>';
         cabecalho += '<th>Funcionario</th>';
         cabecalho += '<th>Cliente</th>';
         cabecalho += '<th>Livro</th>';
+        cabecalho += '<th>Ativo</th>';
         cabecalho += '<th>Opções</th>';
         cabecalho += '</tr>';
 
@@ -146,49 +132,52 @@ xhr.addEventListener('load', function () {//retornar os resultados da busca para
             txtHtml += "<td class='col_devolucao'>" + resultado[i]["data_devolucao"] + "</td>";
             txtHtml += "<td class='col_devolvido'>" + resultado[i]["data_devolvido"] + "</td>";
             txtHtml += "<td class='col_diaria'>" + resultado[i]["diaria"] + "</td>";
-            if (resultado[i]["ativo"] == 1)
-                txtHtml += "<td class='col_ativo'>Sim</td>";
-            else
-                txtHtml += "<td class='col_ativo'>Não</td>";
             txtHtml += "<td class='col_funcionario'>" + resultado[i][10] + "</td>";
             txtHtml += "<td class='col_cliente'>" + resultado[i][9] + "</td>";
             txtHtml += "<td class='col_livro'>" + resultado[i]["titulo"] + "</td>";
-            txtHtml += "<td><a class='editar' href='javascript:void(0)'>Editar</a> <a class='deletar' href='javascript:void(0)'>Deletar</a></td>";
+            if (resultado[i]["ativo"] == 1)
+            {
+                txtHtml += "<td class='col_ativo'>Sim</td>";
+                txtHtml += "<td><a class='deletar' href='javascript:void(0)'>Devolução</a></td>";
+            }
+            else{
+                txtHtml += "<td class='col_ativo'>Não</td>";
+                txtHtml += "<td><p>Devolvido</p></td>";
+            }
             txtHtml += "</tr>";
 
             let tbody = document.querySelector('.tabela > tbody');
             tbody.insertAdjacentHTML('beforeend', txtHtml);//adiciona os novos elementos
             let ultimaLinha = tbody.querySelector('tr:last-child');
-            let editar = ultimaLinha.querySelector('.editar');
-            let apagar = ultimaLinha.querySelector('.deletar');
-
-            editar.addEventListener('click', function () {
-                // let cookie = ultimaLinha.querySelector('.col_codigo').textContent;
-                // document.cookie = 'Codigo='+resultado[i]["id"];
-                // window.location.replace('reserva.php');
-            });
-            apagar.addEventListener('click', function () {
-                let linha = this.parentNode.parentNode;
-
-                let cliente = linha.querySelector(".col_cliente").textContent.trim();
-                let livro = linha.querySelector(".col_livro").textContent.trim();
-
-                let x = new XMLHttpRequest();
-                let url = '../controle/controle_aluga.php';
-                let params = 'op=remover&data_locacao=0&data_devolucao=0&diaria=0&id_funcionario=0&id_cliente=' + cliente + '&id_livro=' + livro;
-                x.open("POST", url, true);
-                x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                x.send(params);
-
-                linha.remove();
-
-                x.onreadystatechange = function() {//Call a function when the state changes.
-                    if(x.readyState == 4 && x.status == 200) {
-                        alert(x.responseText);
-                    }
-                }
-
-            });
+            
+            if (resultado[i]["ativo"] == 1)
+            {
+                let apagar = ultimaLinha.querySelector('.deletar');
+                apagar.addEventListener('click', function () {
+                    let linha = this.parentNode.parentNode;
+    
+                    let cliente = linha.querySelector(".col_cliente").textContent.trim();
+                    let livro = linha.querySelector(".col_livro").textContent.trim();
+    
+                    let x = new XMLHttpRequest();
+                    let url = '../controle/controle_aluga.php';
+                    let params = 'op=remover&id='+resultado[i]["id"]+'&data_locacao=0&data_devolucao=0&diaria=0&id_funcionario=0&id_cliente=' + cliente + '&id_livro=' + livro;
+                    x.open("POST", url, true);
+                    x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    x.send(params);
+    
+                    // linha.remove();
+    
+                    //envia a requisição
+                    let txtBuscar = document.querySelector('#txtBuscar').value;
+                    let urlN = '../controle/controle_aluga.php';
+                    let paramsN = 'op=buscabusca&data_locacao=' + txtBuscar + '&data_devolucao=' + txtBuscar + '&diaria=' + txtBuscar + '&id_funcionario=' + txtBuscar + '&id_cliente=' + txtBuscar + '&id_livro=' + txtBuscar;
+                    paramsN += '&nome=' + txtBuscar + '&cpf=' + txtBuscar + '&email=' + txtBuscar + '&telefone=' + txtBuscar + '&login=' + txtBuscar;
+                    xhr.open("POST", urlN, true);
+                    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhr.send(paramsN);
+                });
+            }
         }
     }
 
@@ -219,7 +208,8 @@ btnBuscar.addEventListener('click', function () { //busca resultado
         else if (cbxTipo.options[cbxTipo.selectedIndex].value == 'alugado') {
             //envia a requisição
             let url = '../controle/controle_aluga.php';
-            let params = 'op=buscacpf&data_locacao=' + txtBuscar + '&data_devolucao=' + txtBuscar + '&diaria=' + txtBuscar + '&id_funcionario=' + txtBuscar + '&id_cliente=' + txtBuscar + '&id_livro=' + txtBuscar;
+            let params = 'op=buscabusca&data_locacao=' + txtBuscar + '&data_devolucao=' + txtBuscar + '&diaria=' + txtBuscar + '&id_funcionario=' + txtBuscar + '&id_cliente=' + txtBuscar + '&id_livro=' + txtBuscar;
+            params += '&nome=' + txtBuscar + '&cpf=' + txtBuscar + '&email=' + txtBuscar + '&telefone=' + txtBuscar + '&login=' + txtBuscar;
             xhr.open("POST", url, true);
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhr.send(params);
@@ -244,10 +234,3 @@ btnCadastrarLivro.addEventListener('click', function () {
 btnAlugar.addEventListener('click', function () {
     window.location.replace('aluga.php');
 });
-
-function setCookie(name, value, duration) {
-    var cookie = name + "=" + escape(value) +
-        ((duration) ? "; duration=" + duration.toGMTString() : "");
-
-    document.cookie = cookie;
-}

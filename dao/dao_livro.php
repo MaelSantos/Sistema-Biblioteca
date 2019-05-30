@@ -52,7 +52,7 @@ class DaoLivro
         try {
             global $conexao;
     
-            $sql = $conexao->getPdo()->prepare("UPDATE Livro SET autor = :a, titulo = :t, ano = :an, editora = :e, codigo = :c, quantidade = :q, disponivel = :d");
+            $sql = $conexao->getPdo()->prepare("UPDATE Livro SET autor = :a, titulo = :t, ano = :an, editora = :e, codigo = :c, quantidade = :q, disponivel = :d WHERE id = :i");
             $sql->bindValue(":a", $livro->getAutor());
             $sql->bindValue(":t", $livro->getTitulo());
             $sql->bindValue(":an", $livro->getAno());
@@ -60,6 +60,7 @@ class DaoLivro
             $sql->bindValue(":c", $livro->getCodigo());
             $sql->bindValue(":q", $livro->getQuantidade());
             $sql->bindValue(":d", $livro->getDisponivel());
+            $sql->bindValue(":i", $livro->getId());
             $sql->execute();
         } catch (\Throwable $th) {
             echo $e->getMessage();

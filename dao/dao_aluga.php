@@ -2,6 +2,7 @@
 
 include_once 'conection.php';
 include_once '../model/aluga.php';
+include_once '../model/cliente.php';
 
 class DaoAluga
 {
@@ -60,7 +61,7 @@ class DaoAluga
         try {
             global $conexao;
     
-            $sql = $conexao->getPdo()->prepare("UPDATE Aluga SET data_locacao = :l, data_devolucao = :d, data_devolvido = :v, diaria = :a, ativo = :t, id_funcionario = :f, id_cliente = :c, id_livro = :o");
+            $sql = $conexao->getPdo()->prepare("UPDATE Aluga SET data_locacao = :l, data_devolucao = :d, data_devolvido = :v, diaria = :a, ativo = :t, id_funcionario = :f, id_cliente = :c, id_livro = :o WHERE id = :i");
             $sql->bindValue(":l", $aluga->getData_locacao());
             $sql->bindValue(":d", $aluga->getData_devolucao());
             $sql->bindValue(":v", $aluga->getData_devolvido());
@@ -69,6 +70,7 @@ class DaoAluga
             $sql->bindValue(":f", $aluga->getId_funcionario());
             $sql->bindValue(":c", $aluga->getId_cliente());
             $sql->bindValue(":o", $aluga->getId_livro());
+            $sql->bindValue(":i", $aluga->getId());
             $sql->execute();
             
         } catch (\Throwable $th) {
@@ -140,20 +142,17 @@ class DaoAluga
         }
     }
 
-    public function busca_por_busca(Aluga $aluga)
+    public function busca_por_busca_cliente(Cliente $cliente)
     {
         try {
             global $conexao;
     
-            $sql = $conexao->getPdo()->prepare("SELECT * FROM Aluga WHERE data_locacao LIKE :l OR data_devolucao LIKE :d OR data_devolvido LIKE :v OR diaria LIKE :a OR ativo LIKE :t OR id_funcionario LIKE :f OR id_cliente LIKE :c OR id_livro LIKE :o");
-            $sql->bindValue(":l", $aluga->getData_locacao());
-            $sql->bindValue(":d", $aluga->getData_devolucao());
-            $sql->bindValue(":v", $aluga->getData_devolvido());
-            $sql->bindValue(":a", $aluga->getDiaria());
-            $sql->bindValue(":t", $aluga->getAtivo());
-            $sql->bindValue(":f", $aluga->getId_funcionario());
-            $sql->bindValue(":c", $aluga->getId_cliente());
-            $sql->bindValue(":o", $aluga->getId_livro());
+            $sql = $conexao->getPdo()->prepare("SELECT DISTINCT a.*, c.nome, f.nome, l.titulo FROM Cliente c, Aluga a, Funcionario f, Livro l WHERE (c.nome LIKE :n OR c.cpf LIKE :c OR c.telefone LIKE :t OR c.email LIKE :e OR c.login LIKE :l) AND a.id_cliente = c.id AND a.id_funcionario = f.id AND a.id_livro = l.id");
+            $sql->bindValue(":n", "%".$cliente->getNome()."%");
+            $sql->bindValue(":c", "%".$cliente->getCpf()."%");
+            $sql->bindValue(":t", "%".$cliente->getTelefone()."%");
+            $sql->bindValue(":e", "%".$cliente->getEmail()."%");
+            $sql->bindValue(":l", "%".$cliente->getLogin()."%");
             $sql->execute();
     
             $alugados = array();
@@ -175,10 +174,10 @@ class DaoAluga
         try {
             global $conexao;
     
-            $sql = $conexao->getPdo()->prepare("UPDATE Aluga a INNER JOIN Cliente c ON (c.id = a.id_cliente AND c.nome = :i) INNER JOIN Livro l ON (l.id = a.id_livro AND l.titulo = :d) SET a.ativo = false");
-            $sql->bindValue(":i", $aluga->getId_cliente());
-            $sql->bindValue(":d", $aluga->getId_livro());
+            $sql = $conexao->getPdo()->prepare("UPDATE Aluga SET ativo = false, data_devolvido = CURRENT_DATE WHERE id = :i");
+            $sql->bindValue(":i", $aluga->getId());
             $sql->execute();
+
         } catch (\Throwable $th) {
             echo $e->getMessage();
         }

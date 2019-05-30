@@ -44,10 +44,6 @@ try { //força a entrada somente se informar os dados do cliente e do livro
                     <li><a href="inicio.php" alt="Pagina Inicial">Inicio</a></li>
                     <li><a href="" alt="Sobre">Sobre</a></li>
                     <li><a href="contatos.php" alt="Contatos">Contatos</a></li>
-                </ul>
-            </nav>
-            <nav id="barra-acesso"> <!--junção de links-->
-                <ul>
                     <li><a id="link-sair" href="javascript:void(0)" alt="Sair">Sair</a></li>
                     <li><a id="link-perfil" href="javascript:void(0)" alt="Perfil">Perfil</a></li>
                 </ul>

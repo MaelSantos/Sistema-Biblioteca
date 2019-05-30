@@ -56,12 +56,12 @@ a:hover{
 input, select{
     display: block;
     font-family: 'Lusitana', serif;
-    width: 350px;
-    margin: 10px;
+    width: 90%;
+    margin: 2%;
     border-radius: 15px;
     border: 1px solid black;
     font-size: 16pt;
-    padding: 10px 20px;
+    padding: 3% 4%;
     outline: none;
 }
 
@@ -70,13 +70,13 @@ input[type=button]{
     border: none;
     cursor: pointer;
     color: white;
-    width: 390px;
+    width: 99%;
 }
 
 div.corpo-form{
     text-align: center;
     width: 33%;
-    margin: 9% auto 1% auto;
+    margin: 1% auto 1% auto;
     min-height:100%;
     position: relative;
 }
@@ -84,28 +84,22 @@ div.corpo-form{
 div.form-opcoes{
     text-align: center;
     width: 100%;
-    margin: 8% auto 1% auto;
+    margin: 1% auto 1% auto;
     min-height:100%;
     position: relative;
 }
 
-nav{
-    position: absolute;
-    top: 9%;
-    right: 0;
-    padding: 1%; /* 20px; */
-
-}
-
 nav#barra-menu{
     text-align: center;
-    width: 100%;
-    overflow: hidden;
+    width: 98%;
+    overflow: visible;
     border-top: 1px dashed black;
     border-bottom: 1px dashed black;
-    position: absolute;
+    position: relative;
     margin-top: 1%;
+    margin-bottom: 2%;
     top: 8%;
+    padding: 1%;
 }
 
 nav#barra-menu ul{
@@ -115,17 +109,6 @@ nav#barra-menu ul{
 nav#barra-menu li{
     display: block;
     /* float: left; */
-}
-
-nav#barra-acesso{
-    text-align: center;
-    margin-top: 1%;
-    top: 8%;
-}
-
-nav#barra-acesso li{
-    display: block;
-    float: right;
 }
 
 td, th{

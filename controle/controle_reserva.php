@@ -68,8 +68,7 @@ try {
         echo json_encode($reservas);
 
     } else if ($op == "remover") {
-        $reserva->setId_cliente($_POST["id_cliente"]);
-        $reserva->setId_livro($_POST["id_livro"]);
+        $reserva->setId($_POST["id"]);
         $daoReserva->remover($reserva);
         echo "Sucesso";
     }

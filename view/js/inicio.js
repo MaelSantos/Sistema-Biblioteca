@@ -56,10 +56,10 @@ xhrReservados.addEventListener('load', function() {//retornar os resultados da b
 
             let cliente = linha.querySelector(".col_cliente").textContent.trim();
             let livro = linha.querySelector(".col_livro").textContent.trim();
-
+            console.log(resultado[i]["id"]);
             let x = new XMLHttpRequest();
             let url = '../controle/controle_reserva.php';
-            let params = 'op=remover&id_livro='+livro+'&id_cliente'+cliente+'0&data_reserva=0&data_retirada=0';
+            let params = 'op=remover&id='+resultado[i]["id"]+'&id_livro='+livro+'&id_cliente='+cliente+'0&data_reserva=0&data_retirada=0';
             x.open("POST", url, true);
             x.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             x.send(params);
@@ -116,10 +116,3 @@ let paramsAt = 'op=buscaAtrazados&data_locacao=0&data_devolucao=0&diaria=0&id_fu
 xhrAtrazados.open("POST", urlAt, true);
 xhrAtrazados.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xhrAtrazados.send(paramsAt);
-
-
-xhrReservados.onreadystatechange = function() {//Call a function when the state changes.
-    if(xhrReservados.readyState == 4 && xhrReservados.status == 200) {
-        alert(xhrReservados.responseText);
-    }
-}

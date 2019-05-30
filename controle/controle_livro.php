@@ -21,6 +21,8 @@ try {
         echo "Sucesso";
     }
     if ($op == "editar") {
+        $id = $daoLivro->busca_por_codigo($livro->getCodigo());
+        $livro->setId($id);
         $daoLivro->editar($livro);
         echo "Sucesso";
     }

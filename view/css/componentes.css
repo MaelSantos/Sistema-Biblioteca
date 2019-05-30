@@ -20,16 +20,27 @@ table.tabela{ /* localização da tabela */
 table.tabela thead tr th {
    background: #0D0D0D; /* Linha de cabeçalho com fundo preto */
    color: white;
-   overflow: visible;
+   overflow: hidden;
 }
 table.tabela tr td{ /* Toda a tabela com fundo azul */
    background: #6BBFA7;
-   overflow: visible;
+   overflow: hidden;
    border-bottom: 1px solid black; /*Divisão entre as linhas*/
 }
 
 form.busca {
    display: flex;
+   position: relative;
+}
+
+form.buscaPadrao {
+   display: flex;
+   position: relative;
+}
+
+form.busca input, select{
+   margin: 1%;
+   padding: 1% 1%;
 }
 
 main#contatos{

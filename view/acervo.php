@@ -34,19 +34,16 @@ if(isset($_SESSION['logado']) || isset($_SESSION['admin'])) {
                     <li><a href="acervo.php" alt="Acervo">Acervo</a></li>
                     <li><a href="" alt="Sobre">Sobre</a></li>
                     <li><a href="contatos.php" alt="Contatos">Contatos</a></li>
-                </ul>
-            </nav>
-            <nav id="barra-acesso"> <!--junção de links-->
-                <ul>
-                    <li><a id="link-sair" href="javascript:void(0)" alt="Sair">Sair</a></li>
                     <li><a id="link-perfil" href="javascript:void(0)" alt="Perfil">Perfil</a></li>
+                    <li><a id="link-sair" href="javascript:void(0)" alt="Sair">Sair</a></li>
                 </ul>
             </nav>
         </header>
         <div class="corpo-form">
             <!--Mensagens de notificação-->
             <div id="form-erro"></div>
-            <form class="busca"> <!--Formulario de busca-->
+            <div id="form-sucesso">Atualizado com sucesso!</div>
+            <form class="buscaPadrao"> <!--Formulario de busca-->
                 <input type="text" id="txtBuscar" name="txtBuscar" placeholder="Buscar">
                 <input type="button" id="btnBuscar" name="Buscar" value="Buscar">
             </form>

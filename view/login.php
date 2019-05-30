@@ -23,6 +23,8 @@
                     <li><a href="../index.php" alt="Pagina Inicial">Inicio</a></li>
                     <li><a href="" alt="Sobre">Sobre</a></li>
                     <li><a href="contatos.php" alt="Contatos">Contatos</a></li>
+                    <li><a href="login.php" alt="Login">Login</a></li>
+                    <li><a href="cadastro_cliente.php" alt="Cadastro">Cadastro</a></li>
                 </ul>
             </nav>
         </header>

@@ -73,7 +73,14 @@ try {
         echo "Sucesso";
 
     } else if ($op == "buscabusca") {
-        $alugados = $daoAluga->busca_por_busca($aluga);
+        $cliente = new Cliente();
+        $cliente->setNome($_POST["nome"]);
+        $cliente->setCpf($_POST["cpf"]);
+        $cliente->setEmail($_POST["email"]);
+        $cliente->setTelefone($_POST["telefone"]);
+        $cliente->setLogin($_POST["login"]);
+
+        $alugados = $daoAluga->busca_por_busca_cliente($cliente);
         echo json_encode($alugados);
 
     } else if ($op == "buscacpf") {
@@ -92,8 +99,7 @@ try {
         echo json_encode($alugados);
     }
     else if ($op == "remover") {
-        $aluga->setId_cliente($_POST["id_cliente"]);
-        $aluga->setId_livro($_POST["id_livro"]);
+        $aluga->setId($_POST["id"]);
         $daoAluga->remover($aluga);
         echo "Sucesso";
     }

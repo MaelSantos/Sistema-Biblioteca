@@ -74,7 +74,7 @@ xhr.addEventListener("load", function() {
         sucesso.style = 'display: initial';
 
     } else {
-        erro.textContent = 'Erro ao Cadastrar';
+        erro.textContent = 'Erro ao cadastrar';
         erro.style = 'display: initial';
     }
 });

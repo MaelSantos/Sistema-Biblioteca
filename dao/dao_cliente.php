@@ -28,14 +28,15 @@ class DaoCliente
             if ($sql->rowCount() > 0) {
                 return false;
             } else {
-                $sql = $conexao->getPdo()->prepare("INSERT INTO Cliente(nome, cpf, telefone, email, login, senha)
-                VALUES (:n, :c, :t, :e, :l, :s)");
+                $sql = $conexao->getPdo()->prepare("INSERT INTO Cliente(nome, cpf, telefone, email, login, senha, ativo)
+                VALUES (:n, :c, :t, :e, :l, :s, :a)");
                 $sql->bindValue(":n", $cliente->getNome());
                 $sql->bindValue(":c", $cliente->getCpf());
                 $sql->bindValue(":t", $cliente->getTelefone());
                 $sql->bindValue(":e", $cliente->getEmail());
                 $sql->bindValue(":l", $cliente->getLogin());
                 $sql->bindValue(":s", md5($cliente->getSenha()));
+                $sql->bindValue(":a", $cliente->getAtivo());
                 $sql->execute();
                 return true;
     
@@ -51,13 +52,14 @@ class DaoCliente
         try {
             global $conexao;
     
-            $sql = $conexao->getPdo()->prepare("UPDATE Cliente SET nome = :n, cpf = :c, telefone = :t, email = :e, login = :l, senha = :s");
+            $sql = $conexao->getPdo()->prepare("UPDATE Cliente SET nome = :n, cpf = :c, telefone = :t, email = :e, login = :l, senha = :s WHERE id = :i");
             $sql->bindValue(":n", $cliente->getNome());
             $sql->bindValue(":c", $cliente->getCpf());
             $sql->bindValue(":t", $cliente->getTelefone());
             $sql->bindValue(":e", $cliente->getEmail());
             $sql->bindValue(":l", $cliente->getLogin());
             $sql->bindValue(":s", md5($cliente->getSenha()));
+            $sql->bindValue(":i", $cliente->getId());
             $sql->execute();
             
         } catch (\Throwable $th) {
@@ -69,7 +71,7 @@ class DaoCliente
         try {
             global $conexao;
     
-            $sql = $conexao->getPdo()->prepare("SELECT id FROM Cliente WHERE login = :l AND senha = :s");
+            $sql = $conexao->getPdo()->prepare("SELECT id FROM Cliente WHERE login = :l AND senha = :s AND ativo = true");
             $sql->bindValue(":l", $cliente->getLogin());
             $sql->bindValue(":s", md5($cliente->getSenha()));
             $sql->execute();

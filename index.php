@@ -33,13 +33,8 @@ else if(isset($_SESSION['admin'])) {
                     <li><a href="index.php" alt="Pagina Inicial">Inicio</a></li>
                     <li><a href="" alt="Sobre">Sobre</a></li>
                     <li><a href="view/contatos.php" alt="Contatos">Contatos</a></li>
-                </ul>
-            </nav>
-
-            <nav id="barra-acesso"> <!--junção de links-->
-                <ul>
-                    <li><a href="view/cadastro_cliente.php" alt="Cadastro">Cadastro</a></li>
                     <li><a href="view/login.php" alt="Login">Login</a></li>
+                    <li><a href="view/cadastro_cliente.php" alt="Cadastro">Cadastro</a></li>
                 </ul>
             </nav>
         </header>

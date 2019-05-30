@@ -28,9 +28,9 @@ btnEntrar.addEventListener('click', function() {
         xhr.addEventListener("load", function() {
             if (this.responseText.trim() == 'Sucesso') {
                 window.location.replace('inicio.php');
-
+                sessionStorage.setItem('logado', txtLogin);
             } else {
-                erro.textContent = 'Erro ao Realizar Login';
+                erro.textContent = 'Erro ao realizar login';
                 erro.style = 'display: initial';
             }
         });

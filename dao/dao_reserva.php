@@ -143,10 +143,8 @@ class DaoReserva
     {
         try {
             global $conexao;
-    
-            $sql = $conexao->getPdo()->prepare("UPDATE Reserva r INNER JOIN Cliente c ON (c.id = r.id_cliente AND c.id = :c) INNER JOIN Livro l ON (l.id = r.id_livro AND l.titulo = :l) SET r.ativo = false");
-            $sql->bindValue(":l", $reserva->id_livro());
-            $sql->bindValue(":c", $reserva->id_cliente());
+            $sql = $conexao->getPdo()->prepare("UPDATE Reserva SET ativo = false WHERE id = :d");
+            $sql->bindValue(":d", $reserva->getId());
             $sql->execute();
             
         } catch (\Throwable $th) {

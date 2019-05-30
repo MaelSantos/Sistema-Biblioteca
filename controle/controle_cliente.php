@@ -30,7 +30,6 @@ try {
         {
             session_start(); 
             $_SESSION["logado"] = $cliente->getLogin();//Define que existe um usuário logado
-            // $_SESSION["logado"] = $cliente->getCpf();//Define que existe um usuário logado
             $_SESSION["id"] = $id; //Define que existe um usuário logado
             echo "Sucesso";
         }
@@ -40,7 +39,7 @@ try {
     }
     if ($op == "buscabusca") {
         $clientes = $daoCliente->busca_por_busca($cliente);
-        echo json_encode($clientes);
+        echo json_encode($clientes); 
     }
     if ($op == "remover") {
         $cli = $daoCliente->buscar_por_cpf($_POST["cpf"]);
