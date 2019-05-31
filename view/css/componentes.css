@@ -46,6 +46,29 @@ form.busca input, select{
 main#contatos{
    position: relative;
    text-align: center;
-   margin-top: 13%;
+   margin-top: 8%;
    background: #6AA69B; /*Mesma cor de fundo*/
+}
+
+div.perfil{
+   display: inline-block;
+   position: relative;
+   align-items: center;
+   text-align: center;
+   overflow: hidden;
+   width: 33%;
+}
+
+div.perfil-button{
+   margin-left: 67%;
+}
+
+div.perfil input{
+   padding: 4% 3%;
+}
+
+div.perfil-container{
+   position: relative;
+   width: 100%;
+   align-items: center;
 }

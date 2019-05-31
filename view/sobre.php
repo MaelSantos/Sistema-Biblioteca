@@ -8,7 +8,7 @@
         <link href="css/componentes.css" rel="stylesheet">
         <link href="css/aparencia.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Lusitana" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lusitana:400,700&display=swap" rel="stylesheet">
     </head>
 
     <body>
@@ -39,13 +39,13 @@
         </header>
 
         <main id="contatos">
-            <p>ABIMAEL JONAS FURTUOSO DOS SANTOS<p>
-            <p>DISCENTE NO CURSO BACHARELADO EM SISTEMAS DE INFORMAÇÃO</p>
-            <p>UNIDADE ACADÊMICA DE SERRA TALHADA / UNIVERSIDADE FEDERAL RURAL DE PERNANBUCO</p>
-            <p>CONTATOS:<p>
-            <p>Telefone: (88)9 8116-9372</p>
-            <p>Email: maelsantos777@gmail.com</p>
-            <a href="https://www.facebook.com/profile.php?id=100014350898752" alt="CafePraza" target="_blank">Ir para Facebook</a>
+            <p>Sistema desenvolvido para disciplina de projeto de sistemas web (PSD)<p>
+            <p>Discente: Abimael Jonas F. dos Santos</p>
+            <p>Docente: Ygor Amaral Barbosa Leite de Sena</p>
+            <p>Curso de Bacharelado em sistemas de informação</p>
+            <p>Unidade Acadêmica de Serra Talhada</p>
+            <p>Universidade Federal Rural De Pernambuco</p>
+            <p>UAST/UFRPE<p>
         </main>
         <footer>  <!--rodapé-->
             <p>&copy; Todos os direitos são reservados.</p>

@@ -32,7 +32,7 @@ if(isset($_SESSION['logado'])) {
                 <ul>
                     <li><a href="inicio.php" alt="Pagina Inicial">Inicio</a></li>
                     <li><a href="acervo.php" alt="Acervo">Acervo</a></li>
-                    <li><a href="" alt="Sobre">Sobre</a></li>
+                    <li><a href="sobre.php" alt="Sobre">Sobre</a></li>
                     <li><a href="contatos.php" alt="Contatos">Contatos</a></li>
                     <li><a id="link-perfil" href="javascript:void(0)" alt="Perfil">Perfil</a></li>
                     <li><a id="link-sair" href="javascript:void(0)" alt="Sair">Sair</a></li>
@@ -41,8 +41,8 @@ if(isset($_SESSION['logado'])) {
         </header>
 
         <div class="form-opcoes">
-            <h1><strong>Livros alugados</strong></h1>
             <table id="alugados" class="tabela" border="1px" cellpadding="5px" cellspacing="0"> <!--Tabela de livros-->
+                <caption>Livros Alugados</caption>
                 <thead>
                 <tr>
                     <th>Livro</th>
@@ -56,8 +56,8 @@ if(isset($_SESSION['logado'])) {
                 <tbody>
                 </tbody>
             </table>
-            <h1><strong>Livros reservados</strong></h1>
             <table id="reservados" class="tabela" border="1px" cellpadding="5px" cellspacing="0"> <!--Tabela de livros-->
+                <caption>Livros reservados</caption>
                 <thead>
                     <tr>
                         <th>Titulo</th>
@@ -70,8 +70,8 @@ if(isset($_SESSION['logado'])) {
                 <tbody>
                 </tbody>
             </table>
-            <h1><strong>Locações atrazadas<strong></h1>
             <table id="atrasados" class="tabela" border="1px" cellpadding="5px" cellspacing="0"> <!--Tabela de livros-->
+                <caption>Locações atrazadas</caption>
                 <thead>
                     <tr>
                         <th>Livro</th>

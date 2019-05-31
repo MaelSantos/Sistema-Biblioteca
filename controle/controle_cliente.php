@@ -22,7 +22,10 @@ try {
             echo "Sucesso";
     }
     if ($op == "editar") {
+        session_start();
+        $cliente->setId($_SESSION['id']);
         $daoCliente->editar($cliente);
+        echo "Sucesso";
     }
     if ($op == "login") {
         $id = $daoCliente->buscar($cliente);
@@ -41,8 +44,18 @@ try {
         $clientes = $daoCliente->busca_por_busca($cliente);
         echo json_encode($clientes); 
     }
+    if ($op == "buscaid") {
+        session_start();
+        $clientes = $daoCliente->buscar_por_id($_SESSION['id']);
+        echo json_encode($clientes); 
+    }
     if ($op == "remover") {
         $cli = $daoCliente->buscar_por_cpf($_POST["cpf"]);
+        $daoCliente->remover($cli);
+    }
+    if ($op == "removerid") {
+        session_start();
+        $cli = $daoCliente->remover($_SESSION['id']);
         $daoCliente->remover($cli);
     }
 } catch (Throwable $th) {

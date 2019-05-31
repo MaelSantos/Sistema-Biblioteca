@@ -50,12 +50,12 @@ class DaoFuncionario
         try {
             global $conexao;
     
-            $sql = $conexao->getPdo()->prepare("UPDATE Funcionario SET nome = :n, cargo = :c, email = :e, login = :l, senha = :s");
+            $sql = $conexao->getPdo()->prepare("UPDATE Funcionario SET nome = :n, cargo = :c, email = :e, login = :l WHERE id = :i");
             $sql->bindValue(":n", $funcionario->getNome());
             $sql->bindValue(":c", $funcionario->getCargo());
             $sql->bindValue(":e", $funcionario->getEmail());
             $sql->bindValue(":l", $funcionario->getLogin());
-            $sql->bindValue(":s", md5($funcionario->getSenha()));
+            $sql->bindValue(":i", $funcionario->getId());
             $sql->execute();
             
         } catch (\Throwable $th) {
@@ -97,6 +97,30 @@ class DaoFuncionario
         }
     }
 
+    public function buscar_por_id($id)
+    {
+        try {
+            global $conexao;
+    
+            $sql = $conexao->getPdo()->prepare("SELECT * FROM Funcionario WHERE id = :i");
+            $sql->bindValue(":i", $id);
+            $sql->execute();
+
+            $funcionarios = array();
+            $i = 0;
+            while($row = $sql->fetch()) {
+                $funcionarios[$i]= $row;
+                $i++;
+            }
+
+            return $funcionarios;
+            
+        } catch (\Throwable $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+    
     public function busca_por_busca(Funcionario $funcionario)
     {
         try {
@@ -132,7 +156,20 @@ class DaoFuncionario
             $sql->bindValue(":l", $funcionario->getLogin());
             $sql->execute();
 
-            echo $sql->rowCount();
+        } catch (\Throwable $th) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function remover_por_id($id)
+    {
+        try {
+            global $conexao;
+
+            $sql = $conexao->getPdo()->prepare("UPDATE Funcionario SET ativo = false WHERE id = :i");
+            $sql->bindValue(":i", $id);
+            $sql->execute();
+
         } catch (\Throwable $th) {
             echo $e->getMessage();
         }

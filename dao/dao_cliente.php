@@ -52,13 +52,12 @@ class DaoCliente
         try {
             global $conexao;
     
-            $sql = $conexao->getPdo()->prepare("UPDATE Cliente SET nome = :n, cpf = :c, telefone = :t, email = :e, login = :l, senha = :s WHERE id = :i");
+            $sql = $conexao->getPdo()->prepare("UPDATE Cliente SET nome = :n, cpf = :c, telefone = :t, email = :e, login = :l WHERE id = :i");
             $sql->bindValue(":n", $cliente->getNome());
             $sql->bindValue(":c", $cliente->getCpf());
             $sql->bindValue(":t", $cliente->getTelefone());
             $sql->bindValue(":e", $cliente->getEmail());
             $sql->bindValue(":l", $cliente->getLogin());
-            $sql->bindValue(":s", md5($cliente->getSenha()));
             $sql->bindValue(":i", $cliente->getId());
             $sql->execute();
             
@@ -118,6 +117,30 @@ class DaoCliente
         }
     }
 
+    public function buscar_por_id($id)
+    {
+        try {
+            global $conexao;
+    
+            $sql = $conexao->getPdo()->prepare("SELECT * FROM Cliente WHERE id = :i");
+            $sql->bindValue(":i", $id);
+            $sql->execute();
+
+            $clientes = array();
+            $i = 0;
+            while($row = $sql->fetch()) {
+                $clientes[$i]= $row;
+                $i++;
+            }
+            
+            return $clientes;
+            
+        } catch (\Throwable $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
     public function busca_por_busca(Cliente $cliente)
     {
         try {
@@ -131,14 +154,14 @@ class DaoCliente
             $sql->bindValue(":l", "%".$cliente->getLogin()."%");
             $sql->execute();
     
-            $livros = array();
+            $clientes = array();
             $i = 0;
             while($row = $sql->fetch()) {
-                $livros[$i]= $row;
+                $clientes[$i]= $row;
                 $i++;
             }
     
-            return $livros;
+            return $clientes;
             
         } catch (\Throwable $th) {
             echo $e->getMessage();

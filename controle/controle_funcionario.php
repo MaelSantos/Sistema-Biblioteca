@@ -20,6 +20,8 @@ try {
         echo "Sucesso";
     }
     else if ($op == "editar") {
+        session_start();
+        $funcionario->setId($_SESSION["id"]);
         $daoFuncionario->editar($funcionario);
         echo "Sucesso";
     }
@@ -37,10 +39,22 @@ try {
         $funcionarios = $daoFuncionario->busca_por_busca($funcionario);
         echo json_encode($funcionarios);
     }
+    else if ($op == "buscaid") {
+        session_start();
+        $funcionarios = $daoFuncionario->buscar_por_id($_SESSION['id']);
+        echo json_encode($funcionarios);
+    }
     else if ($op == "remover") {
         $daoFuncionario->remover($funcionario);
         echo "Sucesso";
     }
+
+    else if ($op == "removerid") {
+        session_start();
+        $daoFuncionario->remover_por_id($_SESSION['id']);
+        echo "Sucesso";
+    }
+
 } catch (Throwable $th) {
     echo "Falha" . $th;
 }

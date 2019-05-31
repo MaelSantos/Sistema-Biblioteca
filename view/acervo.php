@@ -32,7 +32,7 @@ if(isset($_SESSION['logado']) || isset($_SESSION['admin'])) {
                 <ul>
                     <li><a href="inicio.php" alt="Pagina Inicial">Inicio</a></li>
                     <li><a href="acervo.php" alt="Acervo">Acervo</a></li>
-                    <li><a href="" alt="Sobre">Sobre</a></li>
+                    <li><a href="sobre.php" alt="Sobre">Sobre</a></li>
                     <li><a href="contatos.php" alt="Contatos">Contatos</a></li>
                     <li><a id="link-perfil" href="javascript:void(0)" alt="Perfil">Perfil</a></li>
                     <li><a id="link-sair" href="javascript:void(0)" alt="Sair">Sair</a></li>
@@ -50,6 +50,7 @@ if(isset($_SESSION['logado']) || isset($_SESSION['admin'])) {
         </div>
 
         <table class="tabela" border="1px" cellpadding="5px" cellspacing="0"> <!--Tabela de livros-->
+            <caption>Livros</caption>
             <thead>
                 <tr>
                     <th>Codigo</th>

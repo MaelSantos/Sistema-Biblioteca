@@ -32,9 +32,13 @@ h1.titulo a:hover{
     color: white;
 }
 
-p, label, h1, h2, tr{
+p, label, h1, h2, tr, caption{
     font-family: 'Lusitana', serif;
     font-size: 25px;
+}
+
+b, strong {
+    font-weight: bolder;
 }
 
 a{
