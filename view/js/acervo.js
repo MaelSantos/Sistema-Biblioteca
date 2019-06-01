@@ -19,8 +19,8 @@ xhr.addEventListener('load', function () {//retornar os resultados da busca para
         txtHtml += "<td class='col_disponivel'>" + livros[i]["disponivel"] + "</td>";
         if (sessionStorage.getItem('logado') != null)
             txtHtml += "<td><a class='reservar' href='javascript:void(0)'>Reservar</a></td>";
-        else
-            txtHtml += "<td><a class='editar' href='javascript:void(0)'>Editar</a></td>";
+        else if (sessionStorage.getItem('admin') != null)
+            txtHtml += "<td><a class='editar' href='javascript:void(0)'>Editar</a><a class='remover' href='javascript:void(0)'>Remover</a></td>";
 
         txtHtml += "</tr>";
 
@@ -34,6 +34,21 @@ xhr.addEventListener('load', function () {//retornar os resultados da busca para
             });
         }
         else {
+            let apagar = ultimaLinha.querySelector('.remover');
+
+            apagar.addEventListener('click', function () {
+                let linha = this.parentNode.parentNode;
+
+                let xA = new XMLHttpRequest();
+                let urlX = '../controle/controle_livro.php';
+                let paramsX = 'op=remover&id='+livros[i]["id"]+'&autor=0&titulo=0&ano=0&editora=0&codigo=0&quantidade=0&disponivel=0';
+                xA.open("POST", urlX, true);
+                xA.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xA.send(paramsX);
+
+                linha.remove();
+            });
+
             let editar = ultimaLinha.querySelector('.editar');
             editar.addEventListener('click', function () {
                 let linhaTr = this.parentNode.parentNode;
@@ -74,10 +89,10 @@ xhr.addEventListener('load', function () {//retornar os resultados da busca para
                             erro.textContent = 'Erro ao atualizar';
                             erro.style = 'display: initial';
                         }
-                    });
+                    }); 
 
                     let url = '../controle/controle_livro.php';
-                    let params = 'op=editar&autor='+autor+'&titulo='
+                    let params = 'op=editar&id='+livros[i]["id"]+'&autor='+autor+'&titulo='
                     +titulo+'&ano='+ano+'&editora='+editora+'&codigo='+codigo+'&quantidade='+disponivel+'&disponivel='+disponivel;
                     xhrEditar.open("POST", url, true);
                     xhrEditar.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

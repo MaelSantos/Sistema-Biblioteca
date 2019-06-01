@@ -39,7 +39,8 @@ xhr.addEventListener('load', function () {//retornar os resultados da busca para
 
             let tbody = document.querySelector('.tabela > tbody');
             tbody.insertAdjacentHTML('beforeend', txtHtml);//adiciona os novos elementos
-
+            document.querySelector('#txtSenha').value = resultado[i]["senha"];
+            document.querySelector('#txtConfirmaSenha').value = resultado[i]["senha"];
         }
     } else {
         let cabecalho = '<tr>';
@@ -62,6 +63,8 @@ xhr.addEventListener('load', function () {//retornar os resultados da busca para
 
             let tbody = document.querySelector('.tabela > tbody');
             tbody.insertAdjacentHTML('beforeend', txtHtml);//adiciona os novos elementos
+            document.querySelector('#txtSenha').value = resultado[i]["senha"];
+            document.querySelector('#txtConfirmaSenha').value = resultado[i]["senha"];
         }
     }
 
@@ -215,5 +218,55 @@ btnApagar.addEventListener('click', function(){
         xhrRemove.send(params);
 
         window.location.replace('../controle/logout.php');
+    }
+});
+
+
+btnSenha.addEventListener('click', function(){
+    var xhrSenha = new XMLHttpRequest();
+    let erro = document.querySelector("#form-erro");
+    let sucesso = document.querySelector("#form-sucesso");
+    let txtSenha = document.querySelector('#txtSenha').value.trim();
+    let txtConfirmaSenha = document.querySelector('#txtConfirmaSenha').value.trim();
+
+    xhrSenha.addEventListener('load', function () {
+        let erro = document.querySelector("#form-erro");
+        let sucesso = document.querySelector("#form-sucesso");
+        let retorno = this.responseText.trim();
+        if (retorno == 'Sucesso') {
+            erro.style = 'display: none';
+            sucesso.style = 'display: initial';
+
+        } else {
+            erro.textContent = 'Erro ao atualizar';
+            erro.style = 'display: initial';
+        }
+    });
+
+    if(txtSenha == txtConfirmaSenha)
+    {
+        if (sessionStorage.getItem('logado') != null) {
+            //envia a requisição
+            let url = '../controle/controle_cliente.php';
+            let params = 'op=editarsenha&nome=0&cpf=0&email=0&telefone=0&login=0&senha='+txtSenha;
+            xhrSenha.open("POST", url, true);
+            xhrSenha.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhrSenha.send(params);
+        
+        }
+        else if (sessionStorage.getItem('admin') != null) {
+            let url = '../controle/controle_funcionario.php';
+            let params = 'op=editarsenha&nome=0&cargo=0&email=0&login=0&senha='+txtSenha;
+            xhrSenha.open("POST", url, true);
+            xhrSenha.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhrSenha.send(params);
+    
+            erro.style = 'display: none';
+            sucesso.style = 'display: initial';
+        }
+    }
+    else{
+        erro.textContent = 'Senhas diferentes!!!';
+        erro.style = 'display: initial';
     }
 });

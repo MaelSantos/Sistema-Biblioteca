@@ -21,8 +21,7 @@ try {
         echo "Sucesso";
     }
     if ($op == "editar") {
-        $id = $daoLivro->busca_por_codigo($livro->getCodigo());
-        $livro->setId($id);
+        $livro->setId($_POST["id"]);
         $daoLivro->editar($livro);
         echo "Sucesso";
     }
@@ -31,6 +30,7 @@ try {
         echo json_encode($livros);
     }
     if ($op == "remover") {
+        $livro->setId($_POST["id"]);
         $daoLivro->remover($livro);
         echo "Sucesso";
     }

@@ -31,6 +31,7 @@ if(isset($_SESSION['admin'])) {
             <nav id="barra-menu"> <!--junção de links-->
                 <ul>
                     <li><a href="admin.php" alt="Pagina Inicial">Inicio</a></li>
+                    <li><a href="acervo.php" alt="Acervo">Acervo</a></li>
                     <li><a href="sobre.php" alt="Sobre">Sobre</a></li>
                     <li><a href="contatos.php" alt="Contatos">Contatos</a></li>
                     <li><a id="link-perfil" href="javascript:void(0)" alt="Perfil">Perfil</a></li>

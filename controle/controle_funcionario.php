@@ -25,6 +25,12 @@ try {
         $daoFuncionario->editar($funcionario);
         echo "Sucesso";
     }
+    else if ($op == "editarsenha") {
+        session_start();
+        $funcionario->setId($_SESSION["id"]);
+        $daoFuncionario->editar_senha($funcionario);
+        echo "Sucesso";
+    }
     else if ($op == "login") {
         $id = $daoFuncionario->buscar($funcionario);
         if($id != null)

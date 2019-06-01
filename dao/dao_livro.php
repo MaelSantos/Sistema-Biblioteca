@@ -29,8 +29,8 @@ class DaoLivro
                 echo "Erro ao Salvar";
                 return false;
             } else {
-                $sql = $conexao->getPdo()->prepare("INSERT INTO Livro(autor, titulo, ano, editora, codigo, quantidade, disponivel)
-                VALUES (:a, :t, :an, :e, :c, :q, :d)");
+                $sql = $conexao->getPdo()->prepare("INSERT INTO Livro(autor, titulo, ano, editora, codigo, quantidade, disponivel, ativo)
+                VALUES (:a, :t, :an, :e, :c, :q, :d, :n)");
                 $sql->bindValue(":a", $livro->getAutor());
                 $sql->bindValue(":t", $livro->getTitulo());
                 $sql->bindValue(":an", $livro->getAno());
@@ -38,6 +38,7 @@ class DaoLivro
                 $sql->bindValue(":c", $livro->getCodigo());
                 $sql->bindValue(":q", $livro->getQuantidade());
                 $sql->bindValue(":d", $livro->getDisponivel());
+                $sql->bindValue(":n", true);
                 $sql->execute();
                 return true;
     
@@ -66,11 +67,7 @@ class DaoLivro
             echo $e->getMessage();
         }
     }
-    public function buscar_por_locacao(Livro $livro)
-    {
 
-        global $conexao;
-    }
     public function busca_por_codigo($codigo)
     {
         try {
@@ -94,7 +91,7 @@ class DaoLivro
         try {
             global $conexao;
     
-            $sql = $conexao->getPdo()->prepare("SELECT * FROM Livro WHERE autor LIKE :a OR titulo LIKE :t OR ano LIKE :an OR editora LIKE :e OR codigo LIKE :c OR quantidade LIKE :q OR disponivel LIKE :d");
+            $sql = $conexao->getPdo()->prepare("SELECT * FROM Livro WHERE (autor LIKE :a OR titulo LIKE :t OR ano LIKE :an OR editora LIKE :e OR codigo LIKE :c OR quantidade LIKE :q OR disponivel LIKE :d) AND ativo = true");
             $sql->bindValue(":a", "%".$livro->getAutor()."%");
             $sql->bindValue(":t", "%".$livro->getTitulo()."%");
             $sql->bindValue(":an", "%".$livro->getAno()."%");
@@ -124,7 +121,7 @@ class DaoLivro
         try {
             global $conexao;
     
-            $sql = $conexao->getPdo()->prepare("DELETE FROM Livro WHERE id = :i");
+            $sql = $conexao->getPdo()->prepare("UPDATE Livro SET ativo = false WHERE id = :i");
             $sql->bindValue(":i", $livro->getId());
             $sql->execute();
         } catch (\Throwable $th) {

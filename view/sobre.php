@@ -20,11 +20,16 @@
             <nav id="barra-menu"> <!--junção de links-->
                 <ul>
                     <li><a href="../index.php" alt="Pagina Inicial">Inicio</a></li>
+                    <?php
+                    session_start();
+                    if (isset($_SESSION["logado"]) || isset($_SESSION["admin"])) {
+                        echo '<li><a href="acervo.php" alt="Acervo">Acervo</a></li>';
+                    }
+                    ?>
                     <li><a href="sobre.php" alt="Sobre">Sobre</a></li>
                     <li><a href="contatos.php" alt="Contatos">Contatos</a></li>
 
                     <?php
-                    session_start();
                     if (isset($_SESSION["logado"]) || isset($_SESSION["admin"])) {
                         echo '<li><a id="link-perfil" href="javascript:void(0)" alt="Perfil">Perfil</a></li>
                                                 <li><a id="link-sair" href="javascript:void(0)" alt="Sair">Sair</a></li>';

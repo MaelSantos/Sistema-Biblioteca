@@ -65,6 +65,22 @@ class DaoCliente
             echo $e->getMessage();
         }
     }
+
+    public function editar_senha(Cliente $cliente)
+    {
+        try {
+            global $conexao;
+    
+            $sql = $conexao->getPdo()->prepare("UPDATE Cliente SET senha = :s WHERE id = :i");
+            $sql->bindValue(":s", md5($cliente->getSenha()));
+            $sql->bindValue(":i", $cliente->getId());
+            $sql->execute();
+            
+        } catch (\Throwable $th) {
+            echo $e->getMessage();
+        }
+    }
+
     public function buscar(Cliente $cliente)
     {
         try {

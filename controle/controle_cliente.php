@@ -21,13 +21,19 @@ try {
         if($r == true)
             echo "Sucesso";
     }
-    if ($op == "editar") {
+    else if ($op == "editar") {
         session_start();
         $cliente->setId($_SESSION['id']);
         $daoCliente->editar($cliente);
         echo "Sucesso";
     }
-    if ($op == "login") {
+    else if ($op == "editarsenha") {
+        session_start();
+        $cliente->setId($_SESSION['id']);
+        $daoCliente->editar_senha($cliente);
+        echo "Sucesso";
+    }
+    else if ($op == "login") {
         $id = $daoCliente->buscar($cliente);
         if($id != null)
         {
@@ -40,23 +46,27 @@ try {
             echo "Falha";
 
     }
-    if ($op == "buscabusca") {
+    else if ($op == "buscabusca") {
         $clientes = $daoCliente->busca_por_busca($cliente);
         echo json_encode($clientes); 
     }
-    if ($op == "buscaid") {
+    else if ($op == "buscaid") {
         session_start();
         $clientes = $daoCliente->buscar_por_id($_SESSION['id']);
         echo json_encode($clientes); 
     }
-    if ($op == "remover") {
+    else if ($op == "buscaid") {
+        session_start();
+        $clientes = $daoCliente->buscar_por_id($_SESSION['id']);
+        echo json_encode($clientes); 
+    }
+    else if ($op == "remover") {
         $cli = $daoCliente->buscar_por_cpf($_POST["cpf"]);
         $daoCliente->remover($cli);
     }
-    if ($op == "removerid") {
+    else if ($op == "removerid") {
         session_start();
-        $cli = $daoCliente->remover($_SESSION['id']);
-        $daoCliente->remover($cli);
+        $daoCliente->remover($_SESSION["id"]);
     }
 } catch (Throwable $th) {
     echo "Falha" . $th;

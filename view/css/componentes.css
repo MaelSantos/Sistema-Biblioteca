@@ -13,7 +13,7 @@
 
 table.tabela{ /* localização da tabela */
    margin: 2% auto auto auto;
-   table-layout: fixed;
+   /* table-layout: fixed; */
    width: 100%;
 }
 
@@ -57,10 +57,18 @@ div.perfil{
    text-align: center;
    overflow: hidden;
    width: 33%;
+   margin-left: 11%;
 }
 
 div.perfil-button{
-   margin-left: 67%;
+   width: 74%;
+   margin-left: 13%;
+   display: inline-flex;
+   align-items: center;
+}
+
+div.perfil-button input{
+   padding: 2% 2%;
 }
 
 div.perfil input{

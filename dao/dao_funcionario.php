@@ -62,6 +62,20 @@ class DaoFuncionario
             echo $e->getMessage();
         }
     }
+    public function editar_senha(Funcionario $funcionario)
+    {
+        try {
+            global $conexao;
+    
+            $sql = $conexao->getPdo()->prepare("UPDATE Funcionario SET senha = :s WHERE id = :i");
+            $sql->bindValue(":s", md5($funcionario->getSenha()));
+            $sql->bindValue(":i", $funcionario->getId());
+            $sql->execute();
+            
+        } catch (\Throwable $th) {
+            echo $e->getMessage();
+        }
+    }
     public function buscar(Funcionario $funcionario)
     {
         try {
