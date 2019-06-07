@@ -68,7 +68,7 @@ xhr.addEventListener("load", function() {
         document.querySelector('#txtAno').value = '';
         document.querySelector('#txtEditora').value = '';
         document.querySelector('#txtCodigo').value = '';
-        document.querySelector('#txtQuantidade') = '';
+        document.querySelector('#txtQuantidade').value = '';
 
         erro.style = 'display: none';
         sucesso.style = 'display: initial';

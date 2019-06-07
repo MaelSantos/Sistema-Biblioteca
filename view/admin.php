@@ -63,10 +63,10 @@ if(isset($_SESSION['admin'])) {
             <tbody>
             </tbody>
         </table>
-        <script src="js/admin.js"></script>
-        <script src="js/logout.js"></script>
         <footer>  <!--rodapé-->
             <p>&copy; Todos os direitos são reservados.</p>
         </footer>
+        <script src="js/admin.js"></script>
+        <script src="js/logout.js"></script>
     </body>
 </html>

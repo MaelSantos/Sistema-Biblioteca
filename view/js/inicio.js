@@ -73,7 +73,7 @@ xhrReservados.addEventListener('load', function() {//retornar os resultados da b
 xhrAtrazados.addEventListener('load', function() {//retornar os resultados da busca para a tela
     let resultado = JSON.parse(this.responseText.trim());//passa para uma lista os arquivos do JSON
 
-    let tr = document.querySelectorAll('#atrazados > tbody > tr');
+    let tr = document.querySelectorAll('#atrasados > tbody > tr');
     for(let i = 0; i < tr.length; i++)
         tr[i].remove() //remove elementos existentes na tabela
     
@@ -89,8 +89,8 @@ xhrAtrazados.addEventListener('load', function() {//retornar os resultados da bu
         txtHtml += "<td class='col_funcionario'>" + resultado[i][10] + "</td>";
         txtHtml += "</tr>";
         
-        let tbody = document.querySelector('#atrazados > tbody');
-        tbody.insertAdjacentHTML('beforeend', txtHtml);//adiciona os novos elementos
+        let tbody = document.querySelector('#atrasados > tbody');
+        tbody.insertAdjacentHTML('beforeend', txtHtml );//adiciona os novos elementos
     }
     
 });

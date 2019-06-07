@@ -89,7 +89,7 @@ if(isset($_SESSION['logado'])) {
         <footer>  <!--rodapé-->
             <p>&copy; Todos os direitos são reservados.</p>
         </footer>
-    </body>
     <script src="js/inicio.js"></script>
     <script src="js/logout.js"></script>
+    </body>
 </html>

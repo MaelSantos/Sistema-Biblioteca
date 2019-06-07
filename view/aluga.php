@@ -43,7 +43,7 @@ if(isset($_SESSION['admin'])) {
         <div class="corpo-form">
             <!--Mensagens de notificação-->
             <div id="form-erro"></div>
-            <div id="form-sucesso">Cadastrado com Sucesso!</div>
+            <div id="form-sucesso">Cadastrado com sucesso!</div>
             <form name="cadastro_form" method="POST" action=""> <!--formulario-->
                 
                 <label for="datLocacao">Data de locação</label>
@@ -71,6 +71,6 @@ if(isset($_SESSION['admin'])) {
             <p>&copy; Todos os direitos são reservados.</p>
         </footer>
         <script src="js/aluga.js"></script>
+        <script src="js/logout.js"></script>
     </body>
-
 </html>

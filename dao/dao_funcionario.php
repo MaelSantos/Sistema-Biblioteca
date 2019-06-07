@@ -29,13 +29,14 @@ class DaoFuncionario
                 echo "Erro ao Salvar";
                 return false;
             } else {
-                $sql = $conexao->getPdo()->prepare("INSERT INTO Funcionario(nome, cargo, email, login, senha)
-                VALUES (:n, :c, :e, :l, :s)");
+                $sql = $conexao->getPdo()->prepare("INSERT INTO Funcionario(nome, cargo, email, login, senha, ativo)
+                VALUES (:n, :c, :e, :l, :s, :a)");
                 $sql->bindValue(":n", $funcionario->getNome());
                 $sql->bindValue(":c", $funcionario->getCargo());
                 $sql->bindValue(":e", $funcionario->getEmail());
                 $sql->bindValue(":l", $funcionario->getLogin());
                 $sql->bindValue(":s", md5($funcionario->getSenha()));
+                $sql->bindValue(":a", $funcionario->getAtivo());
                 $sql->execute();
                 return true;
             }
