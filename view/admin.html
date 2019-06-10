@@ -1,26 +1,38 @@
-        <div class="form-opcoes">
+    <div class="container">
+        <div class="row">
+            <div class="col col-md-12">
+                <h3>Inicio</h3>
             <!--Mensagens de notificação-->
-            <div id="form-erro"></div>
-            <form class="busca"> <!--Formulario de busca-->
-                <input type="text" id="txtBuscar" name="txtBuscar" placeholder="Buscar">
-                <input type="button" id="btnBuscar" name="Buscar" value="Buscar">
-                <!-- <label for="cbxTipo">Tipo:</label> -->
-                <select name="cbxTipo" id="cbxTipo">
-                    <option value="cliente">Cliente</option>
-                    <option value="funcionario">Funcionario</option>
-                    <option value="alugado">Alugado</option>
-                </select>
-                <input type="button" id="btnAlugar" name="btnAlugar" value="Alugar Livro">
-                <input type="button" id="btnCadastrarLivro" name="btnCadastrarLivro" value="Cadastrar Livro">
-                <input type="button" id="btnCadastrarFuncionario" name="btnCadastrarFuncionario" value="Cadastrar Funcionario">
-            </form>
+<!--            <div id="form-erro"></div>-->
+                <form class="form-inline mb-3"> <!--Formulario de busca-->
+                    <div class="form-group mr-2">
+                        <input type="text" class="form-control" id="txtBuscar" name="txtBuscar" placeholder="Buscar">
+                        <input type="button" class="form-control" id="btnBuscar" name="Buscar" value="Buscar">
+                    </div>
+                    <!-- <label for="cbxTipo">Tipo:</label> -->
+                    <div class="form-group mr-2">
+                        <select class="form-control" name="cbxTipo" id="cbxTipo">
+                            <option value="cliente">Cliente</option>
+                            <option value="funcionario">Funcionario</option>
+                            <option value="alugado">Alugado</option>
+                        </select>
+                    </div>
+                    <div class="form-group mr-2">
+                        <input type="button" class="btn btn-primary mr-3" id="btnAlugar" name="btnAlugar" value="Alugar Livro">
+                        <input type="button" class="btn btn-primary mr-3" id="btnCadastrarLivro" name="btnCadastrarLivro" value="Cadastrar Livro">
+                        <input type="button" class="btn btn-primary mr-3" id="btnCadastrarFuncionario" name="btnCadastrarFuncionario" value="Cadastrar Funcionario">
+                    </div>
+                </form>
+                <table class="table table-striped"> <!--Tabela de livros-->
+                    <thead class="thead-dark">
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
         </div>
+    </div>
 
-        <table class="tabela" border="1px" cellpadding="5px" cellspacing="0"> <!--Tabela de livros-->
-            <thead>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+
 <!--        <script src="js/admin.js"></script>-->
 <!--        <script src="js/logout.js"></script>-->

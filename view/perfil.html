@@ -1,30 +1,38 @@
-        <div class="form-opcoes">
-            <table id="perfil" class="tabela" border="1px" cellpadding="5px" cellspacing="0"> <!--Tabela de livros-->
-                <thead>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-        <div class="perfil-container">
+    <div class="container">
+        <div class="row">
+            <div class="col col-md-12">
+                <table class="table table-striped" id="perfil" class="tabela" border="1px" cellpadding="5px" cellspacing="0"> <!--Tabela de livros-->
+                    <thead class="thead-dark">
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             <!--Mensagens de notificação-->
-            <div id="form-erro"></div>
-            <div id="form-sucesso">Atualizado com sucesso!</div>
-            <form id="perfil_form" name="perfil_form" method="POST" action=""> <!--formulario-->
-                <div class="perfil">
-                    <input type="button" id="btnApagar" name="btnApagar" value="Apagar Conta">
-                </div>
-                <div class="perfil">
-                    <input type="button" id="btnEditar" name="btnEditar" value="Editar">
-                </div>
-                <div class="perfil-button">
-                    <label for="txtSenha">Senha</label>
-                    <input type="password" name="txtSenha" id="txtSenha" placeholder="Senha" >
-                    <label for="txtConfirmaSenha">Confirmar Senha</label>
-                    <input type="password" name="txtConfirmaSenha" id="txtConfirmaSenha" placeholder="Confirmar Senha">
-                    <input type="button" id="btnSenha" name="btnSenha" value="Alterar Senha">
-                </div>
-            </form>
+<!--            <div id="form-erro"></div>-->
+<!--            <div id="form-sucesso">Atualizado com sucesso!</div>-->
+                <form class="form-inline mb-3"> <!--formulario-->
+                    <div class="form-group mr-3">
+                        <input type="button" class="btn btn-primary" id="btnApagar" name="btnApagar" value="Apagar Conta">
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="btn btn-primary" id="btnEditar" name="btnEditar" value="Editar">
+                    </div>
+                </form>
+                <form> <!--formulario-->
+                    <div class="form-group">
+                        <label for="txtSenha">Senha</label>
+                        <input type="password" class="form-control" name="txtSenha" id="txtSenha" placeholder="Senha" >
+                    </div>
+                    <div class="form-group">
+                        <label for="txtConfirmaSenha">Confirmar Senha</label>
+                        <input type="password" class="form-control" name="txtConfirmaSenha" id="txtConfirmaSenha" placeholder="Confirmar Senha">
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="btn btn-primary" id="btnSenha" name="btnSenha" value="Alterar Senha">
+                    </div>
+                </form>
+            </div>
         </div>
+    </div>
 <!--        <script src="js/logout.js"></script>-->
 <!--        <script src="js/perfil.js"></script>-->

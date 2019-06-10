@@ -18,28 +18,35 @@
 <!--}-->
 
 <!--?>-->
-
-        <div class="corpo-form">
-            <!--Mensagens de notificação-->
-            <div id="form-erro"></div>
-            <div id="form-sucesso">Reservado com sucesso!</div>
-            <form name="cadastro_form" method="POST" action=""> <!--formulario-->
-            
-            <label for="txtReserva">Data de Reserva</label>
-            <input type="date" id="txtReserva" name="txtReserva" placeholder="Data de Reserva">
-            
-            <label>Data de Retirada</label>
-            <input type="date" id="txtRetirada" name="txtRetirada" placeholder="Data de Retirada">
-
-            <label for="txtCliente">Cliente:</label>
-            <input type="text" id="txtCliente" name="txtCliente" placeholder="Cliente" value=<?php echo $_SESSION['logado']?>>
-            
-            <label for="txtLivro">Livro:</label>
-            <input type="text" id="txtLivro" name="txtLivro" placeholder="Livro" value=<?php echo $livro?> >
-            
-            <input type="button" id="btnConfirmar" name="btnConfimar" value="Confirmar">
-
-            </form>
+    <div class="container">
+        <div class="row">
+            <div class="col col-md-12">
+<!--                <div id="form-erro"></div>-->
+<!--            <div id="form-sucesso">Reservado com sucesso!</div>-->
+                <h3>Reserva Livro</h3>
+                <form name="cadastro_form" method="POST" action=""> <!--formulario-->
+                <div class="form-group">
+                    <label for="txtReserva">Data de Reserva</label>
+                    <input type="date"class="form-control" id="txtReserva" name="txtReserva" placeholder="Data de Reserva">
+                </div>
+                <div class="form-group">
+                    <label>Data de Retirada</label>
+                    <input type="date"class="form-control" id="txtRetirada" name="txtRetirada" placeholder="Data de Retirada">
+                </div>
+                <div class="form-group">
+                    <label for="txtCliente">Cliente:</label>
+                    <input type="text"class="form-control" id="txtCliente" name="txtCliente" placeholder="Cliente" value=<?php echo $_SESSION['logado']?>>
+                </div>
+                <div class="form-group">
+                    <label for="txtLivro">Livro:</label>
+                    <input type="text"class="form-control" id="txtLivro" name="txtLivro" placeholder="Livro" value=<?php echo $livro?> >
+                </div>
+                <div class="form-group">
+                    <input type="button" class="btn btn-primary" id="btnConfirmar" name="btnConfimar" value="Confirmar">
+                </div>
+                </form>
+            </div>
         </div>
+    </div>
 <!--        <script src="js/reserva.js"></script>-->
 <!--        <script src="js/logout.js"></script>-->

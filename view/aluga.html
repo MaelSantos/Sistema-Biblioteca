@@ -1,29 +1,40 @@
-        <div class="corpo-form">
+    <div class="container">
+        <div class="row">
+            <div class="col col-md-12">
             <!--Mensagens de notificação-->
-            <div id="form-erro"></div>
-            <div id="form-sucesso">Cadastrado com sucesso!</div>
-            <form name="cadastro_form" method="POST" action=""> <!--formulario-->
-                
-                <label for="datLocacao">Data de locação</label>
-                <input type="date" placeholder="Data de locação" name="datLocacao" id="datLocacao">
-
-                <label for="datDevolucao">Data de Devolução</label>
-                <input type="date" placeholder="Data de Devolução" name="datDevolucao" id="datDevolucao">
-                
-                <label for="txtDiaria">Diaria</label>
-                <input type="text" name="txtDiaria" id="txtDiaria" placeholder="Diaria" >
-
-                <label for="txtLivro">Livro</label>
-                <input type="text" name="txtLivro" id="txtLivro" placeholder="Livro" >
-                
-                <label for="txtCliente">Cliente</label>
-                <input type="text" name="txtCliente" id="txtCliente" placeholder="Cliente">
-
-                <label for="txtFuncionario">Funcionario</label>
-                <input type="text" name="txtFuncionario" id="txtFuncionario" placeholder="Funcionario" >
-
-                <input type="button" id="btnCadastrar" name="btnCadastrar" value="Cadastrar">
-            </form>
+<!--            <div id="form-erro"></div>-->
+<!--            <div id="form-sucesso">Cadastrado com sucesso!</div>-->
+                <form name="cadastro_form" method="POST" action=""> <!--formulario-->
+                    <div class="form-group">
+                        <label for="datLocacao">Data de locação</label>
+                        <input type="date" class="form-control" name="datLocacao" id="datLocacao" placeholder="Data de locação">
+                    </div>
+                    <div class="form-group">
+                        <label for="datDevolucao">Data de Devolução</label>
+                        <input type="date" class="form-control" name="datDevolucao" id="datDevolucao" placeholder="Data de Devolução">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtDiaria">Diaria</label>
+                        <input type="text" class="form-control" name="txtDiaria" id="txtDiaria" placeholder="Diaria" >
+                    </div>
+                    <div class="form-group">
+                        <label for="txtLivro">Livro</label>
+                        <input type="text" class="form-control" name="txtLivro" id="txtLivro" placeholder="Livro" >
+                    </div>
+                    <div class="form-group">
+                        <label for="txtCliente">Cliente</label>
+                        <input type="text" class="form-control" name="txtCliente" id="txtCliente" placeholder="Cliente">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtFuncionario">Funcionario</label>
+                        <input type="text" class="form-control" name="txtFuncionario" id="txtFuncionario" placeholder="Funcionario" >
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="btn btn-primary" id="btnCadastrar" name="btnCadastrar" value="Cadastrar">
+                    </div>
+                </form>
+            </div>
         </div>
+    </div>
 <!--        <script src="js/aluga.js"></script>-->
 <!--        <script src="js/logout.js"></script>-->

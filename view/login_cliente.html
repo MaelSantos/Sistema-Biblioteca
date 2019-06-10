@@ -1,15 +1,26 @@
-        <div class="corpo-form">
-            <div id="form-erro"></div> <!--Mensagem de erro-->
-            <form name="login_form" method="GET" action=""> <!--formulario-->
-                <label for="txtLogin">Login:</label>
-                <input type="text" id="txtLogin" name="txtLogin" placeholder="Login" >
-
-                <label for="txtSenha">Senha:</label>
-                <input type="password" id="txtSenha" name="txtSenha" placeholder="Senha" >
-
-                <input type="button" id="btnEntrar" name="btnEntrar" value="Entrar">
-                <a href="cadastro_cliente.php" alt="Cadastro">Ainda não é cadastrado? <strong>Cadastre-se!</strong></a></li>
-            </form>
+    <div class="container">
+        <div class="row">
+            <div class="col col-md-12">
+                <h3>Login Cliente</h3>
+                <!--                    <div id="form-erro"></div> &lt;!&ndash;Mensagem de erro&ndash;&gt;-->
+                <form name="login_form" method="GET" action=""> <!--formulario-->
+                    <div class="form-group">
+                        <label for="txtLogin">Login:</label>
+                        <input type="text" class="form-control" id="txtLogin" name="txtLogin" placeholder="Login" >
+                        <small id="loginHelp" class="form-text text-muted">Nós nunca vamos compartilhar seu e-mail com mais ninguém.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtSenha">Senha:</label>
+                        <input type="password" class="form-control" id="txtSenha" name="txtSenha" placeholder="Senha" >
+                        <small id="senhaHelp" class="form-text text-muted">Sua senha é criptografada para sua segurança e privacidade.</small>
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="button" class="btn btn-primary" id="btnEntrar" name="btnEntrar" value="Entrar">
+                        <a href="cadastro_cliente.php" alt="Cadastro">Ainda não é cadastrado? <strong>Cadastre-se!</strong></a></li>
+                    </div>
+                </form>
+            </div>
         </div>
+    </div>
 
 <!--    <script src="js/login_cliente.js"></script>-->

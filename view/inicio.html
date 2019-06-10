@@ -1,90 +1,57 @@
-<!--<?php-->
 
-<!--session_start();-->
-<!--if(isset($_SESSION['logado'])) {-->
-<!--} else {-->
-<!--    $_SESSION['falhou'] = 'sim';-->
-<!--    header("Location: ../index.php");-->
-<!--}-->
-<!--?>-->
-
-<!--<!DOCTYPE html>-->
-
-<!--<html lang="pt-br">-->
-
-<!--    <head>-->
-<!--        <meta charset="utf-8">-->
-<!--        <title>Sistema Biblioteca</title>-->
-<!--        <link href="css/reset.css" rel="stylesheet">-->
-<!--        <link href="css/aparencia.css" rel="stylesheet">-->
-<!--        <link href="css/componentes.css" rel="stylesheet">-->
-<!--        <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">-->
-<!--        <link href="https://fonts.googleapis.com/css?family=Lusitana" rel="stylesheet">-->
-<!--    </head>-->
-
-<!--    <body>-->
-<!--        <header> &lt;!&ndash;cabeçalho&ndash;&gt;-->
-<!--            <div>-->
-<!--                <h1 class="titulo"><a href="inicio.php" alt="Pagina Principal">Sistema Biblioteca</a></h1>-->
-<!--            </div>-->
-<!--            -->
-<!--            <nav id="barra-menu"> &lt;!&ndash;junção de links&ndash;&gt;-->
-<!--                <ul>-->
-<!--                    <li><a href="inicio.php" alt="Pagina Inicial">Inicio</a></li>-->
-<!--                    <li><a href="acervo.php" alt="Acervo">Acervo</a></li>-->
-<!--                    <li><a href="sobre.php" alt="Sobre">Sobre</a></li>-->
-<!--                    <li><a href="contatos.php" alt="Contatos">Contatos</a></li>-->
-<!--                    <li><a id="link-perfil" href="javascript:void(0)" alt="Perfil">Perfil</a></li>-->
-<!--                    <li><a id="link-sair" href="javascript:void(0)" alt="Sair">Sair</a></li>-->
-<!--                </ul>-->
-<!--            </nav>-->
-<!--        </header>-->
-
-        <div class="form-opcoes">
-            <table id="alugados" class="tabela" border="1px" cellpadding="5px" cellspacing="0"> <!--Tabela de livros-->
-                <caption>Livros Alugados</caption>
-                <thead>
-                <tr>
-                    <th>Livro</th>
-                    <th>Locação</th>
-                    <th>Devolução</th>
-                    <th>Diaria</th>
-                    <th>Cliente</th>
-                    <th>Funcionario</th>
-                </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-            <table id="reservados" class="tabela" border="1px" cellpadding="5px" cellspacing="0"> <!--Tabela de livros-->
-                <caption>Livros reservados</caption>
-                <thead>
+    <div class="container">
+        <div class="row">
+            <div class="col col-md-12">
+                <h3>Inicio</h3>
+                <table class="table table-striped" id="alugados"> <!--Tabela de livros-->
+                    <caption>Livros Alugados</caption>
+                    <thead class="thead-dark">
                     <tr>
-                        <th>Titulo</th>
-                        <th>Reserva</th>
-                        <th>Retirada</th>
-                        <th>Cliente</th>
-                        <th>Opções</th>
+                        <th scope="col">#</th>
+                        <th scope="col">Livro</th>
+                        <th scope="col">Locação</th>
+                        <th scope="col">Devolução</th>
+                        <th scope="col">Diaria</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Funcionario</th>
                     </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-            <table id="atrasados" class="tabela" border="1px" cellpadding="5px" cellspacing="0"> <!--Tabela de livros-->
-                <caption>Locações atrazadas</caption>
-                <thead>
-                    <tr>
-                        <th>Livro</th>
-                        <th>Locação</th>
-                        <th>Devolução</th>
-                        <th>Diaria</th>
-                        <th>Cliente</th>
-                        <th>Funcionario</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <table class="table table-striped" id="reservados"> <!--Tabela de livros-->
+                    <caption>Livros reservados</caption>
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Titulo</th>
+                            <th scope="col">Reserva</th>
+                            <th scope="col">Retirada</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <table class="table table-striped" id="atrasados"> <!--Tabela de livros-->
+                    <caption>Locações atrazadas</caption>
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Livro</th>
+                            <th scope="col">Locação</th>
+                            <th scope="col">Devolução</th>
+                            <th scope="col">Diaria</th>
+                            <th scope="col">Cliente</th>
+                            <th scope="col">Funcionario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
         </div>
+    </div>
 <!--    <script src="js/inicio.js"></script>-->
 <!--    <script src="js/logout.js"></script>-->
