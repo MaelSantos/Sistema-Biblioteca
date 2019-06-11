@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 from controle.Entrada import entrada
 from controle.Cliente import cliente
 from controle.Funcionario import funcionario
@@ -12,4 +13,7 @@ app.register_blueprint(funcionario)
 app.register_blueprint(livro)
 app.register_blueprint(locacao)
 
-app.run()
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/Teste'
+db = SQLAlchemy(app)
+# db.create_all()
+# app.run()
