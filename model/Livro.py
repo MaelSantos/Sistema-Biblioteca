@@ -1,4 +1,4 @@
-from controle.App import db
+from controle.ControleApp import db
 
 class Livro(db.Model):
     db.__tablename__ = 'Livro'
@@ -10,4 +10,4 @@ class Livro(db.Model):
     codigo = db.Column(db.String(50), unique=True, nullable=False)
     quantidade = db.Column(db.Integer, nullable=False)
     disponivel = db.Column(db.Integer, nullable=False)
-    ativo = db.Column(db.Boolean, nullable=False)
+    ativo = db.Column(db.Boolean, default=True)

@@ -1,4 +1,4 @@
-from controle.App import db
+from controle.ControleApp import db
 
 class Conta(db.Model):
     db.__tablename__ = 'Conta'
@@ -8,5 +8,5 @@ class Conta(db.Model):
     data_paga = db.Column(db.Date)
     multa = db.Column(db.Float)
     valor_total = db.Column(db.Float)
-    ativo = db.Column(db.Boolean, nullable=False)
+    ativo = db.Column(db.Boolean, default=True)
     id_aluga = db.Column(db.Integer, db.ForeignKey('Aluga.id'), nullable=False)

@@ -1,4 +1,4 @@
-from controle.App import db
+from controle.ControleApp import db
 
 class Usuario(db.Model):
     db.__tablename__ = 'Usuario'
@@ -7,4 +7,10 @@ class Usuario(db.Model):
     login = db.Column(db.String(50), unique=True, nullable=False)
     senha = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(50), unique=True, nullable=False)
-    ativo = db.Column(db.Boolean, nullable=False)
+    ativo = db.Column(db.Boolean, default=True)
+    tipo = db.Column(db.String(50))
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'Usuario',
+        'polymorphic_on': tipo,
+    }

@@ -1,5 +1,5 @@
-from controle.App import db
-from Exception.DaoException import DaoException
+from controle.ControleApp import db
+from exception.DaoException import DaoException
 from abc import ABCMeta
 
 class Dao:
@@ -7,7 +7,7 @@ class Dao:
     __metaclass__ = ABCMeta
 
     def __init__(self):
-        self.session = db.session;
+        self.session = db.session
 
     def create(self, entidade):
         try:

@@ -3,7 +3,7 @@
             <div class="col col-md-12">
                 <h3>Login Cliente</h3>
                 <!--                    <div id="form-erro"></div> &lt;!&ndash;Mensagem de erro&ndash;&gt;-->
-                <form name="login_form" method="GET" action=""> <!--formulario-->
+                <form name="login_form"> <!--formulario-->
                     <div class="form-group">
                         <label for="txtLogin">Login:</label>
                         <input type="text" class="form-control" id="txtLogin" name="txtLogin" placeholder="Login" >
@@ -16,7 +16,7 @@
                     </div>
                     <div class="form-group form-check">
                         <input type="button" class="btn btn-primary" id="btnEntrar" name="btnEntrar" value="Entrar">
-                        <a href="cadastro_cliente.php" alt="Cadastro">Ainda não é cadastrado? <strong>Cadastre-se!</strong></a></li>
+                        <a href="{{url_for('cliente.cadastro')}}" alt="Cadastro">Ainda não é cadastrado? <strong>Cadastre-se!</strong></a></li>
                     </div>
                 </form>
             </div>
