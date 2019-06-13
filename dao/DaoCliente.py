@@ -79,6 +79,6 @@ class DaoCliente(Dao):
     #         raise DaoException('Erro ao Buscar Cliente Por Login- Contatar o ADM')
 
 
-c = Cliente(nome='teste', login='teste', senha='teste', cpf='teste', telefone='teste', email='teste')
-d = DaoCliente()
-d.create(c)
+# c = Cliente(nome='teste', login='teste', senha='teste', cpf='teste', telefone='teste', email='teste')
+# d = DaoCliente()
+# d.create(c)

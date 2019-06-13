@@ -2,7 +2,9 @@
         <div class="row">
             <div class="col col-md-12">
                 <h3>Login Cliente</h3>
-                <!--                    <div id="form-erro"></div> &lt;!&ndash;Mensagem de erro&ndash;&gt;-->
+                <div id="form-erro" class="alert alert-danger" role="alert">
+                    Erro! verifique seu login e senha e tente novamente
+                </div>
                 <form name="login_form"> <!--formulario-->
                     <div class="form-group">
                         <label for="txtLogin">Login:</label>
@@ -23,4 +25,5 @@
         </div>
     </div>
 
-<!--    <script src="js/login_cliente.js"></script>-->
+
+    <script src="{{url_for('static', filename='js/login.js')}}"></script>

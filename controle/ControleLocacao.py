@@ -1,6 +1,6 @@
 from flask import render_template, session, redirect, url_for, Blueprint
 
-locacao = Blueprint("locacao", "Biblioteca", template_folder="../view", static_folder="../css")
+locacao = Blueprint("locacao", "Biblioteca", template_folder="../view", static_folder="../estilo")
 
 @locacao.route("/Alugar/")
 def alugar():

@@ -1,15 +1,15 @@
-from flask import render_template, session, redirect, url_for, Blueprint
+from flask import render_template, session, redirect, url_for, request, json, Blueprint
 from dao.DaoUsuario import DaoUsuario
 
-entrada = Blueprint("entrada", "Biblioteca", template_folder="../view", static_folder="../css")
+entrada = Blueprint("entrada", "Biblioteca", template_folder="../view", static_folder="../estilo")
 daoUsuario = DaoUsuario()
 
 @entrada.route("/")
 def index():
     if 'logado' in session:
-        redirect(url_for('cliente.inicio'))
+        return redirect(url_for('cliente.inicio'))
     elif 'admin' in session:
-        redirect(url_for('funcionario.admin'))
+        return redirect(url_for('funcionario.admin'))
     else:
         template = render_template("cabecalho.html", inicio='active')
         template += render_template("entrada.html")
@@ -20,7 +20,10 @@ def index():
 @entrada.route("/Sobre/")
 def sobre():
     template = render_template("cabecalho.html", sobre='active')
-    template += render_template("entrada.html")
+    if 'logado' in session or 'admin' in session:
+        template += render_template("logado.html")
+    else:
+        template += render_template("entrada.html")
     template += render_template("sobre.html")
     template += render_template("rodape.html")
     return template
@@ -28,7 +31,10 @@ def sobre():
 @entrada.route("/Contados/")
 def contatos():
     template = render_template("cabecalho.html", contatos='active')
-    template += render_template("entrada.html")
+    if 'logado' in session or 'admin' in session:
+        template += render_template("logado.html")
+    else:
+        template += render_template("entrada.html")
     template += render_template("contatos.html")
     template += render_template("rodape.html")
     return template
@@ -41,19 +47,21 @@ def login():
     template += render_template("rodape.html")
     return template
 
-@entrada.route("/Login/<login>/<senha>")
-def logar(login=None, senha=None):
+@entrada.route("/Logar/", methods=['POST'])
+def logar():
+
+    login = request.form['login'];
+    senha = request.form['senha'];
+
     usuario = daoUsuario.login(login, senha)
 
     if(usuario != None):
         if usuario.tipo == 'Cliente':
             session['logado'] = usuario.id
-            return redirect(url_for('cliente.inicio'))
+            return json.dumps({'status': 'OK', 'cliente' : usuario.id})
         elif usuario.tipo == 'Funcionario':
             session['admin'] = usuario.id
-            return redirect(url_for('funcionario.admin'))
-
-    return redirect(url_for('entrada.login'))
+            return json.dumps({'status': 'OK', 'cliente' : usuario.id})
 
 @entrada.route("/Perfil/")
 def perfil():

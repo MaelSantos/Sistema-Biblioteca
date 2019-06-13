@@ -1,6 +1,8 @@
 from dao.Dao import Dao
 from exception.DaoException import DaoException
 from model.Usuario import Usuario
+from model.Cliente import Cliente
+from model.Funcionario import Funcionario
 
 class DaoUsuario(Dao):
 
@@ -18,7 +20,14 @@ class DaoUsuario(Dao):
 
     def login(self, login, senha):
         try:
-            usuario = self.session.query(Usuario).filter(Usuario.login==login, Usuario.senha==senha, Usuario.ativo==True).first()
+            usuario = self.session.query(Cliente).filter(Usuario.login==login, Usuario.senha==senha, Usuario.ativo==True).first()
+            # usuario = self.session.query(Funcionario).filter(Usuario.login == login, Usuario.senha == senha, Usuario.ativo == True).first()
             return usuario
         except Exception as e:
             raise DaoException('Erro ao Realizar Login - Contatar o ADM')
+
+# d = DaoUsuario()
+#
+# u = d.login('teste', 'teste')
+#
+# print(u)

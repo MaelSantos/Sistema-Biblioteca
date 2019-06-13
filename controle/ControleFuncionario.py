@@ -1,11 +1,11 @@
 from flask import render_template, session, redirect, url_for, Blueprint
 
-funcionario = Blueprint("funcionario", "Biblioteca", template_folder="../view", static_folder="../css")
+funcionario = Blueprint("funcionario", "Biblioteca", template_folder="../view", static_folder="../estilo")
 
 @funcionario.route("/Funcionario/")
 def admin():
     if 'admin' in session:
-        template = render_template("cabecalho.html")
+        template = render_template("cabecalho.html", inicio='active')
         template += render_template("logado.html")
         template += render_template("admin.html")
         template += render_template("rodape.html")

@@ -3,8 +3,12 @@
             <div class="col col-md-12">
                 <h3>Cadastro de Cliente</h3>
             <!--Mensagens de notificação-->
-<!--            <div id="form-erro"></div>-->
-<!--            <div id="form-sucesso">Cadastrado com sucesso!</div>-->
+                <div id="form-sucesso" class="alert alert-success" role="alert">
+                    Cadastrado com sucesso
+                </div>
+                <div id="form-erro" class="alert alert-danger" role="alert">
+                    Erro ao cadastrar!
+                </div>
                 <form name="cadastro_form" method="POST" action=""> <!--formulario-->
                     <div class="form-group">
                         <label for="txtNome">Nome</label>
@@ -41,5 +45,4 @@
           </div>
         </div>
     </div>
-
-<!--        <script src="js/cadastro_cliente.js"></script>-->
+    <script src="{{url_for('static', filename='js/cadastro_cliente.js')}}"></script>

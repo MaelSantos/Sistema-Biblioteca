@@ -1,11 +1,14 @@
-from flask import render_template, session, redirect, url_for, Blueprint
+from flask import render_template, session, redirect, url_for, request, json, Blueprint
+from dao.DaoCliente import DaoCliente
+from model.Cliente import Cliente
 
-cliente = Blueprint("cliente", "Biblioteca", template_folder="../view", static_folder="../css")
+cliente = Blueprint("cliente", "Biblioteca", template_folder="../view", static_folder="../estilo")
+daoCliente = DaoCliente()
 
 @cliente.route("/Cliente/")
 def inicio():
     if 'logado' in session:
-        template = render_template("cabecalho.html")
+        template = render_template("cabecalho.html", inicio='active')
         template += render_template("logado.html")
         template += render_template("inicio.html")
         template += render_template("rodape.html")
@@ -21,6 +24,22 @@ def cadastro():
     template += render_template("cadastro_cliente.html")
     template += render_template("rodape.html")
     return template
+
+@cliente.route("/Cliente/Cadastrar/", methods=['POST'])
+def cadastrar():
+    try:
+        nome = request.form['nome'];
+        login = request.form['login'];
+        senha = request.form['senha'];
+        email = request.form['email'];
+        cpf = request.form['cpf'];
+        telefone = request.form['telefone'];
+
+        clienteM = Cliente(nome=nome,login=login, senha=senha, email=email, cpf=cpf, telefone=telefone)
+        daoCliente.create(clienteM)
+        return json.dumps({'status': 'OK'});
+    except Exception as e:
+        return json.dumps({'status': 'Erro'});
 
 @cliente.route("/Cliente/Perfil/")
 def perfil():
