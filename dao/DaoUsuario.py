@@ -21,13 +21,8 @@ class DaoUsuario(Dao):
     def login(self, login, senha):
         try:
             usuario = self.session.query(Cliente).filter(Usuario.login==login, Usuario.senha==senha, Usuario.ativo==True).first()
-            # usuario = self.session.query(Funcionario).filter(Usuario.login == login, Usuario.senha == senha, Usuario.ativo == True).first()
+            if usuario == None:
+                usuario = self.session.query(Funcionario).filter(Usuario.login == login, Usuario.senha == senha, Usuario.ativo == True).first()
             return usuario
         except Exception as e:
             raise DaoException('Erro ao Realizar Login - Contatar o ADM')
-
-# d = DaoUsuario()
-#
-# u = d.login('teste', 'teste')
-#
-# print(u)

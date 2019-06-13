@@ -38,24 +38,6 @@ class DaoCliente(Dao):
     #     except Exception as e:
     #         raise DaoException('Erro ao Buscar Cliente Por Login- Contatar o ADM')
     #
-    # def search_id(self, id):
-    #     try:
-    #         # $sql = $conexao->getPdo()->prepare("SELECT * FROM Cliente WHERE id = :i");
-    #         # $sql->bindValue(":i", $id);
-    #         # $sql->execute();
-    #         #
-    #         # $clientes = array();
-    #         # $i = 0;
-    #         # while($row = $sql->fetch()) {
-    #         #     $clientes[$i]= $row;
-    #         #     $i++;
-    #         # }
-    #         #
-    #         # return $clientes;
-    #
-    #     except Exception as e:
-    #         raise DaoException('Erro ao Buscar Cliente Por Login- Contatar o ADM')
-    #
     # def search_search(self, cliente):
     #     try:
     #         # $sql = $conexao->getPdo()->prepare("SELECT * FROM Cliente WHERE (nome LIKE :n OR cpf LIKE :c OR telefone LIKE :t OR email LIKE :e OR login LIKE :l) AND ativo = true");
@@ -77,8 +59,3 @@ class DaoCliente(Dao):
     #
     #     except Exception as e:
     #         raise DaoException('Erro ao Buscar Cliente Por Login- Contatar o ADM')
-
-
-# c = Cliente(nome='teste', login='teste', senha='teste', cpf='teste', telefone='teste', email='teste')
-# d = DaoCliente()
-# d.create(c)
