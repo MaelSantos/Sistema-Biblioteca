@@ -1,19 +1,17 @@
+var erro = $("#form-erro");
+var sucesso = $("#form-sucesso");
 
-let btnCadastrar = document.querySelector('#btnCadastrar')
-
-var erro = document.querySelector("#form-erro");
-var sucesso = document.querySelector("#form-sucesso");
-
-var xhr = new XMLHttpRequest();
+erro.hide()
+sucesso.hide()
 
 function validar(){
 
-    let txtTitulo = document.querySelector('#txtTitulo').value.trim();
-    let txtAutor = document.querySelector('#txtAutor').value.trim();
-    let txtAno = document.querySelector('#txtAno').value.trim();
-    let txtEditora = document.querySelector('#txtEditora').value.trim();
-    let txtCodigo = document.querySelector('#txtCodigo').value.trim();
-    let txtQuantidade = document.querySelector('#txtQuantidade').value.trim();
+    let txtTitulo = $('#txtTitulo').val().trim();
+    let txtAutor = $('#txtAutor').val().trim();
+    let txtAno = $('#txtAno').val().trim();
+    let txtEditora = $('#txtEditora').val().trim();
+    let txtCodigo = $('#txtCodigo').val().trim();
+    let txtQuantidade = $('#txtQuantidade').val().trim();
 
     if(txtTitulo == '')
         return false;
@@ -32,49 +30,43 @@ function validar(){
 
 }
 
-btnCadastrar.addEventListener('click', function() {
+$('#btnCadastrar').click(function() {
 
     if(validar())
     {
-        let txtTitulo = document.querySelector('#txtTitulo').value.trim();
-        let txtAutor = document.querySelector('#txtAutor').value.trim();
-        let txtAno = document.querySelector('#txtAno').value.trim();
-        let txtEditora = document.querySelector('#txtEditora').value.trim();
-        let txtCodigo = document.querySelector('#txtCodigo').value.trim();
-        let txtQuantidade = document.querySelector('#txtQuantidade').value.trim();
+        let txtTitulo = $('#txtTitulo').val().trim();
+        let txtAutor = $('#txtAutor').val().trim();
+        let txtAno = $('#txtAno').val().trim();
+        let txtEditora = $('#txtEditora').val().trim();
+        let txtCodigo = $('#txtCodigo').val().trim();
+        let txtQuantidade = $('#txtQuantidade').val().trim();
         
-        sucesso.style = 'display: none';
+        erro.hide()
+        sucesso.show()
 
-        let url = '../controle/controle_livro.php';
-        let params = 'op=salvar&autor='+txtAutor+'&titulo='
-        +txtTitulo+'&ano='+txtAno+'&editora='+txtEditora+'&codigo='+txtCodigo+'&quantidade='+txtQuantidade+'&disponivel='+txtQuantidade;
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.send(params);
+        $.ajax({
+            method: 'POST',
+            url: '/Livro/Cadastrar/',
+            data: {autor : txtAutor, titulo : txtTitulo, ano : txtAno, editora : txtEditora, codigo : txtCodigo, quantidade : txtQuantidade, disponivel : txtQuantidade},
+            success: function(respostas){
+                erro.hide()
+                sucesso.show()
+
+                $('#txtTitulo').val('');
+                $('#txtAutor').val('');
+                $('#txtAno').val('');
+                $('#txtEditora').val('');
+                $('#txtCodigo').val('');
+                $('#txtQuantidade').val('');
+            },
+            error: function(){
+                sucesso.hide()
+                erro.show()
+            }
+         })
         
     }else {
-        erro.textContent = 'Dados invalidos, repetidos ou faltando';
-        erro.style = 'display: initial';
-    }
-});
-
-xhr.addEventListener("load", function() {
-    console.log(this.responseText.trim());
-    if (this.responseText.trim() == 'Sucesso') {
-        
-        // limpando o formulário
-        document.querySelector('#txtTitulo').value = '';
-        document.querySelector('#txtAutor').value = '';
-        document.querySelector('#txtAno').value = '';
-        document.querySelector('#txtEditora').value = '';
-        document.querySelector('#txtCodigo').value = '';
-        document.querySelector('#txtQuantidade').value = '';
-
-        erro.style = 'display: none';
-        sucesso.style = 'display: initial';
-
-    } else {
-        erro.textContent = 'Erro ao cadastrar';
-        erro.style = 'display: initial';
+        sucesso.hide()
+        erro.show()
     }
 });

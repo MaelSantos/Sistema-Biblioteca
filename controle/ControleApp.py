@@ -6,7 +6,7 @@ app = Flask("Biblioteca", template_folder="../view", static_folder="../estilo")
 
 #Configurações do Banco
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/Biblioteca?charset=utf8'
-db = SQLAlchemy(app)
 app.config["SECRET_KEY"] = "babidi"
-
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+db = SQLAlchemy(app)
 

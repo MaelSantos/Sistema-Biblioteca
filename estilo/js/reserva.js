@@ -1,50 +1,34 @@
+let erro = $("#form-erro");
+let sucesso = $("#form-sucesso");
+erro.hide();
+sucesso.hide();
 
-let txtCliente = document.querySelector('#txtCliente');
-let txtLivro = document.querySelector('#txtLivro');
-let txtRetirada = document.querySelector('#txtRetirada');
-let txtReserva = document.querySelector('#txtReserva');
+let txtCliente = $('#txtCliente').attr('readonly', true);
+let txtLivro = $('#txtLivro').attr('readonly', true);
+let txtRetirada = $('#txtRetirada').attr('readonly', true);
+let txtReserva = $('#txtReserva').attr('readonly', true);
 
-let btnConfirmar = document.querySelector('#btnConfirmar');
+txtReserva.val(getData(0));
+txtRetirada.val(getData(7));
 
-var xhr = new XMLHttpRequest();
+$('#btnConfirmar').click(function () { //busca livros 
 
-txtReserva.value = getData(0);
-txtRetirada.value = getData(7);
+    $.ajax({
+        method: 'POST',
+        url: '/Livro/Reservar/',
 
-txtReserva.readOnly = true;
-txtRetirada.readOnly = true;
-txtLivro.readOnly = true;
-txtCliente.readOnly = true;
-
-btnConfirmar.addEventListener('click', function () { //busca livros 
-
-    let erro = document.querySelector("#form-erro");
-    let sucesso = document.querySelector("#form-sucesso");
-
-    //envia a requisição
-    let url = '../controle/controle_reserva.php';
-    let params = 'op=salvar&id_livro=' + txtLivro.value + '&id_cliente=' + txtCliente.value + '&data_reserva=' + txtReserva.value + '&data_retirada=' + txtRetirada.value;
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.send(params);
-
-    erro.style = 'display: none';
-    sucesso.style = 'display: none';
-
+        data: { id_livro: txtLivro.val(), id_cliente: txtCliente.val(), data_reserva: txtReserva.val(), data_retirada: txtRetirada.val() },
+        success: function () {
+            $(location).attr('href', '/Livro/Acervo/');
+            erro.hide()
+            sucesso.show()
+        },
+        error: function () {
+            sucesso.hide()
+            erro.show()
+        }
+    })
 })
-
-xhr.addEventListener("load", function () {
-    let erro = document.querySelector("#form-erro");
-    let sucesso = document.querySelector("#form-sucesso");
-    if (this.responseText.trim().indexOf('Sucesso') > -1) {
-        erro.style = 'display: none';
-        sucesso.style = 'display: initial';
-        window.location.replace('inicio.php');
-    } else {
-        erro.textContent = 'Erro ao reserva livro';
-        erro.style = 'display: initial';
-    }
-});
 
 function getData(dias) {
     var now;

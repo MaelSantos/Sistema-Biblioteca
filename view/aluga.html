@@ -22,16 +22,12 @@
                         <input type="text" class="form-control" name="txtDiaria" id="txtDiaria" placeholder="Diaria" >
                     </div>
                     <div class="form-group">
-                        <label for="txtLivro">Livro</label>
-                        <input type="text" class="form-control" name="txtLivro" id="txtLivro" placeholder="Livro" >
+                        <label for="txtLivro">Código do Livro</label>
+                        <input type="text" class="form-control" name="txtLivro" id="txtLivro" placeholder="Código do Livro" >
                     </div>
                     <div class="form-group">
-                        <label for="txtCliente">Cliente</label>
-                        <input type="text" class="form-control" name="txtCliente" id="txtCliente" placeholder="Cliente">
-                    </div>
-                    <div class="form-group">
-                        <label for="txtFuncionario">Funcionario</label>
-                        <input type="text" class="form-control" name="txtFuncionario" id="txtFuncionario" placeholder="Funcionario" >
+                        <label for="txtCliente">CPF do Cliente</label>
+                        <input type="text" class="form-control" name="txtCliente" id="txtCliente" placeholder="CPF do Cliente">
                     </div>
                     <div class="form-group">
                         <input type="button" class="btn btn-primary" id="btnCadastrar" name="btnCadastrar" value="Cadastrar">
@@ -40,5 +36,4 @@
             </div>
         </div>
     </div>
-<!--        <script src="js/aluga.js"></script>-->
-<!--        <script src="js/logout.js"></script>-->
+    <script src="{{url_for('static', filename='js/aluga.js')}}"></script>

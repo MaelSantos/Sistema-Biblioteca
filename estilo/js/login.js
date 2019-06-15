@@ -1,14 +1,14 @@
 let erro = $("#form-erro");
 erro.hide()
 
-function validar(){
+function validar() {
 
-    let txtLogin = $('#txtLogin').val()
-    let txtSenha = $('#txtSenha').val()
+    let txtLogin = $('#txtLogin').val().trim()
+    let txtSenha = $('#txtSenha').val().trim()
 
-    if(txtLogin == '')
+    if (txtLogin == '')
         return false;
-    else if(txtSenha == '')
+    else if (txtSenha == '')
         return false;
 
     return true;
@@ -16,28 +16,31 @@ function validar(){
 }
 
 
-$('#btnEntrar').click(function(){
+$('#btnEntrar').click(function () {
 
-        if(validar())
-        {
-            let txtLogin = $('#txtLogin').val()
-            let txtSenha = $('#txtSenha').val()
+    if (validar()) {
+        let txtLogin = $('#txtLogin').val().trim()
+        let txtSenha = $('#txtSenha').val().trim()
 
-            $.ajax({
-                method: 'POST',
-                url: '/Logar/',
-                data: {login: txtLogin, senha: txtSenha },
-                success: function(){
-                    $(location).attr('href', '/Cliente/');
-                    //sessionStorage.setItem('logado', txtLogin);
-                erro.hide()
-                },
-                error: function(){
-                    erro.show()
-                }
-             })
+        $.ajax({
+            method: 'POST',
+            url: '/Logar/',
+            data: { login: txtLogin, senha: txtSenha },
+            success: function (resposta) {
+                resposta = JSON.parse(resposta)
+                if (resposta['tipo'] == 'cliente')
+                    sessionStorage.setItem('logado', txtLogin);
+                else if (resposta['tipo'] == 'funcionario')
+                    sessionStorage.setItem('admin', txtLogin);
 
-        }else {
-            erro.show()
-        }
+                $(location).attr('href', '/Cliente/');
+            },
+            error: function (resposta) {
+                erro.show()
+            }
+        })
+
+    } else {
+        erro.show()
+    }
 });

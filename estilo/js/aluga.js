@@ -1,113 +1,95 @@
-let datLocacao = document.querySelector('#datLocacao');
-let datDevolucao = document.querySelector('#datDevolucao');
-let txtDiaria = document.querySelector('#txtDiaria');
-let btnCadastrar = document.querySelector('#btnCadastrar');
+var erro = $("#form-erro");
+var sucesso = $("#form-sucesso");
+erro.hide()
+sucesso.hide()
 
-datLocacao.value = getData(0);
-datDevolucao.value = getData(7);
-txtDiaria.value = '10';
+let datLocacao = $('#datLocacao');
+let datDevolucao = $('#datDevolucao');
+let txtDiaria = $('#txtDiaria');
+
+datLocacao.val(getData(0));
+datDevolucao.val(getData(7));
+txtDiaria.val('10');
 
 //desabilito os campos
 datDevolucao.readOnly = true;
 datLocacao.readOnly = true;
 txtDiaria.readOnly = true;
 
-var xhr = new XMLHttpRequest();
-var erro = document.querySelector("#form-erro");
-var sucesso = document.querySelector("#form-sucesso");
+$('#btnCadastrar').click(function () {
 
-btnCadastrar.addEventListener('click', function(){
+    if (validar()) {
+        let datLocacao = $('#datLocacao').val().trim();
+        let datDevolucao = $('#datDevolucao').val().trim();
+        let txtDiaria = $('#txtDiaria').val().trim();
+        let txtLivro = $('#txtLivro').val().trim();
+        let txtCliente = $('#txtCliente').val().trim();
 
-    if(validar())
-    {
-        let datLocacao = document.querySelector('#datLocacao').value.trim();
-        let datDevolucao = document.querySelector('#datDevolucao').value.trim();
-        let txtDiaria = document.querySelector('#txtDiaria').value.trim();
-        let txtLivro = document.querySelector('#txtLivro').value.trim();
-        let txtCliente = document.querySelector('#txtCliente').value.trim();
-        let txtFuncionario = document.querySelector('#txtFuncionario').value.trim();
-        
-        sucesso.style = 'display: none';
+        $.ajax({
+            method: 'POST',
+            url: '/Locação/Alugar/',
+            data: { data_locacao: datLocacao, data_devolucao: datDevolucao, diaria: txtDiaria, id_cliente: txtCliente, id_livro: txtLivro },
+            success: function (respostas) {
+                erro.hide()
+                sucesso.show()
 
-        let url = '../controle/controle_aluga.php';
-        let params = 'op=salvar&data_locacao='+datLocacao+'&data_devolucao='+datDevolucao+'&diaria='+txtDiaria+'&id_funcionario='+txtFuncionario+'&id_cliente='+txtCliente+'&id_livro='+txtLivro;
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.send(params);
-        
-    }else {
-        erro.textContent = 'Dados invalidos, repetidos ou faltando';
-        erro.style = 'display: initial';
-    }
-});
-
-xhr.addEventListener("load", function() {
-    console.log(this.responseText.trim());
-    if (this.responseText.trim() == 'Sucesso') {
-        
-        // limpando o formulário
-        document.querySelector('#datLocacao').value = getData(0);
-        document.querySelector('#datDevolucao').value = getData(7);
-        document.querySelector('#txtDiaria').value = '';
-        document.querySelector('#txtLivro').value = '';
-        document.querySelector('#txtCliente').value = '';
-        document.querySelector('#txtFuncionario').value = '';
-
-        erro.style = 'display: none';
-        sucesso.style = 'display: initial';
+                $('#datLocacao').val(getData(0));
+                $('#datDevolucao').val(getData(7));
+                $('#txtDiaria').val('');
+                $('#txtLivro').val('');
+                $('#txtCliente').val('');
+            },
+            error: function () {
+                sucesso.hide()
+                erro.show()
+            }
+        })
 
     } else {
-        erro.textContent = 'Erro ao Cadastrar';
-        erro.style = 'display: initial';
+        sucesso.hide();
+        erro.show();
     }
 });
 
-function validar(){
+function validar() {
 
-    let datLocacao = document.querySelector('#datLocacao').value.trim();
-    let datDevolucao = document.querySelector('#datDevolucao').value.trim();
-    let txtDiaria = document.querySelector('#txtDiaria').value.trim();
-    let txtLivro = document.querySelector('#txtLivro').value.trim();
-    let txtCliente = document.querySelector('#txtCliente').value.trim();
-    let txtFuncionario = document.querySelector('#txtFuncionario').value.trim();
+    let datLocacao = $('#datLocacao').val().trim();
+    let datDevolucao = $('#datDevolucao').val().trim();
+    let txtDiaria = $('#txtDiaria').val().trim();
+    let txtLivro = $('#txtLivro').val().trim();
+    let txtCliente = $('#txtCliente').val().trim();
 
-    if(datLocacao == '')
+    if (datLocacao == '')
         return false;
-    else if(datDevolucao == '')
+    else if (datDevolucao == '')
         return false;
-    else if(txtDiaria == '')
+    else if (txtDiaria == '')
         return false;
-    else if(txtLivro == '')
+    else if (txtLivro == '')
         return false;
-    else if(txtCliente == '')
+    else if (txtCliente == '')
         return false;
-    else if(txtFuncionario == '')
-        return false;
-    
+
     return true;
 
 }
 
-function getData(dias)
-{
+function getData(dias) {
     var now;
-    if(dias > 0)
+    if (dias > 0)
         now = addDias(dias);
     else
         now = new Date();
- 
+
     var day = ("0" + now.getDate()).slice(-2);
     var month = ("0" + (now.getMonth() + 1)).slice(-2);
 
-    var today = now.getFullYear()+"-"+(month)+"-"+(day);
-
-    console.log(today);
+    var today = now.getFullYear() + "-" + (month) + "-" + (day);
 
     return today;
 }
 
-function addDias(dias)
-{
+function addDias(dias) {
     time = new Date();
     var outraData = new Date();
     outraData.setDate(time.getDate() + dias); // Adiciona 3 dias

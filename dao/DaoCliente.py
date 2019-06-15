@@ -16,27 +16,19 @@ class DaoCliente(Dao):
         except Exception as e:
             raise DaoException('Erro ao Buscar Todos - Contatar o ADM')
 
-    # def search_cpf(self, cpf):
-    #     try:
-    #         # $sql = $conexao->getPdo()->prepare("SELECT id FROM Cliente WHERE cpf = :c");
-    #         # $sql->bindValue(":c", $cpf);
-    #         # $sql->execute();
-    #         #
-    #         # return $sql->fetch()["id"];
-    #
-    #     except Exception as e:
-    #         raise DaoException('Erro ao Buscar Cliente Por CPF- Contatar o ADM')
-    #
-    # def search_login(self, login):
-    #     try:
-    #         # $sql = $conexao->getPdo()->prepare("SELECT id FROM Cliente WHERE login = :l");
-    #         # $sql->bindValue(":l", $login);
-    #         # $sql->execute();
-    #         #
-    #         # return $sql->fetch()["id"];
-    #
-    #     except Exception as e:
-    #         raise DaoException('Erro ao Buscar Cliente Por Login- Contatar o ADM')
+    def search_cpf(self, cpf):
+        try:
+            cliente = self.session.query(Cliente).filter(Cliente.cpf==cpf, Cliente.ativo==True).first()
+            return cliente;
+        except Exception as e:
+            raise DaoException('Erro ao Buscar Cliente Por CPF- Contatar o ADM')
+
+    def search_login(self, login):
+        try:
+            cliente = self.session.query(Cliente).filter(Cliente.login==login, Cliente.ativo==True).first()
+            return cliente
+        except Exception as e:
+            raise DaoException('Erro ao Buscar Cliente Por Login- Contatar o ADM')
     #
     # def search_search(self, cliente):
     #     try:

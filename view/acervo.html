@@ -15,7 +15,7 @@
                         <input type="button" class="form-control" id="btnBuscar" name="Buscar" value="Buscar">
                     </div>
                 </form>
-                <table class="table table-striped"> <!--Tabela de livros-->
+                <table id="tabela" class="table table-striped"> <!--Tabela de livros-->
                     <caption>Livros</caption>
                     <thead class="thead-dark">
                         <tr>
@@ -35,6 +35,4 @@
             </div>
         </div>
     </div>
-
-<!--        <script src="js/acervo.js"></script>-->
-<!--        <script src="js/logout.js"></script>-->
+    <script src="{{url_for('static', filename='js/acervo.js')}}"></script>

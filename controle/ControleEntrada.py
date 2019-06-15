@@ -58,10 +58,10 @@ def logar():
     if(usuario != None):
         if usuario.tipo == 'Cliente':
             session['logado'] = usuario.id
-            return json.dumps({'status': 'OK', 'cliente' : usuario.id})
+            return json.dumps({'status': 'OK', 'usuario' : usuario.id, 'tipo':'cliente'})
         elif usuario.tipo == 'Funcionario':
             session['admin'] = usuario.id
-            return json.dumps({'status': 'OK', 'cliente' : usuario.id})
+            return json.dumps({'status': 'OK', 'usuario' : usuario.id, 'tipo':'funcionario'})
 
 @entrada.route("/Perfil/")
 def perfil():

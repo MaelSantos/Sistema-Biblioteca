@@ -1,79 +1,71 @@
 
-let btnCadastrar = document.querySelector('#btnCadastrar')
+let erro = $('#form-erro');
+let sucesso = $('#form-sucesso');
+erro.hide()
+sucesso.hide()
 
-function validar(){
+function validar() {
 
-    let txtNome = document.querySelector('#txtNome').value.trim();
-    let txtCargo = document.querySelector('#txtCargo').value.trim();
-    let txtEmail = document.querySelector('#txtEmail').value.trim();
-    let txtLogin = document.querySelector('#txtLogin').value.trim();
-    let txtSenha = document.querySelector('#txtSenha').value.trim();
-    let txtConfirmaSenha = document.querySelector('#txtConfirmaSenha').value.trim();
+    let txtNome = $('#txtNome').val().trim();
+    let txtCargo = $('#txtCargo').val().trim();
+    let txtEmail = $('#txtEmail').val().trim();
+    let txtLogin = $('#txtLogin').val().trim();
+    let txtSenha = $('#txtSenha').val().trim();
+    let txtConfirmaSenha = $('#txtConfirmaSenha').val().trim();
 
-    if(txtNome == '' || txtNome.length < 3)
+    if (txtNome == '' || txtNome.length < 3)
         return false;
-    else if(txtCargo == '' || txtCargo.length < 3)
+    else if (txtCargo == '' || txtCargo.length < 3)
         return false;
-    else if(txtEmail == '' || txtEmail.length < 3)
+    else if (txtEmail == '' || txtEmail.length < 3)
         return false;
-    else if(txtLogin == '' || txtLogin.length < 3)
+    else if (txtLogin == '' || txtLogin.length < 3)
         return false;
-    else if(txtSenha == '' || txtSenha.length < 3)
+    else if (txtSenha == '' || txtSenha.length < 3)
         return false;
-    else if(txtConfirmaSenha == '' || txtConfirmaSenha.length < 3)
+    else if (txtConfirmaSenha == '' || txtConfirmaSenha.length < 3)
         return false;
-    else if(txtSenha != txtConfirmaSenha)
+    else if (txtSenha != txtConfirmaSenha)
         return false;
-    
+
     return true;
 
 }
 
-btnCadastrar.addEventListener('click', function() {
+$('#btnCadastrar').click(function () {
 
-    let erro = document.querySelector("#form-erro");
-    let sucesso = document.querySelector("#form-sucesso");
-
-    if(validar()) //valida se todos os campos estão preenchidos
+    if (validar()) //valida se todos os campos estão preenchidos
     {
-        let txtNome = document.querySelector('#txtNome').value.trim();
-        let txtCargo = document.querySelector('#txtCargo').value.trim();
-        let txtEmail = document.querySelector('#txtEmail').value.trim();
-        let txtLogin = document.querySelector('#txtLogin').value.trim();
-        let txtSenha = document.querySelector('#txtSenha').value.trim();
-        
-        sucesso.style = 'display: none';
+        let txtNome = $('#txtNome').val().trim();
+        let txtCargo = $('#txtCargo').val().trim();
+        let txtEmail = $('#txtEmail').val().trim();
+        let txtLogin = $('#txtLogin').val().trim();
+        let txtSenha = $('#txtSenha').val().trim();
 
-        var xhr = new XMLHttpRequest();
-        xhr.addEventListener("load", function() {
-            console.log(this.responseText.trim());
-            if (this.responseText.trim() == 'Sucesso') {
-                
-                // limpando o formulário
-                document.querySelector('#txtNome').value = "";
-                document.querySelector('#txtCargo').value = "";
-                document.querySelector('#txtEmail').value = "";
-                document.querySelector('#txtLogin').value = "";
-                document.querySelector('#txtSenha').value = "";
-                document.querySelector('#txtConfirmaSenha').value = "";
+        $.ajax({
+            method: 'POST',
+            url: '/Funcionario/Cadastrar/',
+            data: { nome: txtNome, cargo: txtCargo, email: txtEmail, login: txtLogin, senha: txtSenha },
+            success: function (resposta) {
+                sucesso.show()
+                erro.hide()
 
-                erro.style = 'display: none';
-                sucesso.style = 'display: initial';
-
-            } else {
-                erro.textContent = 'Erro ao Cadastrar';
-                erro.style = 'display: initial';
+                $('#txtNome').val('');
+                $('#txtCargo').val('');
+                $('#txtEmail').val('');
+                $('#txtLogin').val('');
+                $('#txtSenha').val('');
+                $('#txtConfirmaSenha').val('');
+            },
+            error: function (resposta) {
+                erro.show()
+                sucesso.hide()
             }
-        });
+        })
 
-        let url = '../controle/controle_funcionario.php';
-        let params = 'op=salvar&nome='+txtNome+'&cargo='+txtCargo+'&email='+txtEmail+'&login='+txtLogin+'&senha='+txtSenha;
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.send(params);
-        
-    }else {
-        erro.textContent = 'Dados invalidos, repetidos ou faltando';
-        erro.style = 'display: initial';
+
+    } else {
+        erro.show()
+        sucesso.hide()
     }
 })

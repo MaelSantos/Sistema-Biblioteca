@@ -1,3 +1,4 @@
+from controle.ControleApp import db
 from dao.Dao import Dao
 from exception.DaoException import DaoException
 from model.Livro import Livro
@@ -16,50 +17,27 @@ class DaoLivro(Dao):
         except Exception as e:
             raise DaoException('Erro ao Buscar Todos - Contatar o ADM')
 
-    # public function busca_por_codigo($codigo)
-    # {
-    #     try {
-    #         global $conexao;
-    #
-    #         $sql = $conexao->getPdo()->prepare("SELECT id FROM Livro WHERE codigo = :c");
-    #         $sql->bindValue(":c", $codigo);
-    #         $sql->execute();
-    #
-    #         return $sql->fetch()["id"];
-    #
-    #     } catch (\Throwable $th) {
-    #         echo $e->getMessage();
-    #         return null;
-    #     }
-    # }
-    #
-    #
-    # public function busca_por_busca(Livro $livro)
-    # {
-    #     try {
-    #         global $conexao;
-    #
-    #         $sql = $conexao->getPdo()->prepare("SELECT * FROM Livro WHERE (autor LIKE :a OR titulo LIKE :t OR ano LIKE :an OR editora LIKE :e OR codigo LIKE :c OR quantidade LIKE :q OR disponivel LIKE :d) AND ativo = true");
-    #         $sql->bindValue(":a", "%".$livro->getAutor()."%");
-    #         $sql->bindValue(":t", "%".$livro->getTitulo()."%");
-    #         $sql->bindValue(":an", "%".$livro->getAno()."%");
-    #         $sql->bindValue(":e", "%".$livro->getEditora()."%");
-    #         $sql->bindValue(":c", "%".$livro->getCodigo()."%");
-    #         $sql->bindValue(":q", "%".$livro->getQuantidade()."%");
-    #         $sql->bindValue(":d", "%".$livro->getDisponivel()."%");
-    #         $sql->execute();
-    #
-    #         $livros = array();
-    #         $i = 0;
-    #         while($row = $sql->fetch()) {
-    #             $livros[$i]= $row;
-    #             $i++;
-    #         }
-    #
-    #         // echo json_encode($livros);
-    #         return $livros;
-    #
-    #     } catch (\Throwable $th) {
-    #         echo $e->getMessage();
-    #     }
-    # }
+    def search_codigo(self, codigo):
+        try:
+            livro = self.session.query(Livro).filter(Livro.codigo == codigo, Livro.ativo == True).first()
+            return livro;
+        except Exception as e:
+            raise DaoException('Erro ao Buscar Todos - Contatar o ADM')
+
+    def search_search(self, busca):
+        try:
+            livros = self.session.query(Livro).filter(db.or_(Livro.codigo.ilike('%'+busca+'%'),
+                                                     Livro.titulo.ilike('%'+busca+'%'),
+                                                    Livro.editora.ilike('%'+busca+'%'),
+                                                    Livro.autor.ilike('%'+busca+'%'),
+                                                     Livro.disponivel.ilike('%' + busca + '%'),
+                                                     Livro.quantidade.ilike('%' + busca + '%'),
+                                                      Livro.ano.ilike('%' + busca + '%')),
+                                                     Livro.ativo == True).all()
+            return livros;
+        except Exception as e:
+            raise DaoException('Erro ao Buscar Todos - Contatar o ADM')
+
+# d = DaoLivro()
+# l = d.search_search('e')
+# print(l)

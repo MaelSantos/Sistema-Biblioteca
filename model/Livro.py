@@ -1,7 +1,7 @@
 from controle.ControleApp import db
 
 class Livro(db.Model):
-    db.__tablename__ = 'Livro'
+    __tablename__ = 'Livro'
     id = db.Column(db.Integer, db.Sequence('livro_seq'), primary_key=True)
     autor = db.Column(db.String(50), nullable=False)
     titulo = db.Column(db.String(50), nullable=False)

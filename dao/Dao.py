@@ -13,6 +13,9 @@ class Dao:
         try:
             self.session.add(entidade)
             self.session.commit()
+            self.session.refresh(entidade)
+            print(entidade.id)
+            return entidade.id
         except Exception as e:
             self.session.rollback()
             raise DaoException('Erro ao Salvar - Contatar ADM')
@@ -26,8 +29,10 @@ class Dao:
 
     def remove(self, entidade):
         try:
-            self.session.delete(entidade)
-            self.session.commit()
+            entidade.ativo = False;
+            self.update()
+            # self.session.delete(entidade)
+            # self.session.commit()
         except Exception as e:
             self.session.rollback()
             raise DaoException('Erro ao Remover - Contatar ADM')

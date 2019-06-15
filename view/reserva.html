@@ -1,23 +1,4 @@
-<!--<?php-->
 
-<!--session_start();-->
-<!--if(isset($_SESSION['logado'])) {-->
-<!--} else {-->
-<!--    $_SESSION['falhou'] = 'sim';-->
-<!--    header("Location: ../index.php");-->
-<!--}-->
-
-<!--try { //força a entrada somente se informar os dados do cliente e do livro-->
-<!--    $livro = $_GET['livro'];-->
-
-<!--    if($livro == null)-->
-<!--        header("Location: acervo.php");-->
-
-<!--} catch (\Throwable $th) {-->
-<!--    header("Location: acervo.php");-->
-<!--}-->
-
-<!--?>-->
     <div class="container">
         <div class="row">
             <div class="col col-md-12">
@@ -39,11 +20,11 @@
                 </div>
                 <div class="form-group">
                     <label for="txtCliente">Cliente:</label>
-                    <input type="text"class="form-control" id="txtCliente" name="txtCliente" placeholder="Cliente" value=<?php echo $_SESSION['logado']?>>
+                    <input type="text"class="form-control" id="txtCliente" name="txtCliente" placeholder="Cliente" value={{cliente}}>
                 </div>
                 <div class="form-group">
                     <label for="txtLivro">Livro:</label>
-                    <input type="text"class="form-control" id="txtLivro" name="txtLivro" placeholder="Livro" value=<?php echo $livro?> >
+                    <input type="text"class="form-control" id="txtLivro" name="txtLivro" placeholder="Livro" value={{codigo}}>
                 </div>
                 <div class="form-group">
                     <input type="button" class="btn btn-primary" id="btnConfirmar" name="btnConfimar" value="Confirmar">
@@ -52,5 +33,4 @@
             </div>
         </div>
     </div>
-<!--        <script src="js/reserva.js"></script>-->
-<!--        <script src="js/logout.js"></script>-->
+    <script src="{{url_for('static', filename='js/reserva.js')}}"></script>

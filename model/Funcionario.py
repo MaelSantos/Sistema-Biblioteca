@@ -2,7 +2,7 @@ from model.Usuario import Usuario
 from controle.ControleApp import db
 
 class Funcionario(Usuario):
-    db.__tablename__ = 'Funcionario'
+    __tablename__ = 'Funcionario'
     id = db.Column(db.Integer, db.ForeignKey(Usuario.id), db.Sequence('Funcionario_seq'), primary_key=True)
     cargo = db.Column(db.String(50), nullable=False)
 
