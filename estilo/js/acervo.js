@@ -40,13 +40,11 @@ $('#btnBuscar').click(function () { //busca livros
                         txtHtml += "<td><a class='editar' href='javascript:void(0)'>Editar</a><a class='remover' href='javascript:void(0)'>Remover</a></td>";
 
                     txtHtml += "</tr>";
-
-                    // console.log(txtHtml)
+                    
                     let tbody = $('#tabela > tbody');
                     tbody.append(txtHtml);//adiciona os novos elementos
                     let ultimaLinha = tbody.last('tr');
                     if (sessionStorage.getItem('logado') != null) {
-                        // let reservar = ultimaLinha.parent('.reservar');
                         let reservar = $('a[class="reservar"]').last();
                         reservar.click(function () {
                             $(location).attr('href', '/Livro/Reserva/' + livros[i]["codigo"]+'/'+sessionStorage.getItem('logado'));
@@ -54,11 +52,8 @@ $('#btnBuscar').click(function () { //busca livros
                     }
                     else {
                         let apagar = $('a[class="remover"]').last();
-                        // let apagar = ultimaLinha.parent('.remover');
 
                         apagar.click(function () {
-                            let linha = this.parent().parent();
-
                             // let xA = new XMLHttpRequest();
                             // let urlX = '../controle/controle_livro.php';
                             // let paramsX = 'op=remover&id=' + livros[i]["id"] + '&autor=0&titulo=0&ano=0&editora=0&codigo=0&quantidade=0&disponivel=0';
@@ -66,7 +61,7 @@ $('#btnBuscar').click(function () { //busca livros
                             // xA.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                             // xA.send(paramsX);
 
-                            linha.remove();
+                            ultimaLinha.remove()
                         });
 
                         // let editar = ultimaLinha.querySelector('.editar');

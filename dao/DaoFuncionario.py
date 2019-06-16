@@ -1,3 +1,4 @@
+from controle.ControleApp import db
 from dao.Dao import Dao
 from exception.DaoException import DaoException
 from model.Funcionario import Funcionario
@@ -15,33 +16,15 @@ class DaoFuncionario(Dao):
             return super().search_all(Funcionario)
         except Exception as e:
             raise DaoException('Erro ao Buscar Todos - Contatar o ADM')
-    #
-    # public function busca_por_busca(Funcionario $funcionario)
-    # {
-    #     try {
-    #         global $conexao;
-    #
-    #         $sql = $conexao->getPdo()->prepare("SELECT * FROM Funcionario WHERE (nome LIKE :n OR cargo LIKE :c OR email LIKE :e OR login LIKE :l) AND ativo = true");
-    #         $sql->bindValue(":n", "%".$funcionario->getNome()."%");
-    #         $sql->bindValue(":c", "%".$funcionario->getCargo()."%");
-    #         $sql->bindValue(":e", "%".$funcionario->getEmail()."%");
-    #         $sql->bindValue(":l", "%".$funcionario->getLogin()."%");
-    #         $sql->execute();
-    #
-    #         $funcionarios = array();
-    #         $i = 0;
-    #         while($row = $sql->fetch()) {
-    #             $funcionarios[$i]= $row;
-    #             $i++;
-    #         }
-    #
-    #         return $funcionarios;
-    #
-    #     } catch (\Throwable $th) {
-    #         echo $e->getMessage();
-    #     }
-    # }
 
-# f = Funcionario(cargo='admin', nome='admin', login='admin', senha='admin', email='admin')
-# d = DaoFuncionario()
-# d.create(f)
+    def search_search(self, busca):
+        try:
+            clientes = self.session.query(Funcionario).filter(db.or_(Funcionario.login.ilike('%' + busca + '%'),
+                                                                 Funcionario.email.ilike('%' + busca + '%'),
+                                                                 Funcionario.cargo.ilike('%' + busca + '%'),
+                                                                 Funcionario.nome.ilike('%' + busca + '%'),
+                                                                 ), Funcionario.ativo == True).all()
+            return clientes;
+
+        except Exception as e:
+            raise DaoException('Erro ao Buscar Clientes- Contatar o ADM')

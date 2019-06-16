@@ -52,3 +52,37 @@ def perfil():
         return template
     else:
         return redirect(url_for('entrada.index'))
+
+@cliente.route("/Cliente/Buscar/", methods=['POST'])
+def busca_busca():
+    try:
+        busca = request.form['busca'];
+
+        clientes =daoCliente.search_search(busca)
+
+        j = []
+        for l in clientes:
+            j.append({
+                'id': l.id,
+                'nome': l.nome,
+                'login': l.login,
+                'email': l.email,
+                'cpf': l.cpf,
+                'telefone': l.telefone,
+            })
+        return json.dumps(j)
+
+    except Exception as e:
+        return json.dumps({'status': 'Erro'});
+
+@cliente.route("/Cliente/Remover/", methods=['POST'])
+def remover():
+    try:
+        id = request.form['id'];
+
+        clienteM =daoCliente.search_id(id)
+        daoCliente.remove(clienteM)
+        return json.dumps({'status': 'Ok'});
+
+    except Exception as e:
+        return json.dumps({'status': 'Erro'});

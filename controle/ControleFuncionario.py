@@ -17,6 +17,7 @@ def admin():
     else:
         return redirect(url_for('entrada.index'))
 
+
 @funcionario.route("/Funcionario/Cadastro/")
 def cadastro():
     if 'admin' in session:
@@ -27,6 +28,7 @@ def cadastro():
         return template
     else:
         return redirect(url_for('entrada.index'))
+
 
 @funcionario.route("/Funcionario/Cadastrar/", methods=['POST'])
 def cadastrar():
@@ -43,6 +45,7 @@ def cadastrar():
     except Exception as e:
         return json.dumps({'status': 'Erro'});
 
+
 @funcionario.route("/Funcionario/Perfil/")
 def perfil():
     if 'admin' in session:
@@ -53,3 +56,36 @@ def perfil():
         return template
     else:
         return redirect(url_for('entrada.index'))
+
+@funcionario.route("/Funcionario/Buscar/", methods=['POST'])
+def busca_busca():
+    try:
+        busca = request.form['busca'];
+
+        funcionarios =daoFuncionario.search_search(busca)
+
+        j = []
+        for l in funcionarios:
+            j.append({
+                'id': l.id,
+                'nome': l.nome,
+                'login': l.login,
+                'email': l.email,
+                'cargo': l.cargo,
+            })
+        return json.dumps(j)
+
+    except Exception as e:
+        return json.dumps({'status': 'Erro'});
+
+@funcionario.route("/Funcionario/Remover/", methods=['POST'])
+def remover():
+    try:
+        id = request.form['id'];
+
+        funcionarioM =daoFuncionario.search_id(id)
+        daoFuncionario.remove(funcionarioM)
+        return json.dumps({'status': 'Ok'});
+
+    except Exception as e:
+        return json.dumps({'status': 'Erro'});

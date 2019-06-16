@@ -1,3 +1,6 @@
+from builtins import classmethod
+
+from controle.ControleApp import db
 from dao.Dao import Dao
 from model.Cliente import Cliente
 from exception.DaoException import DaoException
@@ -29,25 +32,16 @@ class DaoCliente(Dao):
             return cliente
         except Exception as e:
             raise DaoException('Erro ao Buscar Cliente Por Login- Contatar o ADM')
-    #
-    # def search_search(self, cliente):
-    #     try:
-    #         # $sql = $conexao->getPdo()->prepare("SELECT * FROM Cliente WHERE (nome LIKE :n OR cpf LIKE :c OR telefone LIKE :t OR email LIKE :e OR login LIKE :l) AND ativo = true");
-    #         # $sql->bindValue(":n", "%".$cliente->getNome()."%");
-    #         # $sql->bindValue(":c", "%".$cliente->getCpf()."%");
-    #         # $sql->bindValue(":t", "%".$cliente->getTelefone()."%");
-    #         # $sql->bindValue(":e", "%".$cliente->getEmail()."%");
-    #         # $sql->bindValue(":l", "%".$cliente->getLogin()."%");
-    #         # $sql->execute();
-    #         #
-    #         # $clientes = array();
-    #         # $i = 0;
-    #         # while($row = $sql->fetch()) {
-    #         #     $clientes[$i]= $row;
-    #         #     $i++;
-    #         # }
-    #         #
-    #         # return $clientes;
-    #
-    #     except Exception as e:
-    #         raise DaoException('Erro ao Buscar Cliente Por Login- Contatar o ADM')
+
+    def search_search(self, busca):
+        try:
+            clientes = self.session.query(Cliente).filter(db.or_(Cliente.login.ilike('%'+busca+'%'),
+                                                                 Cliente.email.ilike('%'+busca+'%'),
+                                                                 Cliente.cpf.ilike('%'+busca+'%'),
+                                                                 Cliente.telefone.ilike('%'+busca+'%'),
+                                                                 Cliente.nome.ilike('%'+busca+'%'),
+                                                                 ), Cliente.ativo == True).all()
+            return clientes;
+
+        except Exception as e:
+            raise DaoException('Erro ao Buscar Clientes- Contatar o ADM')

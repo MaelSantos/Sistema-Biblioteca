@@ -14,7 +14,6 @@ class Dao:
             self.session.add(entidade)
             self.session.commit()
             self.session.refresh(entidade)
-            print(entidade.id)
             return entidade.id
         except Exception as e:
             self.session.rollback()

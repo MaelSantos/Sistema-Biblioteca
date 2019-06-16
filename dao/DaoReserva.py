@@ -1,6 +1,8 @@
 from dao.Dao import Dao
 from exception.DaoException import DaoException
 from model.Reserva import Reserva
+from model.Cliente import Cliente
+from model.Livro import Livro
 
 class DaoReserva(Dao):
 
@@ -16,54 +18,23 @@ class DaoReserva(Dao):
         except Exception as e:
             raise DaoException('Erro ao Buscar Todos - Contatar o ADM')
 
-    # public function buscar_por_cliente($id)
-    # {
-    #     try {
-    #         global $conexao;
-    #
-    #         $sql = $conexao->getPdo()->prepare("SELECT * FROM Reserva r WHERE r.id_cliente = :c AND r.ativo = true");
-    #         $sql->bindValue(":c", $id);
-    #         $sql->execute();
-    #
-    #         $reservas = array();
-    #         $i = 0;
-    #         while($row = $sql->fetch()) {
-    #             $reservas[$i]= $row;
-    #             $i++;
-    #         }
-    #
-    #         return $reservas;
-    #
-    #     } catch (\Throwable $th) {
-    #         echo $th->getMessage();
-    #     }
-    #     return null;
-    # }
-    #
-    # public function buscar_por_id($id)
-    # {
-    #     try {
-    #         global $conexao;
-    #
-    #         $sql = $conexao->getPdo()->prepare("SELECT r.*, l.titulo, c.nome FROM Reserva r, Cliente c, Livro l WHERE r.id_cliente = c.id AND r.id_livro = l.id AND c.id = :d AND r.ativo = true");
-    #         $sql->bindValue(":d", $id);
-    #         $sql->execute();
-    #
-    #         $reservas = array();
-    #         $i = 0;
-    #         while($row = $sql->fetch()) {
-    #             $reservas[$i]= $row;
-    #             $i++;
-    #         }
-    #
-    #         return $reservas;
-    #
-    #     } catch (\Throwable $th) {
-    #         echo $th->getMessage();
-    #     }
-    #     return null;
-    # }
-    #
+    # def search_id_cliente(self, id):
+    #     try:
+    #         reservas = self.session.query(Reserva).filter(Reserva.id_cliente == 0, Reserva.ativo == True).all()
+    #         return reservas
+    #     except Exception as e:
+    #         raise DaoException('Erro ao Buscar Reservas Por Cliente - Contatar o ADM')
+
+    def search_id_cliente(self, id):
+        try:
+            reservas = self.session.query(Reserva, Cliente, Livro ).filter(Reserva.id_cliente == Cliente.id,
+                                                                           Reserva.id_livro == Livro.id,
+                                                                           Cliente.id == id,
+                                                                           Reserva.ativo == True).all()
+            return reservas
+        except Exception as e:
+            raise DaoException('Erro ao Buscar Reservas Por Cliente - Contatar o ADM')
+
     # public function busca_por_busca(Reserva $reserva)
     # {
     #     try {

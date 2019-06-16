@@ -37,7 +37,3 @@ class DaoLivro(Dao):
             return livros;
         except Exception as e:
             raise DaoException('Erro ao Buscar Todos - Contatar o ADM')
-
-# d = DaoLivro()
-# l = d.search_search('e')
-# print(l)
