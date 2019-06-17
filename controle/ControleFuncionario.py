@@ -45,6 +45,26 @@ def cadastrar():
     except Exception as e:
         return json.dumps({'status': 'Erro'});
 
+@funcionario.route("/Funcionario/Editar/", methods=['POST'])
+def editar():
+    try:
+        nome = request.form['nome'];
+        login = request.form['login'];
+        senha = request.form['senha'];
+        email = request.form['email'];
+        cargo = request.form['cargo'];
+
+        funcionarioM = daoFuncionario.search_id(session['admin'])
+        funcionarioM.cargo=cargo
+        funcionarioM.nome=nome
+        funcionarioM.email=email
+        funcionarioM.login=login
+        funcionarioM.senha=senha
+        daoFuncionario.update()
+        return json.dumps({'status': 'OK'});
+    except Exception as e:
+        return json.dumps({'status': 'Erro'});
+
 
 @funcionario.route("/Funcionario/Perfil/")
 def perfil():
@@ -73,6 +93,25 @@ def busca_busca():
                 'email': l.email,
                 'cargo': l.cargo,
             })
+        return json.dumps(j)
+
+    except Exception as e:
+        return json.dumps({'status': 'Erro'});
+
+@funcionario.route("/Funcionario/Perfil/Buscar/", methods=['POST'])
+def busca_perfil():
+    try:
+        print('merda')
+        funcionarioM = daoFuncionario.search_id(session['admin'])
+        print(funcionarioM)
+        j = [{
+                'id': funcionarioM.id,
+                'nome': funcionarioM.nome,
+                'login': funcionarioM.login,
+                'email': funcionarioM.email,
+                'cargo': funcionarioM.cargo,
+                'senha': funcionarioM.senha,
+            }]
         return json.dumps(j)
 
     except Exception as e:

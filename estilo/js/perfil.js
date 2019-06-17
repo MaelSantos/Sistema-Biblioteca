@@ -1,272 +1,245 @@
-let btnApagar = document.querySelector('#btnApagar');
-let btnSenha = document.querySelector('#btnSenha');
-let btnEditar = document.querySelector('#btnEditar');
-var xhr = new XMLHttpRequest();
 
-xhr.addEventListener('load', function () {//retornar os resultados da busca para a tela
-    console.log(this.responseText.trim());
-    let resultado = JSON.parse(this.responseText.trim());//passa para uma lista os arquivos do JSON
+let erro = $("#form-erro");
+let sucesso = $("#form-sucesso");
+erro.hide()
+sucesso.hide()
 
-    let tr = document.querySelectorAll('.tabela > tbody > tr');
-    for (let i = 0; i < tr.length; i++)
-        tr[i].remove() //remove elementos existentes na tabela
-
-    let th = document.querySelectorAll('.tabela > thead > tr');
-    if (th != null)
-        for (let i = 0; i < th.length; i++)
-            th[i].remove() //remove elementos existentes na tabela
-
-    if (sessionStorage.getItem('logado') != null) {
-        let cabecalho = '<tr>';
-        cabecalho += '<th>Nome</th>';
-        cabecalho += '<th>Login</th>';
-        cabecalho += '<th>Email</th>';
-        cabecalho += '<th>Cpf</th>';
-        cabecalho += '<th>Telefone</th>';
-        cabecalho += '</tr>';
-
-        document.querySelector('.tabela > thead').insertAdjacentHTML('beforeend', cabecalho);//adiciona o cabeçalho
-
-        for (let i = 0; i < resultado.length; i++) {
-            //prepara os dados a serem adicionados
-            let txtHtml = "<tr>";
-            txtHtml += "<td class='col_nome'>" + resultado[i]["nome"] + "</td>";
-            txtHtml += "<td class='col_login'>" + resultado[i]["login"] + "</td>";
-            txtHtml += "<td class='col_email'>" + resultado[i]["email"] + "</td>";
-            txtHtml += "<td class='col_cpf'>" + resultado[i]["cpf"] + "</td>";
-            txtHtml += "<td class='col_telefone'>" + resultado[i]["telefone"] + "</td>";
-            txtHtml += "</tr>";
-
-            let tbody = document.querySelector('.tabela > tbody');
-            tbody.insertAdjacentHTML('beforeend', txtHtml);//adiciona os novos elementos
-            document.querySelector('#txtSenha').value = resultado[i]["senha"];
-            document.querySelector('#txtConfirmaSenha').value = resultado[i]["senha"];
-        }
-    } else {
-        let cabecalho = '<tr>';
-        cabecalho += '<th>Nome</th>';
-        cabecalho += '<th>Login</th>';
-        cabecalho += '<th>Email</th>';
-        cabecalho += '<th>Cargo</th>';
-        cabecalho += '</tr>';
-
-        document.querySelector('.tabela > thead').insertAdjacentHTML('beforeend', cabecalho);//adiciona o cabeçalho
-
-        for (let i = 0; i < resultado.length; i++) {
-            //prepara os dados a serem adicionados
-            let txtHtml = "<tr>";
-            txtHtml += "<td class='col_nome'>" + resultado[i]["nome"] + "</td>";
-            txtHtml += "<td class='col_login'>" + resultado[i]["login"] + "</td>";
-            txtHtml += "<td class='col_email'>" + resultado[i]["email"] + "</td>";
-            txtHtml += "<td class='col_cargo'>" + resultado[i]["cargo"] + "</td>";
-            txtHtml += "</tr>";
-
-            let tbody = document.querySelector('.tabela > tbody');
-            tbody.insertAdjacentHTML('beforeend', txtHtml);//adiciona os novos elementos
-            document.querySelector('#txtSenha').value = resultado[i]["senha"];
-            document.querySelector('#txtConfirmaSenha').value = resultado[i]["senha"];
-        }
-    }
-
-});
+console.log(sessionStorage.getItem('logado'))
+console.log(sessionStorage.getItem('admin'))
 
 if (sessionStorage.getItem('logado') != null) {
     //envia a requisição
-    let url = '../controle/controle_cliente.php';
-    let params = 'op=buscaid&nome=0&cpf=0&email=0&telefone=0&login=0&senha=0';
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.send(params);
+    $.ajax({
+        method: 'POST',
+        url: '/Cliente/Perfil/Buscar/',
+        success: function (resposta) {
 
+            let resultado = JSON.parse(resposta);//passa para uma lista os arquivos do JSON
+
+            let tr = $('#tabela > tbody > tr');
+            for (let i = 0; i < tr.length; i++)
+                tr[i].remove() //remove elementos existentes na tabela
+
+            let th = $('#tabela > thead > tr');
+            if (th != null)
+                for (let i = 0; i < th.length; i++)
+                    th[i].remove() //remove elementos existentes na tabela
+
+            let cabecalho = '<tr>';
+            cabecalho += '<th scope="col">#</th>';
+            cabecalho += '<th scope="col">Nome</th>';
+            cabecalho += '<th scope="col">Login</th>';
+            cabecalho += '<th scope="col">Email</th>';
+            cabecalho += '<th scope="col">Cpf</th>';
+            cabecalho += '<th scope="col">Telefone</th>';
+            cabecalho += '</tr>';
+
+            $('#tabela > thead').append(cabecalho);//adiciona o cabeçalho
+
+            for (let i = 0; i < resultado.length; i++) {
+                //prepara os dados a serem adicionados
+                let txtHtml = "<tr>";
+                txtHtml += "<td class='col_id'>" + resultado[i]["id"] + "</td>";
+                txtHtml += "<td class='col_nome'>" + resultado[i]["nome"] + "</td>";
+                txtHtml += "<td class='col_login'>" + resultado[i]["login"] + "</td>";
+                txtHtml += "<td class='col_email'>" + resultado[i]["email"] + "</td>";
+                txtHtml += "<td class='col_cpf'>" + resultado[i]["cpf"] + "</td>";
+                txtHtml += "<td class='col_telefone'>" + resultado[i]["telefone"] + "</td>";
+                txtHtml += "</tr>";
+
+                let tbody = $('#tabela > tbody');
+                tbody.append(txtHtml);//adiciona os novos elementos
+                $('#txtSenha').val(resultado[i]["senha"]);
+                $('#txtConfirmaSenha').val(resultado[i]["senha"]);
+            }
+        },
+    })
 }
 else if (sessionStorage.getItem('admin') != null) {
-    let url = '../controle/controle_funcionario.php';
-    let params = 'op=buscaid&nome=0&cargo=0&email=0&login=0&senha=0';
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.send(params);
+    $.ajax({
+        method: 'POST',
+        url: '/Funcionario/Perfil/Buscar/',
+        success: function (resposta) {
+
+            let resultado = JSON.parse(resposta);//passa para uma lista os arquivos do JSON
+
+            let tr = $('#tabela > tbody > tr');
+            for (let i = 0; i < tr.length; i++)
+                tr[i].remove() //remove elementos existentes na tabela
+
+            let th = $('#tabela > thead > tr');
+            if (th != null)
+                for (let i = 0; i < th.length; i++)
+                    th[i].remove() //remove elementos existentes na tabela
+
+            let cabecalho = '<tr>';
+            cabecalho += '<th scope="col">#</th>';
+            cabecalho += '<th scope="col">Nome</th>';
+            cabecalho += '<th scope="col">Login</th>';
+            cabecalho += '<th scope="col">Email</th>';
+            cabecalho += '<th scope="col">Cargo</th>';
+            cabecalho += '</tr>';
+
+            $('#tabela > thead').append(cabecalho);//adiciona o cabeçalho
+
+            for (let i = 0; i < resultado.length; i++) {
+                //prepara os dados a serem adicionados
+                let txtHtml = "<tr>";
+                txtHtml += "<td class='col_id'>" + resultado[i]["id"] + "</td>";
+                txtHtml += "<td class='col_nome'>" + resultado[i]["nome"] + "</td>";
+                txtHtml += "<td class='col_login'>" + resultado[i]["login"] + "</td>";
+                txtHtml += "<td class='col_email'>" + resultado[i]["email"] + "</td>";
+                txtHtml += "<td class='col_cargo'>" + resultado[i]["cargo"] + "</td>";
+                txtHtml += "</tr>";
+
+                let tbody = $('#tabela > tbody');
+                tbody.append(txtHtml);//adiciona os novos elementos
+                $('#txtSenha').val(resultado[i]["senha"]);
+                $('#txtConfirmaSenha').val(resultado[i]["senha"]);
+            }
+        },
+    })
 }
 
-btnEditar.addEventListener('click', function () {
+$('#btnEditar').click(function () {
 
-    if(sessionStorage.getItem('logado') != null)
-    {
-        let linhaTr = document.querySelector('.tabela > tbody > tr');
-        let colunaNome = linhaTr.querySelector('.col_nome');
-        let colunaLogin = linhaTr.querySelector('.col_login');
-        let colunaEmail = linhaTr.querySelector('.col_email');
-        let colunaCpf = linhaTr.querySelector('.col_cpf');
-        let colunaTelefone = linhaTr.querySelector('.col_telefone');
-    
-        if (colunaNome.querySelectorAll('input').length > 0) {
+    if (sessionStorage.getItem('logado') != null) {
+        let colunaNome = $('#tabela > tbody > tr > td.col_nome').last();
+        let colunaLogin = $('#tabela > tbody > tr > td.col_login').last();
+        let colunaEmail = $('#tabela > tbody > tr > td.col_email').last();
+        let colunaCpf = $('#tabela > tbody > tr > td.col_cpf').last();
+        let colunaTelefone = $('#tabela > tbody > tr > td.col_telefone').last();
+
+        if (colunaNome.children('input').length > 0) {
             // terminando de editar
-            let nome = colunaNome.querySelector('input').value;
-            let telefone = colunaTelefone.querySelector('input').value;
-            let cpf = colunaCpf.querySelector('input').value;
-            let email = colunaEmail.querySelector('input').value;
-            let login = colunaLogin.querySelector('input').value;
-    
-            var xhrEditar = new XMLHttpRequest();
-            xhrEditar.addEventListener('load', function () {
-                let erro = document.querySelector("#form-erro");
-                let sucesso = document.querySelector("#form-sucesso");
-                let retorno = this.responseText.trim();
-                if (retorno == 'Sucesso') {
-                    colunaCpf.innerHTML = cpf;
-                    colunaEmail.innerHTML = email;
-                    colunaNome.innerHTML = nome;
-                    colunaTelefone.innerHTML = telefone;
-                    colunaLogin.innerHTML = login;
-                    btnEditar.value = "Editar";
-    
-                    erro.style = 'display: none';
-                    sucesso.style = 'display: initial';
-    
-                } else {
-                    erro.textContent = 'Erro ao atualizar';
-                    erro.style = 'display: initial';
-                }
-            });
-    
-            let url = '../controle/controle_cliente.php';
-            let params = 'op=editar&nome='+nome+'&cpf='+cpf+'&email='+email+'&telefone='+telefone+'&login='+login+'&senha=0';
-            xhrEditar.open("POST", url, true);
-            xhrEditar.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhrEditar.send(params);
-    
+            let nome = colunaNome.children('input').val().trim();
+            let telefone = colunaTelefone.children('input').val().trim();
+            let cpf = colunaCpf.children('input').val().trim();
+            let email = colunaEmail.children('input').val().trim();
+            let login = colunaLogin.children('input').val().trim();
+            let senha = $('#txtSenha').val().trim()
+
+            let txtConfirmaSenha = $('#txtConfirmaSenha').val().trim();
+
+            if (senha == txtConfirmaSenha)
+                $.ajax({
+                    method: 'POST',
+                    url: '/Cliente/Editar/',
+                    data: { nome: nome, cpf: cpf, email: email, telefone: telefone, login: login, senha: senha },
+                    success: function (resposta) {
+                        resposta = JSON.parse(resposta)
+                        colunaCpf.html(cpf);
+                        colunaEmail.html(email);
+                        colunaNome.html(nome);
+                        colunaTelefone.html(telefone);
+                        colunaLogin.html(login);
+                        $('#txtSenha').val(senha)
+                        $('#btnEditar').val("Editar");
+
+                        sucesso.show()
+                        erro.hide()
+                    },
+                    error: function (resposta) {
+                        sucesso.hide()
+                        erro.show()
+
+                    }
+                })
+            else {
+                sucesso.hide()
+                erro.show()
+            }
+
         } else {
             // iniciando a edição
-            btnEditar.value = "Salvar";
-            colunaNome.innerHTML = "<input type='text' value='" + colunaNome.textContent + "'>";
-            colunaTelefone.innerHTML = "<input type='text' value='" + colunaTelefone.textContent + "'>";
-            colunaCpf.innerHTML = "<input type='text' value='" + colunaCpf.textContent + "'>";
-            colunaEmail.innerHTML = "<input type='text' value='" + colunaEmail.textContent + "'>";
-            colunaLogin.innerHTML = "<input type='text' value='" + colunaLogin.textContent + "'>";
+            $('#btnEditar').val("Salvar");
+            colunaNome.html("<input type='text' class='form-control' value='" + colunaNome.html() + "'>");
+            colunaTelefone.html("<input type='text' class='form-control' value='" + colunaTelefone.html() + "'>");
+            colunaCpf.html("<input type='text' class='form-control' value='" + colunaCpf.html() + "'>");
+            colunaEmail.html("<input type='text' class='form-control' value='" + colunaEmail.html() + "'>");
+            colunaLogin.html("<input type='text' class='form-control' value='" + colunaLogin.html() + "'>");
         }
     }
-    else if(sessionStorage.getItem('admin')){
+    else if (sessionStorage.getItem('admin')) {
 
-        let linhaTr = document.querySelector('.tabela > tbody > tr');
-        let colunaNome = linhaTr.querySelector('.col_nome');
-        let colunaLogin = linhaTr.querySelector('.col_login');
-        let colunaEmail = linhaTr.querySelector('.col_email');
-        let colunaCargo = linhaTr.querySelector('.col_cargo');
-    
-        if (colunaNome.querySelectorAll('input').length > 0) {
+        let colunaNome = $('#tabela > tbody > tr > td.col_nome').last();
+        let colunaLogin = $('#tabela > tbody > tr > td.col_login').last();
+        let colunaEmail = $('#tabela > tbody > tr > td.col_email').last();
+        let colunaCargo = $('#tabela > tbody > tr > td.col_cargo').last();
+
+        if (colunaNome.children('input').length > 0) {
             // terminando de editar
-            let nome = colunaNome.querySelector('input').value;
-            let cargo = colunaCargo.querySelector('input').value;
-            let email = colunaEmail.querySelector('input').value;
-            let login = colunaLogin.querySelector('input').value;
-    
-            var xhrEditar = new XMLHttpRequest();
-            xhrEditar.addEventListener('load', function () {
-                let erro = document.querySelector("#form-erro");
-                let sucesso = document.querySelector("#form-sucesso");
-                let retorno = this.responseText.trim();
-                if (retorno == 'Sucesso') {
-                    colunaCargo.innerHTML = cargo;
-                    colunaEmail.innerHTML = email;
-                    colunaNome.innerHTML = nome;
-                    colunaLogin.innerHTML = login;
-                    btnEditar.value = "Editar";
-    
-                    erro.style = 'display: none';
-                    sucesso.style = 'display: initial';
-    
-                } else {
-                    erro.textContent = 'Erro ao atualizar';
-                    erro.style = 'display: initial';
-                }
-            });
-    
-            let url = '../controle/controle_funcionario.php';
-            let params = 'op=editar&nome='+nome+'&cargo='+cargo+'&email='+email+'&login='+login+'&senha=0';
-            xhrEditar.open("POST", url, true);
-            xhrEditar.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhrEditar.send(params);
-    
+            let nome = colunaNome.children('input').val().trim();
+            let cargo = colunaCargo.children('input').val().trim();
+            let email = colunaEmail.children('input').val().trim();
+            let login = colunaLogin.children('input').val().trim();
+            let senha = $('#txtSenha').val().trim()
+
+            let txtConfirmaSenha = $('#txtConfirmaSenha').val().trim();
+
+            if (senha == txtConfirmaSenha)
+                $.ajax({
+                    method: 'POST',
+                    url: '/Funcionario/Editar/',
+                    data: { nome: nome, cargo: cargo, email: email, login: login, senha: senha },
+                    success: function (resposta) {
+                        colunaCargo.html(cargo);
+                        colunaEmail.html(email);
+                        colunaNome.html(nome);
+                        colunaLogin.html(login);
+                        $('#txtSenha').val(senha)
+                        $('#btnEditar').val('Editar');
+
+                        erro.hide()
+                        sucesso.show()
+                    },
+                    error: function (resposta) {
+                        sucesso.hide()
+                        erro.show()
+                    }
+                })
+            else {
+                sucesso.hide()
+                erro.show()
+            }
+
         } else {
             // iniciando a edição
-            btnEditar.value = "Salvar";
-            colunaNome.innerHTML = "<input type='text' value='" + colunaNome.textContent + "'>";
-            colunaCargo.innerHTML = "<input type='text' value='" + colunaCargo.textContent + "'>";
-            colunaEmail.innerHTML = "<input type='text' value='" + colunaEmail.textContent + "'>";
-            colunaLogin.innerHTML = "<input type='text' value='" + colunaLogin.textContent + "'>";
+            $('#btnEditar').val("Salvar");
+            colunaNome.html("<input type='text' class='form-control' value='" + colunaNome.html() + "'>");
+            colunaCargo.html("<input type='text' class='form-control' value='" + colunaCargo.html() + "'>");
+            colunaEmail.html("<input type='text' class='form-control' value='" + colunaEmail.html() + "'>");
+            colunaLogin.html("<input type='text' class='form-control' value='" + colunaLogin.html() + "'>");
         }
     }
 });
 
-btnApagar.addEventListener('click', function(){
-    var xhrRemove = new XMLHttpRequest();
+$('#btnApagar').click(function () {
+
+    let id = $('#tabela > tbody > tr > td.col_id').last().html();
 
     if (sessionStorage.getItem('logado') != null) {
         //envia a requisição
-        let url = '../controle/controle_cliente.php';
-        let params = 'op=removerid&nome=0&cpf=0&email=0&telefone=0&login=0&senha=0';
-        xhrRemove.open("POST", url, true);
-        xhrRemove.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhrRemove.send(params);
-    
-        window.location.replace('../controle/logout.php');
+        $.ajax({
+            method: 'POST',
+            url: '/Cliente/Remover/',
+            data: { id: id },
+            success: function (resposta) {
+                $(location).attr('href', '/Logout/');
+            },
+        })
+
     }
     else if (sessionStorage.getItem('admin') != null) {
-        let url = '../controle/controle_funcionario.php';
-        let params = 'op=removerid&nome=0&cargo=0&email=0&login=0&senha=0';
-        xhrRemove.open("POST", url, true);
-        xhrRemove.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhrRemove.send(params);
+        $.ajax({
+            method: 'POST',
+            url: '/Funcionario/Remover/',
+            data: { id: id },
+            success: function (resposta) {
+                $(location).attr('href', '/Logout/');
+            },
+        })
 
-        window.location.replace('../controle/logout.php');
     }
 });
 
-
-btnSenha.addEventListener('click', function(){
-    var xhrSenha = new XMLHttpRequest();
-    let erro = document.querySelector("#form-erro");
-    let sucesso = document.querySelector("#form-sucesso");
-    let txtSenha = document.querySelector('#txtSenha').value.trim();
-    let txtConfirmaSenha = document.querySelector('#txtConfirmaSenha').value.trim();
-
-    xhrSenha.addEventListener('load', function () {
-        let erro = document.querySelector("#form-erro");
-        let sucesso = document.querySelector("#form-sucesso");
-        let retorno = this.responseText.trim();
-        if (retorno == 'Sucesso') {
-            erro.style = 'display: none';
-            sucesso.style = 'display: initial';
-
-        } else {
-            erro.textContent = 'Erro ao atualizar';
-            erro.style = 'display: initial';
-        }
-    });
-
-    if(txtSenha == txtConfirmaSenha)
-    {
-        if (sessionStorage.getItem('logado') != null) {
-            //envia a requisição
-            let url = '../controle/controle_cliente.php';
-            let params = 'op=editarsenha&nome=0&cpf=0&email=0&telefone=0&login=0&senha='+txtSenha;
-            xhrSenha.open("POST", url, true);
-            xhrSenha.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhrSenha.send(params);
-        
-        }
-        else if (sessionStorage.getItem('admin') != null) {
-            let url = '../controle/controle_funcionario.php';
-            let params = 'op=editarsenha&nome=0&cargo=0&email=0&login=0&senha='+txtSenha;
-            xhrSenha.open("POST", url, true);
-            xhrSenha.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhrSenha.send(params);
-    
-            erro.style = 'display: none';
-            sucesso.style = 'display: initial';
-        }
-    }
-    else{
-        erro.textContent = 'Senhas diferentes!!!';
-        erro.style = 'display: initial';
-    }
-});

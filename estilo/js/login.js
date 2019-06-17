@@ -28,6 +28,8 @@ $('#btnEntrar').click(function () {
             data: { login: txtLogin, senha: txtSenha },
             success: function (resposta) {
                 resposta = JSON.parse(resposta)
+                sessionStorage.removeItem('logado')
+                sessionStorage.removeItem('admin')
                 if (resposta['tipo'] == 'cliente')
                     sessionStorage.setItem('logado', txtLogin);
                 else if (resposta['tipo'] == 'funcionario')

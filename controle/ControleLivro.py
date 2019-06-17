@@ -71,3 +71,38 @@ def cadastrar():
         return json.dumps({'status': 'OK'});
     except Exception as e:
         return json.dumps({'status': 'Erro'});
+
+@livro.route("/Livro/Remover/", methods=['POST'])
+def remover():
+    try:
+        id = request.form['id'];
+        livroM = daoLivro.search_id(id)
+        daoLivro.remove(livroM)
+        return json.dumps({'status': 'OK'});
+    except Exception as e:
+        return json.dumps({'status': 'Erro'});
+
+@livro.route("/Livro/Editar/", methods=['POST'])
+def editar():
+    try:
+        id = request.form['id'];
+        autor = request.form['autor'];
+        titulo = request.form['titulo'];
+        ano = request.form['ano'];
+        editora = request.form['editora'];
+        codigo = request.form['codigo'];
+        quantidade = request.form['disponivel'];
+        disponivel = request.form['disponivel'];
+
+        livroM = daoLivro.search_id(id)
+        livroM.autor=autor
+        livroM.titulo=titulo
+        livroM.ano=ano
+        livroM.editora=editora
+        livroM.codigo=codigo
+        livroM.quantidade=quantidade
+        livroM.disponivel=disponivel
+        daoLivro.update()
+        return json.dumps({'status': 'OK'});
+    except Exception as e:
+        return json.dumps({'status': 'Erro'});

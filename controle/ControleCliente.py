@@ -41,6 +41,28 @@ def cadastrar():
     except Exception as e:
         return json.dumps({'status': 'Erro'});
 
+@cliente.route("/Cliente/Editar/", methods=['POST'])
+def editar():
+    try:
+        nome = request.form['nome'];
+        login = request.form['login'];
+        senha = request.form['senha'];
+        email = request.form['email'];
+        cpf = request.form['cpf'];
+        telefone = request.form['telefone'];
+
+        clienteM = daoCliente.search_id(session['logado'])
+        clienteM.nome=nome
+        clienteM.login=login
+        clienteM.senha=senha
+        clienteM.email=email
+        clienteM.cpf=cpf
+        clienteM.telefone=telefone
+        daoCliente.update()
+        return json.dumps({'status': 'OK'});
+    except Exception as e:
+        return json.dumps({'status': 'Erro'});
+
 @cliente.route("/Cliente/Perfil/")
 def perfil():
     if 'logado' in session:
@@ -70,6 +92,27 @@ def busca_busca():
                 'cpf': l.cpf,
                 'telefone': l.telefone,
             })
+        return json.dumps(j)
+
+    except Exception as e:
+        return json.dumps({'status': 'Erro'});
+
+@cliente.route("/Cliente/Perfil/Buscar/", methods=['POST'])
+def busca_perfil():
+    try:
+
+        clienteM = daoCliente.search_id(session['logado'])
+
+        j = [{
+                'id': clienteM.id,
+                'nome': clienteM.nome,
+                'login': clienteM.login,
+                'email': clienteM.email,
+                'cpf': clienteM.cpf,
+                'telefone': clienteM.telefone,
+                'senha': clienteM.senha,
+            }]
+
         return json.dumps(j)
 
     except Exception as e:

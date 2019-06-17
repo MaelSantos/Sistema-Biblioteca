@@ -180,8 +180,6 @@ $('#btnBuscar').click(function () { //busca resultado
                         if (resultado[i]["ativo"] == 1) {
                             let apagar = $('a[class="deletar"]').last();
                             apagar.click(function () {
-                                let ultimaLinha = $('#tabela > tbody > tr').last()
-
                                 $.ajax({
                                     method: 'POST',
                                     url: '/Locação/Remover/',

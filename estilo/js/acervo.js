@@ -37,93 +37,88 @@ $('#btnBuscar').click(function () { //busca livros
                     if (sessionStorage.getItem('logado') != null)
                         txtHtml += "<td><a class='reservar' href='javascript:void(0)'>Reservar</a></td>";
                     else if (sessionStorage.getItem('admin') != null)
-                        txtHtml += "<td><a class='editar' href='javascript:void(0)'>Editar</a><a class='remover' href='javascript:void(0)'>Remover</a></td>";
+                        txtHtml += "<td><a class='editar' href='javascript:void(0)'>Editar</a> <a class='remover' href='javascript:void(0)'>Remover</a></td>";
 
                     txtHtml += "</tr>";
-                    
+
                     let tbody = $('#tabela > tbody');
                     tbody.append(txtHtml);//adiciona os novos elementos
                     let ultimaLinha = tbody.last('tr');
                     if (sessionStorage.getItem('logado') != null) {
                         let reservar = $('a[class="reservar"]').last();
                         reservar.click(function () {
-                            $(location).attr('href', '/Livro/Reserva/' + livros[i]["codigo"]+'/'+sessionStorage.getItem('logado'));
+                            $(location).attr('href', '/Livro/Reserva/' + livros[i]["codigo"] + '/' + sessionStorage.getItem('logado'));
                         });
                     }
                     else {
                         let apagar = $('a[class="remover"]').last();
 
                         apagar.click(function () {
-                            // let xA = new XMLHttpRequest();
-                            // let urlX = '../controle/controle_livro.php';
-                            // let paramsX = 'op=remover&id=' + livros[i]["id"] + '&autor=0&titulo=0&ano=0&editora=0&codigo=0&quantidade=0&disponivel=0';
-                            // xA.open("POST", urlX, true);
-                            // xA.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                            // xA.send(paramsX);
-
-                            ultimaLinha.remove()
+                            let ultimaLinha = $('#tabela > tbody > tr').last()
+                            $.ajax({
+                                method: 'POST',
+                                url: '/Livro/Remover/',
+                                data: { id: livros[i]["id"] },
+                                success: function (resposta) {
+                                    resposta = JSON.parse(resposta)
+                                    if (resposta['status'] == 'OK')
+                                        ultimaLinha.remove()
+                                },
+                            }) 
                         });
 
-                        // let editar = ultimaLinha.querySelector('.editar');
-                        // editar.addEventListener('click', function () {
-                        //     let linhaTr = this.parentNode.parentNode;
-                        //     let colunaCodigo = linhaTr.querySelector('.col_codigo');
-                        //     let colunaTitulo = linhaTr.querySelector('.col_titulo');
-                        //     let colunaAutor = linhaTr.querySelector('.col_autor');
-                        //     let colunaAno = linhaTr.querySelector('.col_ano');
-                        //     let colunaEditora = linhaTr.querySelector('.col_editora');
-                        //     let colunaDisponivel = linhaTr.querySelector('.col_disponivel');
+                        let editar = $('a[class="editar"]').last();
+                        editar.click(function () {
 
-                        //     if (colunaCodigo.querySelectorAll('input').length > 0) {
-                        //         // terminando de editar
-                        //         let codigo = colunaCodigo.querySelector('input').val();
-                        //         let editora = colunaEditora.querySelector('input').val();
-                        //         let ano = colunaAno.querySelector('input').val();
-                        //         let autor = colunaAutor.querySelector('input').val();
-                        //         let titulo = colunaTitulo.querySelector('input').val();
-                        //         let disponivel = colunaDisponivel.querySelector('input').val();
+                            let colunaCodigo = $('#tabela > tbody > tr > td.col_codigo').last();
+                            let colunaTitulo = $('#tabela > tbody > tr > td.col_titulo').last();
+                            let colunaAutor = $('#tabela > tbody > tr > td.col_autor').last();
+                            let colunaAno = $('#tabela > tbody > tr > td.col_ano').last();
+                            let colunaEditora = $('#tabela > tbody > tr > td.col_editora').last();
+                            let colunaDisponivel = $('#tabela > tbody > tr > td.col_disponivel').last();
 
-                        //         var xhrEditar = new XMLHttpRequest();
-                        //         xhrEditar.addEventListener('load', function () {
-                        //             let erro = $("#form-erro");
+                            if (colunaCodigo.children('input').length > 0) {
+                                // terminando de editar
+                                let codigo = colunaCodigo.children('input').val().trim();
+                                let editora = colunaEditora.children('input').val().trim();
+                                let ano = colunaAno.children('input').val().trim();
+                                let autor = colunaAutor.children('input').val().trim();
+                                let titulo = colunaTitulo.children('input').val().trim();
+                                let disponivel = colunaDisponivel.children('input').val().trim();
 
-                        //             let retorno = this.responseText.trim();
-                        //             if (retorno == 'Sucesso') {
-                        //                 colunaAno.innerHTML = ano;
-                        //                 colunaAutor.innerHTML = autor;
-                        //                 colunaCodigo.innerHTML = codigo;
-                        //                 colunaDisponivel.innerHTML = disponivel;
-                        //                 colunaEditora.innerHTML = editora;
-                        //                 colunaTitulo.innerHTML = titulo;
-                        //                 editar.innerHTML = "Editar";
+                                $.ajax({
+                                    method: 'POST',
+                                    url: '/Livro/Editar/',
+                                    data: { id: livros[i]["id"], autor: autor, titulo: titulo, ano: ano, editora: editora, codigo: codigo, quantidade: disponivel, disponivel: disponivel },
+                                    success: function (resposta) {
+                                        colunaAno.html(ano);
+                                        colunaAutor.html(autor);
+                                        colunaCodigo.html(codigo);
+                                        colunaDisponivel.html(disponivel);
+                                        colunaEditora.html(editora);
+                                        colunaTitulo.html(titulo);
+                                        editar.text("Editar");
 
-                        //                 erro.style = 'display: none';
-                        //                 sucesso.style = 'display: initial';
+                                        erro.hide();
+                                        sucesso.show();
+                                    },
+                                    error: function (resposta) {
+                                        sucesso.hide()
+                                        erro.show()
+                                    }
+                                })
 
-                        //             } else {
-                        //                 erro.textContent = 'Erro ao atualizar';
-                        //                 erro.style = 'display: initial';
-                        //             }
-                        //         });
-
-                        //         let url = '../controle/controle_livro.php';
-                        //         let params = 'op=editar&id=' + livros[i]["id"] + '&autor=' + autor + '&titulo='
-                        //             + titulo + '&ano=' + ano + '&editora=' + editora + '&codigo=' + codigo + '&quantidade=' + disponivel + '&disponivel=' + disponivel;
-                        //         xhrEditar.open("POST", url, true);
-                        //         xhrEditar.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                        //         xhrEditar.send(params);
-
-                        //     } else {
-                        //         // iniciando a edição
-                        //         editar.innerHTML = "Salvar";
-                        //         colunaCodigo.innerHTML = "<input type='text' val()='" + colunaCodigo.textContent + "'>";
-                        //         colunaEditora.innerHTML = "<input type='text' val()='" + colunaEditora.textContent + "'>";
-                        //         colunaAno.innerHTML = "<input type='text' val()='" + colunaAno.textContent + "'>";
-                        //         colunaAutor.innerHTML = "<input type='text' val()='" + colunaAutor.textContent + "'>";
-                        //         colunaTitulo.innerHTML = "<input type='text' val()='" + colunaTitulo.textContent + "'>";
-                        //         colunaDisponivel.innerHTML = "<input type='text' val()='" + colunaDisponivel.textContent + "'>";
-                        //     }
-                        // });
+                            } else {
+                                // iniciando a edição
+                                editar.text("Salvar")
+                                colunaCodigo.html("<input type='text' class='form-control' value='" + colunaCodigo.html() + "'>");
+                                colunaEditora.html("<input type='text' class='form-control' value='" + colunaEditora.html() + "'>");
+                                colunaAno.html("<input type='text' class='form-control' value='" + colunaAno.html() + "'>");
+                                colunaAutor.html("<input type='text' class='form-control' value='" + colunaAutor.html() + "'>");
+                                colunaTitulo.html("<input type='text' class='form-control' value='" + colunaTitulo.html() + "'>");
+                                colunaDisponivel.html("<input type='text' class='form-control' value='" + colunaDisponivel.html() + "'>");
+                            }
+                        });
                     }
                 }
 

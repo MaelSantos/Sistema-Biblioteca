@@ -52,20 +52,44 @@ def buscar():
         alugados = daoAluga.search_id_cliente(session['logado'])
 
         j = []
-        for r in alugados:
+        for r in range(int(len(alugados)/4)):
             j.append({
-                'id': r[0].id,
-                'titulo' : r[2].titulo,
-                'data_locacao' : r[0].data_locacao,
-                'data_devolucao' : r[0].data_devolucao,
-                'diaria' : r[0].diaria,
-                'funcionario' : r[3].nome,
-                'cliente' : r[1].nome,
+                'id': alugados[0].id,
+                'titulo' : alugados[2].titulo,
+                'data_locacao' : alugados[0].data_locacao,
+                'data_devolucao' : alugados[0].data_devolucao,
+                'diaria' : alugados[0].diaria,
+                'funcionario' : alugados[3].nome,
+                'cliente' : alugados[1].nome,
+            })
+        return json.dumps(j)
+
+    except Exception as e:
+        print(e.args)
+        return json.dumps({'status': 'Erro', 'erro': e.args});
+
+@locacao.route('/Locação/Buscar/Atrasados', methods=['POST'])
+def buscar_atrasados():
+    try:
+        alugados = daoAluga.search_id_cliente_atrasados(session['logado'])
+
+        j = []
+        for r in range(int(len(alugados)/4)):
+            print(r)
+            j.append({
+                'id': alugados[0].id,
+                'titulo': alugados[2].titulo,
+                'data_locacao': alugados[0].data_locacao,
+                'data_devolucao': alugados[0].data_devolucao,
+                'diaria': alugados[0].diaria,
+                'funcionario': alugados[3].nome,
+                'cliente': alugados[1].nome,
             })
         return json.dumps(j)
 
     except Exception as e:
         return json.dumps({'status': 'Erro', 'Erro': e.args});
+
 
 @locacao.route('/Locação/Buscar/Buscar/', methods=['POST'])
 def busca_busca():

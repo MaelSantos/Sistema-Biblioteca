@@ -5,7 +5,7 @@ $.ajax({
     url: '/Locação/Buscar/',
     success: function (resposta) {
         let resultado = JSON.parse(resposta)
-
+        console.log(resultado['erro'])
         let tr = $('#alugados > tbody > tr');
         for (let i = 0; i < tr.length; i++)
             tr[i].remove() //remove elementos existentes na tabela
