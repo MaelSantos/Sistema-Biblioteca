@@ -1,0 +1,62 @@
+/*
+    Fonte principal: Lusitana
+    Cor de fundo - #6AA69B;
+    Cor de destaque - #8C3555
+*/
+
+body{
+    background-color: #6AA69B; /* Cor de fundo */
+    background-image: url("fundo.png"); /*Imagem de fundo*/
+    background-repeat: no-repeat;
+    background-position: 40% 20%;
+}
+
+p, div, input, h1, h2, tr, caption, footer, small{
+    font-family: 'Lusitana', serif;
+    font-size: 18px;
+}
+
+.text-muted {
+    color: black;
+}
+
+.blockquote-footer {
+    color: black;
+    font-size: 18px;
+}
+
+a{
+    font-family: 'Lusitana', serif;
+    font-size: 18px;
+    border-radius: 15px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    padding: 3px;
+}
+
+a:hover{
+    background-color: #8C3555; /*Imagem de destaque*/
+    color: white;
+}
+
+input, select{
+    display: block;
+    font-family: 'Lusitana', serif;
+    border-radius: 15px;
+    border: 1px solid black;
+    outline: none;
+}
+
+input[type=button]{
+    background: #8C3555;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+tr td{ /* Toda a tabela com fundo azul */
+   background: #6BBFA7;
+   overflow: hidden;
+   /*border-bottom: 1px solid black; Divisão entre as linhas*/
+}
