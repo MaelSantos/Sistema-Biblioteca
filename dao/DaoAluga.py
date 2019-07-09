@@ -7,9 +7,6 @@ from model.Funcionario import Funcionario
 from model.Livro import Livro
 from datetime import date
 
-from model.Usuario import Usuario
-
-
 class DaoAluga(Dao):
 
     def search_id(self, id):
@@ -24,15 +21,6 @@ class DaoAluga(Dao):
         except Exception as e:
             raise DaoException('Erro ao Buscar Todos - Contatar o ADM')
 
-    # def search_all_cliente(self, id):
-    #     try:
-    #     # $sql = $conexao->getPdo()->prepare("SELECT id FROM Aluga WHERE id_cliente = :c");
-    #     # $sql->bindValue(":c", $aluga->getLogin());
-    #     # $sql->execute();
-    #     # return $sql->fetch()["id"];
-    #     except Exception as e:
-    #         raise DaoException('Erro ao Buscar Locações - Contatar o ADM')
-    #
     def search_id_cliente(self, id):
         try:
             alugados = self.session.query(Aluga, Cliente, Livro).filter(Aluga.id_cliente == Cliente.id,

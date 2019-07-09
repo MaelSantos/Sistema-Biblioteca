@@ -101,9 +101,7 @@ def busca_busca():
 @funcionario.route("/Funcionario/Perfil/Buscar/", methods=['POST'])
 def busca_perfil():
     try:
-        print('merda')
         funcionarioM = daoFuncionario.search_id(session['admin'])
-        print(funcionarioM)
         j = [{
                 'id': funcionarioM.id,
                 'nome': funcionarioM.nome,
