@@ -16,7 +16,7 @@ def acervo():
         template = render_template("cabecalho.html")
         template += render_template("logado.html", acervo = 'active')
         template += render_template("acervo.html")
-        template += render_template("rodape.html")
+        template += render_template("rodape.html", rodape="fixed-bottom")
         return template
     else:
         return redirect(url_for("entrada.index"))

@@ -14,7 +14,7 @@ def index():
         template = render_template("cabecalho.html", inicio='active')
         template += render_template("entrada.html")
         template += render_template("index.html")
-        template += render_template("rodape.html")
+        template += render_template("rodape.html", rodape="fixed-bottom")
         return template
 
 @entrada.route("/Sobre/")
@@ -25,7 +25,7 @@ def sobre():
     else:
         template += render_template("entrada.html")
     template += render_template("sobre.html")
-    template += render_template("rodape.html")
+    template += render_template("rodape.html", rodape="fixed-bottom")
     return template
 
 @entrada.route("/Contados/")
@@ -36,7 +36,7 @@ def contatos():
     else:
         template += render_template("entrada.html")
     template += render_template("contatos.html")
-    template += render_template("rodape.html")
+    template += render_template("rodape.html", rodape="fixed-bottom")
     return template
 
 @entrada.route("/Login/")
@@ -44,7 +44,7 @@ def login():
     template = render_template("cabecalho.html")
     template += render_template("entrada.html", login='active')
     template += render_template("login.html")
-    template += render_template("rodape.html")
+    template += render_template("rodape.html", rodape="fixed-bottom")
     return template
 
 @entrada.route("/Logar/", methods=['POST'])
