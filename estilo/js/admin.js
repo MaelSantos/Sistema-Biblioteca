@@ -186,6 +186,72 @@ $('#btnBuscar').click(function () { //busca resultado
                                     data: { id: resultado[i]["id"] },
                                     success: function (resposta) {
                                         resposta = JSON.parse(resposta)
+                                        if (resposta['status'] == 'OK')
+                                            $('#btnBuscar').trigger('click');
+                                    },
+                                })
+                            });
+                        }
+                    }
+                    erro.hide()
+                },
+                error: function () {
+                    erro.show()
+                }
+            })
+        }else if (cbxTipo.children('option:selected').val() == 'conta') {
+            $.ajax({
+                method: 'POST',
+                url: '/Conta/Buscar/',
+                data: { busca: txtBuscar },
+                success: function (resposta) {
+                    let resultado = JSON.parse(resposta);//passa para uma lista os arquivos do JSON
+                    let cabecalho = '<tr>';
+                    cabecalho += '<th scope="col">#</th>';
+                    cabecalho += '<th scope="col">Cliente</th>';
+                    cabecalho += '<th scope="col">Data Efetuada</th>';
+                    cabecalho += '<th scope="col">Data Pagamento</th>';
+                    cabecalho += '<th scope="col">Data Paga</th>';
+                    cabecalho += '<th scope="col">Valor Total</th>';
+                    cabecalho += '<th scope="col">Multa</th>';
+                    cabecalho += '<th scope="col">Ativo</th>';
+                    cabecalho += '<th scope="col">Opções</th>';
+                    cabecalho += '</tr>';
+
+                    $('#tabela > thead').append(cabecalho);//adiciona o cabeçalho
+
+                    for (let i = 0; i < resultado.length; i++) {
+                        //prepara os dados a serem adicionados
+
+                        let txtHtml = "<tr>";
+                        txtHtml += "<td class='col_id'>" + resultado[i]["id"] + "</td>";
+                        txtHtml += "<td class='col_cliente'>" + resultado[i]["id_aluga"] + "</td>";
+                        txtHtml += "<td class='col_efetuada'>" + resultado[i]["data_efetuada"] + "</td>";
+                        txtHtml += "<td class='col_pagamento'>" + resultado[i]["data_pagamento"] + "</td>";
+                        txtHtml += "<td class='col_paga'>" + resultado[i]["data_paga"] + "</td>";
+                        txtHtml += "<td class='col_total'>" + resultado[i]["valor_total"] + "</td>";
+                        txtHtml += "<td class='col_multa'>" + resultado[i]["multa"] + "</td>";
+                        if (resultado[i]["ativo"] == 1) {
+                            txtHtml += "<td class='col_ativo'>Sim</td>";
+                            txtHtml += "<td><a class='deletar' href='javascript:void(0)'>Dar Baixa</a></td>";
+                        }
+                        else {
+                            txtHtml += "<td class='col_ativo'>Não</td>";
+                            txtHtml += "<td><p>Já Pago</p></td>";
+                        }
+                        txtHtml += "</tr>";
+
+                        let tbody = $('#tabela > tbody');
+                        tbody.append(txtHtml);//adiciona os novos elementos
+                        if (resultado[i]["ativo"] == 1) {
+                            let apagar = $('a[class="deletar"]').last();
+                            apagar.click(function () {
+                                $.ajax({
+                                    method: 'POST',
+                                    url: '/Conta/Remover/',
+                                    data: { id: resultado[i]["id"] },
+                                    success: function (resposta) {
+                                        resposta = JSON.parse(resposta)
                                         if (resposta['status'] == 'Ok')
                                             $('#btnBuscar').trigger('click');
                                     },
@@ -200,7 +266,7 @@ $('#btnBuscar').click(function () { //busca resultado
                 }
             })
         }
-        erro.hide()
+//        erro.hide()
 
     } else {
         erro.show()

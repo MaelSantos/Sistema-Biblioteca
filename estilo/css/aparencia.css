@@ -50,9 +50,14 @@ input, select{
 
 input[type=button]{
     background: #8C3555;
-    border: none;
+    border-color: #8C3555;
     cursor: pointer;
     color: white;
+}
+
+input[type=button]:hover{
+    background: #6BBFA7;
+    border-color: #6BBFA7;
 }
 
 tr td{ /* Toda a tabela com fundo azul */

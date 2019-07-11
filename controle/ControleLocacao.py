@@ -1,4 +1,5 @@
 from flask import render_template, session, redirect, url_for, request, json, Blueprint
+from datetime import date
 from dao.DaoAluga import DaoAluga
 from dao.DaoCliente import DaoCliente
 from dao.DaoLivro import DaoLivro
@@ -120,8 +121,14 @@ def remover():
     try:
         id = request.form['id'];
         alugado = daoAluga.search_id(id)
+        alugado.data_devolvido = date.today()
         daoAluga.remove(alugado)
-        return json.dumps({'status': 'Ok'});
+
+        conta = daoConta.search_id(id)
+        conta.data_paga = date.today()
+        daoAluga.remove(conta)
+
+        return json.dumps({'status': 'OK'});
 
     except Exception as e:
         return json.dumps({'status': 'Erro', 'Erro': e.args});
