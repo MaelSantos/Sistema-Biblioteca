@@ -1,4 +1,5 @@
-from flask import Flask
+import os
+from flask import Flask, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 
 #Crição do App Principal
@@ -8,5 +9,5 @@ app = Flask("Biblioteca", template_folder="../view", static_folder="../estilo")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/Biblioteca?charset=utf8'
 app.config["SECRET_KEY"] = "babidi"
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
-db = SQLAlchemy(app)
 
+db = SQLAlchemy(app)

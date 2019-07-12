@@ -38,6 +38,7 @@ a{
 a:hover{
     background-color: #8C3555; /*Imagem de destaque*/
     color: white;
+    text-decoration: none;
 }
 
 input, select{

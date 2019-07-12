@@ -105,6 +105,7 @@ def busca_busca():
                 'titulo' : r[2].titulo,
                 'data_locacao' : r[0].data_locacao,
                 'data_devolucao' : r[0].data_devolucao,
+                'data_devolvido': r[0].data_devolvido,
                 'diaria' : r[0].diaria,
                 # 'funcionario' : r[3].nome,
                 'cliente' : r[1].nome,
