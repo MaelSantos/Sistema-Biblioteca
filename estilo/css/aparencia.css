@@ -17,11 +17,11 @@ p, div, input, h1, h2, tr, caption, footer, small{
 }
 
 .text-muted {
-    color: black;
+    color: white;
 }
 
 .blockquote-footer {
-    color: black;
+    color: white;
     font-size: 18px;
 }
 
@@ -35,11 +35,13 @@ a{
     padding: 3px;
 }
 
-a:hover{
-    background-color: #8C3555; /*Imagem de destaque*/
+a:hover, .nav-link:hover{
+    background-color: #8C3555; /*Cor de destaque*/
     color: white;
     text-decoration: none;
 }
+
+li.nav-item a:hover { color: #fff !important; }
 
 input, select{
     display: block;
@@ -59,6 +61,7 @@ input[type=button]{
 input[type=button]:hover{
     background: #6BBFA7;
     border-color: #8C3555;
+    color: black !important;
 }
 
 tr td{ /* Toda a tabela com fundo azul */
