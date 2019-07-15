@@ -1,34 +1,34 @@
-from controle.ControleApp import db
+from controle.ControleApp import db, salt
 from dao.Dao import Dao
 from model.Cliente import Cliente
 from exception.DaoException import DaoException
-from cryptography.fernet import Fernet
-
-key = Fernet.generate_key()
-farnet = Fernet(key)
+import bcrypt
 
 class DaoCliente(Dao):
 
     def create(self, entidade):
         try:
-            entidade.senha = farnet.encrypt(entidade.senha.encode('utf-8'))
+            entidade.senha = bcrypt.hashpw(entidade.senha.encode('utf-8'), salt)
             entidade.senha = entidade.senha.decode("utf-8")
-            print(entidade.senha)
+
             return super().create(entidade)
         except Exception as e:
             raise DaoException('Erro ao Cadastrar Cliente - Contatar o ADM')
 
     def update(self, entidade):
         try:
-            entidade.senha = farnet.encrypt(entidade.senha.encode('utf-8'))
-            entidade.senha = entidade.senha.decode("utf-8")
+            if entidade.senha[0] != '$':
+                entidade.senha = bcrypt.hashpw(entidade.senha.encode('utf-8'), salt)
+                entidade.senha = entidade.senha.decode("utf-8")
+
             return super().update();
         except Exception as e:
             raise DaoException('Erro ao Atualizar Cliente - Contatar o ADM')
 
     def search_id(self, id):
         try:
-            return super().search_id(Cliente, id)
+            entidade = super().search_id(Cliente, id)
+            return entidade
         except Exception as e:
             raise DaoException('Erro ao Buscar - Contatar o ADM')
 

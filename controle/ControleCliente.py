@@ -11,7 +11,7 @@ def inicio():
         template = render_template("cabecalho.html", inicio='active')
         template += render_template("logado.html")
         template += render_template("inicio.html")
-        template += render_template("rodape.html", rodape="fixed-bottom")
+        template += render_template("rodape.html")
         return template
     else:
         return redirect(url_for('entrada.index'))
@@ -70,7 +70,7 @@ def perfil():
         template = render_template("cabecalho.html")
         template += render_template("logado.html", perfil='active')
         template += render_template("perfil.html")
-        template += render_template("rodape.html", rodape="fixed-bottom")
+        template += render_template("rodape.html")
         return template
     else:
         return redirect(url_for('entrada.index'))
