@@ -60,7 +60,7 @@ def editar():
         funcionarioM.email=email
         funcionarioM.login=login
         funcionarioM.senha=senha
-        daoFuncionario.update()
+        daoFuncionario.update(funcionarioM)
         return json.dumps({'status': 'OK'});
     except Exception as e:
         return json.dumps({'status': 'Erro'});

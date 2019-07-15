@@ -2,8 +2,30 @@ from controle.ControleApp import db
 from dao.Dao import Dao
 from exception.DaoException import DaoException
 from model.Funcionario import Funcionario
+from cryptography.fernet import Fernet #biblioteca resposavel pela criptografia
+
+key = Fernet.generate_key()
+farnet = Fernet(key)
 
 class DaoFuncionario(Dao):
+
+    def create(self, entidade):
+        try:
+            entidade.senha = farnet.encrypt(entidade.senha.encode('utf-8'))
+            entidade.senha = entidade.senha.decode("utf-8")
+            print(entidade.senha)
+            return super().create(entidade)
+        except Exception as e:
+            raise DaoException('Erro ao Cadastrar Funcionario - Contatar o ADM')
+
+    def update(self, entidade):
+        try:
+            entidade.senha = farnet.encrypt(entidade.senha.encode('utf-8'))
+            entidade.senha = entidade.senha.decode("utf-8")
+            print(entidade.senha)
+            return super().update();
+        except Exception as e:
+            raise DaoException('Erro ao Atualizar Funcionario - Contatar o ADM')
 
     def search_id(self, id):
         try:

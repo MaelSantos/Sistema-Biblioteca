@@ -58,7 +58,7 @@ def editar():
         clienteM.email=email
         clienteM.cpf=cpf
         clienteM.telefone=telefone
-        daoCliente.update()
+        daoCliente.update(clienteM)
         return json.dumps({'status': 'OK'});
     except Exception as e:
         return json.dumps({'status': 'Erro'});
@@ -80,7 +80,7 @@ def busca_busca():
     try:
         busca = request.form['busca'];
 
-        clientes =daoCliente.search_search(busca)
+        clientes = daoCliente.search_search(busca)
 
         j = []
         for l in clientes:

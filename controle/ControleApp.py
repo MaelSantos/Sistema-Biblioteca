@@ -1,6 +1,6 @@
+from flask_migrate import Migrate
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 
 #Crição do App Principal
 app = Flask("Biblioteca", template_folder="../view", static_folder="../estilo")
@@ -14,7 +14,7 @@ db = SQLAlchemy(app)
 
 #Implementação da migration
 # COMANDOS UTILIZADOS NO TERMINAL
-# 1. é necessario exportar a aplicação para ter acesso ao migration pelo terminal. Usando: export FLASK_APP="controle/ControleApp.py
+# 1. é necessario exportar a aplicação para ter acesso ao migration pelo terminal. Usando: export FLASK_APP="controle/ControleApp.py"
 # 2. flask db init - Cria o repositorio de migração
 # 3. flask db migrate - gera uma migração inicial
 # 4. flask db upgrade - aplica a migração ao banco de dados

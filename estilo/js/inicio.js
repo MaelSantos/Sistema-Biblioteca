@@ -18,8 +18,8 @@ $.ajax({
             txtHtml += "<td class='col_locacao'>" + resultado[i]["data_locacao"] + "</td>";
             txtHtml += "<td class='col_devolucao'>" + resultado[i]["data_devolucao"] + "</td>";
             txtHtml += "<td class='col_diaria'>" + resultado[i]["diaria"] + "</td>";
-            txtHtml += "<td class='col_cliente'>" + resultado[i]["funcionario"] + "</td>";
-            txtHtml += "<td class='col_funcionario'>" + resultado[i]["cliente"] + "</td>";
+            txtHtml += "<td class='col_cliente'>" + resultado[i]["cliente"] + "</td>";
+            txtHtml += "<td class='col_funcionario'>" + resultado[i]["funcionario"] + "</td>";
             txtHtml += "</tr>";
 
             let tbody = $('#alugados > tbody');
@@ -92,8 +92,8 @@ $.ajax({
             txtHtml += "<td class='col_locacao'>" + resultado[i]["data_locacao"] + "</td>";
             txtHtml += "<td class='col_devolucao'>" + resultado[i]["data_devolucao"] + "</td>";
             txtHtml += "<td class='col_diaria'>" + resultado[i]["diaria"] + "</td>";
-            txtHtml += "<td class='col_cliente'>" + resultado[i][9] + "</td>";
-            txtHtml += "<td class='col_funcionario'>" + resultado[i][10] + "</td>";
+            txtHtml += "<td class='col_cliente'>" + resultado[i]["cliente"] + "</td>";
+            txtHtml += "<td class='col_funcionario'>" + resultado[i]["funcionario"] + "</td>";
             txtHtml += "</tr>";
 
             let tbody = $('#atrasados > tbody');
