@@ -2,7 +2,7 @@ from flask import render_template, session, redirect, url_for, request, json, Bl
 from dao.DaoCliente import DaoCliente
 from model.Cliente import Cliente
 
-cliente = Blueprint("cliente", "Biblioteca", template_folder="../view", static_folder="../estilo")
+cliente = Blueprint("cliente", "Biblioteca", template_folder="view", static_folder="estilo")
 daoCliente = DaoCliente()
 
 @cliente.route("/Cliente/")

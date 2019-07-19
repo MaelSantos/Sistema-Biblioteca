@@ -2,7 +2,7 @@ from flask import render_template, session, redirect, url_for, request, json, Bl
 from dao.DaoFuncionario import DaoFuncionario
 from model.Funcionario import Funcionario
 
-funcionario = Blueprint("funcionario", "Biblioteca", template_folder="../view", static_folder="../estilo")
+funcionario = Blueprint("funcionario", "Biblioteca", template_folder="view", static_folder="estilo")
 daoFuncionario = DaoFuncionario()
 
 

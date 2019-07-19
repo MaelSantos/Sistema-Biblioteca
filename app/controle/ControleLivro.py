@@ -5,7 +5,7 @@ from dao.DaoReserva import DaoReserva
 from model.Livro import Livro
 from model.Reserva import Reserva
 
-livro = Blueprint("livro", "Biblioteca", template_folder="../view", static_folder="../estilo")
+livro = Blueprint("livro", "Biblioteca", template_folder="view", static_folder="estilo")
 daoLivro = DaoLivro()
 daoCliente = DaoCliente()
 daoReserva = DaoReserva()

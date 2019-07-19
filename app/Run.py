@@ -16,18 +16,5 @@ app.register_blueprint(reserva)
 app.register_blueprint(locacao)
 app.register_blueprint(conta)
 
-#Implementação da migration
-# COMANDOS UTILIZADOS NO TERMINAL
-# 1. é necessario exportar a aplicação para ter acesso ao migration pelo terminal.
-# Usando:
-# export FLASK_APP="app/Run.py" (Linux)
-# SET FLASK_APP=app/Run.py (Windows)
-# 2. flask db init - Cria o repositorio de migração
-# 3. flask db migrate - gera uma migração inicial
-# 4. flask db upgrade - aplica a migração ao banco de dados
-# 5. flask db downgrade - remove a migração do banco de dados
-# Obs: sempre que for atualizar o banco novamente para uma nova migration utilizar os comandos de migration e upgrade (passo 3 e 4)
-# migrate = Migrate(app, db)
-
 db.create_all() #Criando tabelas no banco de dados
 app.run()

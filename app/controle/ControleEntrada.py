@@ -1,7 +1,7 @@
 from flask import render_template, session, redirect, url_for, request, json, Blueprint
 from dao.DaoUsuario import DaoUsuario
 
-entrada = Blueprint("entrada", "Biblioteca", template_folder="../view", static_folder="../estilo")
+entrada = Blueprint("entrada", "Biblioteca", template_folder="view", static_folder="estilo")
 daoUsuario = DaoUsuario()
 
 @entrada.route("/")

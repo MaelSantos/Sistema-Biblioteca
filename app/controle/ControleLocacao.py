@@ -7,7 +7,7 @@ from dao.DaoConta import DaoConta
 from model.Aluga import Aluga
 from model.Conta import Conta
 
-locacao = Blueprint('locacao', 'Biblioteca', template_folder='../view', static_folder='../estilo')
+locacao = Blueprint('locacao', 'Biblioteca', template_folder='view', static_folder='estilo')
 daoAluga = DaoAluga()
 daoCliente = DaoCliente()
 daoLivro = DaoLivro()

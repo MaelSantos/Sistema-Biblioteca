@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 13-Jul-2019 às 19:46
+-- Tempo de geração: 19-Jul-2019 às 16:06
 -- Versão do servidor: 10.3.16-MariaDB
 -- versão do PHP: 7.3.6
 
@@ -50,13 +50,6 @@ CREATE TABLE `Aluga` (
   `id_livro` int(11) NOT NULL
 ) ;
 
---
--- Extraindo dados da tabela `Aluga`
---
-
-INSERT INTO `Aluga` (`id`, `data_locacao`, `data_devolucao`, `data_devolvido`, `diaria`, `ativo`, `id_funcionario`, `id_cliente`, `id_livro`) VALUES
-(1, '2019-07-11', '2019-07-10', '2019-07-11', 10, 1, 1, 4, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -74,8 +67,7 @@ CREATE TABLE `Cliente` (
 --
 
 INSERT INTO `Cliente` (`id`, `cpf`, `telefone`) VALUES
-(3, '23432424', '32421412'),
-(4, '433241', 'fds3242');
+(1, '000000', '98237080921');
 
 -- --------------------------------------------------------
 
@@ -94,13 +86,6 @@ CREATE TABLE `Conta` (
   `id_aluga` int(11) NOT NULL
 ) ;
 
---
--- Extraindo dados da tabela `Conta`
---
-
-INSERT INTO `Conta` (`id`, `data_efetuada`, `data_pagamento`, `data_paga`, `multa`, `valor_total`, `ativo`, `id_aluga`) VALUES
-(1, '2019-07-01', '2019-07-10', '2019-07-11', 0, 10101000000000, 1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -117,7 +102,7 @@ CREATE TABLE `Funcionario` (
 --
 
 INSERT INTO `Funcionario` (`id`, `cargo`) VALUES
-(1, 'admin');
+(2, 'admin');
 
 -- --------------------------------------------------------
 
@@ -137,16 +122,6 @@ CREATE TABLE `Livro` (
   `ativo` tinyint(1) DEFAULT NULL
 ) ;
 
---
--- Extraindo dados da tabela `Livro`
---
-
-INSERT INTO `Livro` (`id`, `autor`, `titulo`, `ano`, `editora`, `codigo`, `quantidade`, `disponivel`, `ativo`) VALUES
-(1, 'Euzinho', 'Os que não foram', 2019, 'Sravá', '1000', 100, 100, 1),
-(2, 'jlksajdlk', 'sdjl', 1920, 'askdçls', '10920', 88, 88, 1),
-(3, 'ddjflka', 'oiueiwuoq', 98, 'akjsd', '0219jl', 300, 300, 1),
-(4, 'jlkjdask', 'wqelj', 9089, 'dsaoai', '0921ijk', 109, 109, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -162,15 +137,6 @@ CREATE TABLE `Reserva` (
   `id_livro` int(11) NOT NULL
 ) ;
 
---
--- Extraindo dados da tabela `Reserva`
---
-
-INSERT INTO `Reserva` (`id`, `data_reserva`, `data_retirada`, `ativo`, `id_cliente`, `id_livro`) VALUES
-(1, '2019-07-11', '2019-07-18', 1, 4, 1),
-(2, '2019-07-11', '2019-07-18', 1, 4, 1),
-(3, '2019-07-11', '2019-07-18', 1, 4, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -181,7 +147,7 @@ CREATE TABLE `Usuario` (
   `id` int(11) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `login` varchar(50) NOT NULL,
-  `senha` varchar(50) NOT NULL,
+  `senha` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
   `ativo` tinyint(1) DEFAULT NULL,
   `tipo` varchar(50) DEFAULT NULL
@@ -192,9 +158,8 @@ CREATE TABLE `Usuario` (
 --
 
 INSERT INTO `Usuario` (`id`, `nome`, `login`, `senha`, `email`, `ativo`, `tipo`) VALUES
-(1, 'admin', 'admin', 'admin', 'admin', 1, 'Funcionario'),
-(3, 'gfds', 'mama', 'mama', 'dsfgfdssdfadmin', 1, 'Cliente'),
-(4, 'msdfgf', 'mau', 'maumau', 'admin32421', 1, 'Cliente');
+(1, 'wil', 'wil', '$2b$08$4ZplVPH5gYh5bDCH3pvIWe2K83LhEBQ6V2inUoDWUkj0zix9RIC9y', 'wil@gmail.com', 1, 'Cliente'),
+(2, 'admin', 'admin', '$2b$08$4ZplVPH5gYh5bDCH3pvIWeXR1PFpm7p4wOIZML0jCG57k2ppy712G', 'admin', 1, 'Funcionario');
 
 --
 -- Índices para tabelas despejadas

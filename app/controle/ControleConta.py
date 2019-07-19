@@ -3,7 +3,7 @@ from datetime import date
 from dao.DaoConta import DaoConta
 from dao.DaoAluga import DaoAluga
 
-conta = Blueprint('conta', 'Biblioteca', template_folder='../view', static_folder='../estilo')
+conta = Blueprint('conta', 'Biblioteca', template_folder='view', static_folder='estilo')
 daoConta = DaoConta()
 daoAluga = DaoAluga()
 
