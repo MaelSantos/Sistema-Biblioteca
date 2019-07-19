@@ -49,6 +49,7 @@ class DaoFuncionario(Dao):
         except Exception as e:
             raise DaoException('Erro ao Buscar Clientes- Contatar o ADM')
 
-# f = Funcionario(login='admin', nome='admin', senha='admin', cargo='admin', email='admin')
-# d = DaoFuncionario()
-# d.create(f)
+d = DaoFuncionario()
+if d.search_id(1) == None:
+    f = Funcionario(login='admin', nome='admin', senha='admin', cargo='admin', email='admin')
+    d.create(f)
