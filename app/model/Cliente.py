@@ -1,5 +1,5 @@
-from model.Usuario import Usuario
-from controle.ControleApp import db
+from app.model.Usuario import Usuario
+from app.controle.ControleApp import db
 
 class Cliente(Usuario):
 

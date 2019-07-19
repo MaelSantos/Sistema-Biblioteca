@@ -16,5 +16,5 @@ app.register_blueprint(reserva)
 app.register_blueprint(locacao)
 app.register_blueprint(conta)
 
-db.create_all() #Criando tabelas no banco de dados
+# db.create_all() #Criando tabelas no banco de dados
 app.run()

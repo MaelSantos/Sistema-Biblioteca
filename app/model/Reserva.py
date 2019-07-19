@@ -1,4 +1,4 @@
-from controle.ControleApp import db
+from app.controle.ControleApp import db
 
 class Reserva(db.Model):
     __tablename__ = 'Reserva'

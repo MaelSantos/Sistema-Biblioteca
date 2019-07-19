@@ -1,4 +1,4 @@
-from controle.ControleApp import db
+from app.controle.ControleApp import db
 
 class Livro(db.Model):
     __tablename__ = 'Livro'
