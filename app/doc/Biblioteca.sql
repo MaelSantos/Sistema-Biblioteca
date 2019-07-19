@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 19-Jul-2019 às 16:06
+-- Tempo de geração: 19-Jul-2019 às 16:15
 -- Versão do servidor: 10.3.16-MariaDB
 -- versão do PHP: 7.3.6
 
@@ -50,6 +50,13 @@ CREATE TABLE `Aluga` (
   `id_livro` int(11) NOT NULL
 ) ;
 
+--
+-- Extraindo dados da tabela `Aluga`
+--
+
+INSERT INTO `Aluga` (`id`, `data_locacao`, `data_devolucao`, `data_devolvido`, `diaria`, `ativo`, `id_funcionario`, `id_cliente`, `id_livro`) VALUES
+(1, '2019-07-19', '2019-07-26', NULL, 10, 1, 2, 1, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -86,6 +93,13 @@ CREATE TABLE `Conta` (
   `id_aluga` int(11) NOT NULL
 ) ;
 
+--
+-- Extraindo dados da tabela `Conta`
+--
+
+INSERT INTO `Conta` (`id`, `data_efetuada`, `data_pagamento`, `data_paga`, `multa`, `valor_total`, `ativo`, `id_aluga`) VALUES
+(1, '2019-07-19', '2019-07-26', NULL, 0, 10101000000000, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -102,7 +116,8 @@ CREATE TABLE `Funcionario` (
 --
 
 INSERT INTO `Funcionario` (`id`, `cargo`) VALUES
-(2, 'admin');
+(2, 'admin'),
+(4, 'Chefe');
 
 -- --------------------------------------------------------
 
@@ -122,6 +137,14 @@ CREATE TABLE `Livro` (
   `ativo` tinyint(1) DEFAULT NULL
 ) ;
 
+--
+-- Extraindo dados da tabela `Livro`
+--
+
+INSERT INTO `Livro` (`id`, `autor`, `titulo`, `ano`, `editora`, `codigo`, `quantidade`, `disponivel`, `ativo`) VALUES
+(1, 'eu mesmo', 'Aqueles que não foram', 2019, 'Qualquer', '0009', 100, 100, 1),
+(2, 'Um ali', 'Os que voltaram', 2019, 'Sei la', '0001', 209, 209, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -136,6 +159,13 @@ CREATE TABLE `Reserva` (
   `id_cliente` int(11) NOT NULL,
   `id_livro` int(11) NOT NULL
 ) ;
+
+--
+-- Extraindo dados da tabela `Reserva`
+--
+
+INSERT INTO `Reserva` (`id`, `data_reserva`, `data_retirada`, `ativo`, `id_cliente`, `id_livro`) VALUES
+(1, '2019-07-19', '2019-07-26', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -159,7 +189,8 @@ CREATE TABLE `Usuario` (
 
 INSERT INTO `Usuario` (`id`, `nome`, `login`, `senha`, `email`, `ativo`, `tipo`) VALUES
 (1, 'wil', 'wil', '$2b$08$4ZplVPH5gYh5bDCH3pvIWe2K83LhEBQ6V2inUoDWUkj0zix9RIC9y', 'wil@gmail.com', 1, 'Cliente'),
-(2, 'admin', 'admin', '$2b$08$4ZplVPH5gYh5bDCH3pvIWeXR1PFpm7p4wOIZML0jCG57k2ppy712G', 'admin', 1, 'Funcionario');
+(2, 'admin', 'admin', '$2b$08$4ZplVPH5gYh5bDCH3pvIWeXR1PFpm7p4wOIZML0jCG57k2ppy712G', 'admin', 1, 'Funcionario'),
+(4, 'Alisin', 'alisin', '$2b$08$4ZplVPH5gYh5bDCH3pvIWebzceXc2m94MF7JJwQongGsgDZExaa/.', 'alisin@gmail.com', 1, 'Funcionario');
 
 --
 -- Índices para tabelas despejadas
