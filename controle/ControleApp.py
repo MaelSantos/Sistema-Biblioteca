@@ -15,7 +15,10 @@ db = SQLAlchemy(app)
 
 #Implementação da migration
 # COMANDOS UTILIZADOS NO TERMINAL
-# 1. é necessario exportar a aplicação para ter acesso ao migration pelo terminal. Usando: export FLASK_APP="controle/ControleApp.py"
+# 1. é necessario exportar a aplicação para ter acesso ao migration pelo terminal.
+# Usando:
+# export FLASK_APP="controle/ControleApp.py" (Linux)
+# SET FLASK_APP=controle/ControleApp.py (Windows)
 # 2. flask db init - Cria o repositorio de migração
 # 3. flask db migrate - gera uma migração inicial
 # 4. flask db upgrade - aplica a migração ao banco de dados
